@@ -1,0 +1,18 @@
+#!/bin/sh
+# This is autotest pruning tool, removing info about specified old
+# pairings. Note that this removes only pairing results, you need
+# to adjust the rc file manually if you haven't removed the pairing
+# specifiers from there yet.
+
+mask="$1"
+if [ -z "$mask" ]; then
+	echo "Usage: $0 MASK" >&2
+	echo "MASK can be pairing name, or a glob pattern (*, ?)." >&2
+	echo "Use \`$0 *\` to remove all pairings." >&2
+	exit 1
+fi
+. ./autotest-lib
+
+echo "Removing $(ls r/$mask.dat | wc -l) result pairs..."
+rm -f r/$mask.dat r/$mask.summary.dat r/$mask.html r/$mask.beacon r/$mask.error
+rm -rf c/*/$mask

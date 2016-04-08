@@ -1,0 +1,306 @@
+This is brief developer-oriented overview in Pachi structure.
+
+Pachi is completely Go-specific (c.f. Fuego; though e.g. atari go support
+should be easy to add), but fairly modular. It has been built with focus
+on MonteCarlo-based play, but it can in principle be used for other
+play engines as well.
+
+
+Basic architecture
+==================
+
+Pachi consists of the following components:
+
+
+  +------+    +--------+    +---------+    +------------------+
+  | core | -- | engine | -- | playout | -- | tactical library |
+  +------+    +--------+    +---------+    +------------------+
+                     |        |
+                  +-------------+
+                  | aux library |
+                  +-------------+
+
+* "core" takes care of the program's lifetime, GTP interface and basic
+  fast Go board implementation
+
+	pachi.c		global initialization and the main loop
+	version.h	current version information
+	debug.h		debugging infrastructure
+	random.[ch]	fast random number generator
+	gtp.[ch]	GTP protocol interface
+	network.[ch]	Network interface (useful for distributed engine)
+	timeinfo.[ch]	Time-keeping information
+	stone.[ch]	one board point coloring definition
+	move.[ch]	one board move definition
+	board.[ch]	board definition and basic interface
+
+* "aux library" provides extra functions like static tactical evaluation
+  and pattern matching; it is somewhat interwound with "core" component
+
+	mq.h		"move queue" data structure
+	stats.h		"move statistics" data structure
+	probdist.[ch]	"probability distribution" data structure
+	ownermap.[ch]	simulation-based finalpos. "owner map" data structure
+	pattern3.[ch]	fast 3x3 spatial pattern matcher
+	pattern.[ch]	general multi-feature pattern matcher
+
+* "tactical library" provides extended interfaces for the go board,
+  most important non-trivial tactical information
+
+	tactics/
+
+* "engine" receives notifications about opponent moves and is asked
+  to generate a move to play on given board
+
+	engine.h	abstract engine interface
+	random/		example "random move generator" engine
+	replay/		example "playout move generator" engine
+	montecarlo/	simple treeless Monte Carlo engine, quite bitrotten
+	uct/		the main UCT-player engine, see below
+	distributed/	"meta-engine" for distributed play by orchestrating
+				several UCT engines on different computers
+	patternscan/	auxiliary engine for harvesting patterns from
+				existing games
+	joseki/		auxiliary engine for generating joseki patterns
+
+* "playout" policy is asked to generate moves to play during the Monte Carlo
+  simulations, and to provide rough evaluation of moves feasibility for
+  the engine
+
+	playout.[ch]	abstract playout policy interface,
+				Monte Carlo simulation execution
+	playout/light	uniformly random playout policy
+	playout/moggy	rule-based "Mogo-like" playout policy
+
+* Also, several ways of testing Pachi are provided:
+
+	t-unit/		interface for writing unit-tests for specific
+				functionality, mainly tactics
+	t-play/		interface for testing performance by playing games
+				against a fixed opponent (e.g. GNUGo)
+
+
+UCT architecture
+================
+
+The UCT engine (the proper name should be MCTS as it does not have that
+much common with classic UCT now) has non-trivial structure by itself:
+
+  +-------------+    +-----+     +-------------------+
+  | node policy | -- | UCT | --- | node prior-hinter |
+  +-------------+    +-----+     +-------------------+
+                        |           |
+                   +---------+      |
+                   | playout | -----'
+                   +---------+
+
+* "UCT" is the core of the engine
+
+	uct.[ch]	engine initialization, public interface
+	internal.h	internal state and data structures
+	tree.[ch]	minimax move tree with success statistics
+	walk.[ch]	filling the tree by walking it many times
+				and running MC simulations from leaves
+	slave.[ch]	engine interface for the distributed engine
+
+* "node prior-hinter" assigns newly created nodes preliminary success
+  statistics ("prior values") to focus the search better
+
+	prior.[ch]	variety of methods for setting the priors
+
+* "node policy" mainly chooses the current node's child to descend
+  through during the tree walk, based on the already recorded statistics;
+  it must balance exploration and exploitation well during the selection
+
+	policy/ucb1	the old-school original simple policy
+	policy/ucb1amaf	the AMAF/RAVE-based policy gathering statistics rapidly
+
+* "dynkomi driver" dynamically determines self-imposed extra virtual komi
+
+	dynkomi.[ch]
+
+
+Board Implementation
+====================
+
+The infrastructure is optimized for speed to make it well suited
+for bruteforce engines, however tradeoffs are made to make it useful
+for heavier MonteCarlo playouts as well (e.g. real liberties are
+tracked instead of pseudoliberties). If you are looking for raw
+light playout speed, libEGO is better choice.
+
+In general, arbitrary board sizes are supported; however, board sizes
+smaller than 9x9 have not been tested and board sizes larger than 25x25
+are not supported by GTP - also, in theory some buffer overflows might
+happen with board sizes larger than 19x19. The engine parameters are
+primarily tuned for 19x19 play.
+
+Ruleset
+-------
+
+While the Pachi engines generally play according to Chinese rules,
+internally, Pachi uses Tromp-Taylor rules because they are simple,
+fast and universal; they are very close to the New Zealand rules.
+That means, it simply counts the number of stones and one-point eyes
+of each color on the board, plus komi and handicap correction.
+
+Tromp-Taylor rules also mean that multi-stone suicide is allowed! If you
+do not like that (basically if you want to pretend it plays according
+to Chinese rules), you need to rule that out in your engine, currently.
+The provided engines DO avoid multi-stone suicide, though it is allowed
+in the playouts for performance reasons (perhaps we should re-visit that
+decision in light of heavy playouts).
+
+Tromp-Taylor rules have positional superko; the board implementation
+will set a flag if it is violated, but play the move anyway. You need
+to enforce the superko rule in your engine.
+
+
+GTP Implementation
+==================
+
+...is a very sad hack. ENSURE that only trusted parties talk to Pachi's
+GTP interface, as it is totally non-resilient to any kind of overflow
+or bad input attacks and allowing arbitrary input to be entered within
+is a major security hole. Yes, this needs to be cleaned up. Also, currently
+engines cannot plug in their own commands and there is no GoGui interface.
+
+Pachi supports only few GTP commands now. Most importantly, it does not
+support the undo command.  The final_status_list command requires engine
+support.
+
+
+General Pattern Matcher
+=======================
+
+Pachi has in-development general pattern matcher that can match various
+sets of features (spatial and others), inspired by the CrazyStone and
+van der Werf - de Groot - Stern pattern model. Please see pattern.h
+for detailed description of the pattern concept and recognized features.
+
+To harvest patterns, use 'pachi -e patternscan' (see patternscan/patternscan.c
+for available options).  The output of the pattern scanner are two data
+structures: The matched patterns
+
+	(feature1:payload feature2:payload ...)
+
+and spatial dictionary. "Spatial" feature represents a particular
+configuration of stones in a circle around the move-to-play; each
+configuration has its own record in the dictionary and the spatial
+feature references only the id in the dictionary; so you need to keep
+both the patterns and the "patterns.spat" file.  Normally, 'patternscan'
+will only match already existing dictionary entries, but you
+can pass it "gen_spat_dict" so that it appends all newly found spatial
+features to the dictionary - use "spat_threshold" to limit recording
+only to frequently occuring spatial features; to start the dictionary
+from scratch, simply remove any existing "patterns.spat" file.
+
+There are few pre-made scripts to make the initialization of the pattern
+matcher easy:
+
+* tools/pattern_byplayer.sh: Sorts out patterns from given SGF collection
+  by player names, one player per file in a dedicated directory. This is
+  useful if you want to use the patterns to e.g. recognize games of a
+  player by characteristic patterns. Spatial dictionary is autogenerated
+  in full.
+
+* tools/pattern_spatial_gen.sh: Initializes spatial dictionary by spatial
+  features found at least N times in given SGF collection.  This is useful
+  for further gathering of general pattern statistics while keeping
+  the amount of spatial features manageable.
+
+* tools/pattern_spatial_show.pl ID: Shows spatial pattern of given id
+  in 2D plane.
+
+* tools/pattern_bayes_gen.sh: Generates a Bayesian probability table
+  for each pattern in a SGF collection. The computed number is the empiric
+  probability of playing a given pattern when it is available on board.
+
+* tools/pattern_bayes_merge.sh: Merges Bayesian probability tables
+  of patterns. This is useful for parallel pattern mining - run multiple
+  pattern_bayes_gen (perhaps remove the counts >= 2 test) and then merge
+  the generated tables.
+
+* tools/pattern_getdrops.pl: Processes game logs to determine moves that
+  lead to large drop in Pachi's evaluation and extracts patterns that
+  represent these moves. This might allow Pachi to "learn from its past
+  mistakes" and recognize these moves in the future. A full pipeline
+  for this might be:
+
+	cat kgsGtp.log | tools/kgslog2gtp.pl |
+		tools/pattern_getdrops.pl | tools/pattern_bayes_gen.sh - |
+		tools/pattern_bayes_merge.sh patterns.prob - >patterns.prob2
+
+
+Plugin API
+==========
+
+The UCT engine allows external plugins to be loaded and provide external
+knowledge for various heuristics - currently just biasing the MCTS priors,
+but more can be added easily. The plugins should follow the API in
+<uct/plugin.h> - see that file for details.
+
+
+Joseki Patterns
+===============
+
+Joseki patterns can be generated from variations of a SGF file. Josekis
+are matched per-quadrant, no other move must be within the quadrant. See
+joseki/README for details on usage of the auxiliary engine and a full
+recipe for making Pachi play according to joseki sequences extracted from
+the Kogo dictionary.
+
+
+Opening Book
+============
+
+The UCT engine can "pre-read" the starting board position and
+dump the core of the built tree to a file, loading it later. This is
+called a 'tbook' (as in "tree book") and can be generated using the
+tools/gentbook.sh script. The newly generated file is automatically
+used by the UCT engine when found.
+
+Alternatively, there is a support for directly used opening book
+(so-called fbook, a.k.a. "forced book" or "fuseki book"). The book
+is stored in a text file in Fuego-compatible format and can be loaded
+using the ./pachi -f parameter. A naive way to build such a book
+based on shell-based, twogtp-based UCT is available through the
+tools/autobook/ framework.
+
+
+Local Trees
+===========
+
+This is a mostly unique idea in Pachi, currently in development;
+it does not work too well yet, but Pasky has great hopes for it in
+the future.
+
+A local tree is a tree comprising of (CFG-topologically) local
+sequences, built in parallel with the real game tree; there is
+a separate tree for black-first and white-first sequences. E.g if
+the game tree (on empty board) consists of D4-C6-D6-Q16-O17-D7,
+the coresponding local tree sequences are (black) D4-C6-D6, (white)
+Q16-O17 and (white) D7. The simulation result is then recorded as
+usual in the game tree, but also in the corresponding local trees.
+
+The goal of this is to dynamically build a cache of various
+resolutions of local situations. This is to overcome cases where
+the proper resolution of a given situation is easily found in
+the tree, but improper heuristical bisaes keep muddying the
+evaluation down.
+
+Exactly what kind of values to store in the local tree nodes is
+still an open question. The original approach has been to simply
+use simulation results directly or biased on base "value temperature";
+now, we are experimenting with survival rate of the "base stone"
+of the branch (the first move in the branch sequence). We also intend
+to integrate criticality information with local tree data.
+
+The local trees are descended in parallel with the main tree.
+The values stored in local trees are added to the RAVE term
+from the main tree during node selection. We also wish to use
+the information from local trees in the simulations, but this is
+still subject to research.
+
+To enable local trees usage, pass local_tree=1 to the UCT engine.
+There are many further knobs to twiddle, too.

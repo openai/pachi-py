@@ -1,0 +1,79 @@
+Docs:
+* Manual page - full usage documentation
+* GTP interface documentation
+
+Base:
+* Further optimize board implementation, profiling fun
+* Clean up GTP interface, allow custom GTP commands for modules
+* gogui-friendly GTP interface
+* Implement parameter setup over GTP (less important)
+* Fix the build system to allow fully parallel build
+	However, revamp to something like cmake (or, ugh, autotools)
+	is not guaranteed to be appreciated.
+
+Self-contained tasks:
+* Improving Pachi's game analysis features
+	We provide just a few user-unfriendly proof-of-concept scripts
+	but it should be fairly easy to upgrade them to something
+	that creates a nice webpage with move-by-move statistics,
+	winrate evolution, pattern moves andwhatnot. CrazyStone stats
+	output may be used for inspiration, but we can take it further!
+	This could be done even if you are afraid of Pachi's codebase,
+	just using Pachi's output.
+* Try to disable the bsize pattern feature
+	It just fudges the pattern evaluation since for most tactical
+	patterns fourth line vs. fifth line just doesn't matter. Maybe
+	its max should be 2 and maybe it should just be gone, needs
+	regenerating the pattern database and benchmarking.
+* Develop dedicated playout handling for few common tactical situations
+	Monkey jump (and its followup sequences!), bent four in the
+	corner, ...
+* Fix seki recognition to be stable
+	Try to research and fix most cases harmed by selfatarirate=100
+	or find another way to fix seki.
+* Try to avoid using a hash table for 3x3 patterns
+	Instead autogenerate procedural matching code; may be more
+	efficient (the near-guaranteed L1 cache miss is fairly expensive).
+* Optimizing our tree implementation for cache-efficiency
+	Statistics of all children of a parent node shall be contained
+	in an array of the parent node so that move evaluation during
+	the descent can access them sequentially in memory, instead
+	of walking a linked list. Pasky already tried once but it's
+	somewhat arduous and dull work.
+* Clean up the is_private() hack in the distributed engine
+	We should simply check against a proper IP range ACL specified
+	as a parameter instead.
+
+General improvements:
+* Online Pachi game analysis/dump features
+	Make Pachi generate a webpage with *lots* of details after each
+	move while playing a game. This can provide game analysis info
+	for observer or casual opponent, but could also help with
+	debugging when just dumping stuff on stderr is intractable.
+* Automated building of opening book
+* Expanding and tagging the regression suite
+	Even better, create a nice UI for our users to contribute and
+	crowdsource!
+	What about drawing testcases from GNUGo's regression suite?
+* Implement Pachi support to fishtest
+	http://tests.stockfishchess.org/tests would allow crowdsourcing
+	Pachi parameter tuning.
+* Split playout aspects to custom-stackable pieces?
+* Port to Intel Phi (if we get the hardware :)
+
+Some heuristics to test:
+* Try to adapt and reuse GNUGo's pattern matching code/database
+* Local trees (work in progress, no luck so far)
+* Liberty maps (work in progress)
+* Implement a tsumego solver and apply it once per playout (stv insp.,
+  see Eric van der Werf's PhD thesis?)
+* MM local-based patterns in playouts (work in progress, no luck so far)
+* Balanced local-based patterns?
+* Killer moves (redundant to RAVE?)
+* Reverse status learning
+	Run on game corpus. Start at final position, watch development
+	of status of all stones. The moment the final status and expected
+	status changes, analyze, especially if move choice differs. Use
+	learnt status-fixing moves in simulations somehow.
+	Tried to do this on Pachi-played KGS games; no measurable effect
+	(maybe too small sample).

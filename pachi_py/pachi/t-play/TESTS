@@ -1,0 +1,622 @@
+Default settings, 5000 playouts.
+Opponent: gnugo --mode gtp --chinese-rules --capture-all-dead --level 10
+GNUGo 3.7.12
+
+gnugo 19x19 l1 vs l10 k 7.5:	29% (+-2.3%)
+gnugo 19x19 l1 vs l10 k 0.5:	42.2% (+-2.5%)
+gnugo 19x19 l1 vs l10 k -7.5:	52.5% (+-2.5%)
+gnugo 19x19 l1 vs l10 k -14.5:	62.2% (+-2.4%)
+gnugo 19x19 l1 vs l10 k -21.5:	71.5% (+-2.3%)
+gnugo 19x19 l1 vs l10 k -28.5:	78.2% (+-2.1%)
+gnugo 19x19 l1 vs l10 handi 2:	54.7% (+-2.1%)
+gnugo 19x19 l1 vs l10 handi 3:	71.9% (+-2.2%)
+gnugo 19x19 l1 vs l10 handi 4:	82.6% (+-1.9%)
+gnugo 19x19 l1 vs l10 handi 5:	88.9% (+-1.6%)
+
+
+Unfortunately, some early measurements use 95% confidence interval; all newer
+ones use the standard error (/1.96) instead, since that's what gogui-twogtp
+provides.
+
+
+Template:
+../../gogui-1.1.10/bin/gogui-twogtp -black  'gnugo --mode gtp --chinese-rules --capture-all-dead --level 10' -white './zzgo-77d2d games=5000,policy=ucb1amaf,playout=moggy' -alternate -auto -verbose -size 9 -komi 7.5 -games 100 -sgffile f1-77d2d
+for i in *.dat; do ../../gogui-1.1.10/bin/gogui-twogtp -force -analyze $i; done
+./test_in_context.sh <directory with results> 9
+
+ead8e	ucb1amaf	16.5% (+-4.5%)
+
+b2185	ucb1amaf	50% (+-6%)
+
+75fff	ucb1amaf	49% (+-4%)
+
+c5bea	ucb1amaf	42.5% (+-2.5%)
+
+95bf3	ucb1amaf	25.2% (+-4%)
+
+c7249	ucb1amaf	34.2% (+-4.8%)
+
+9367d	ucb1amaf	37% (+-8%)
+
+ce540	ucb1amaf*	42% (+-2%)	selfatarirate=0
+ce540	ucb1amaf	43% (+-2%)
+
+62592	ucb1amaf*	47% (+-2.5%)	selfatarirate=0
+62592	ucb1amaf	44% (+-2.5%)
+62592	ucb1amaf*#	45.2% (+-2.5%)	selfatarirate=0,rave_prior
+62592	ucb1amaf#	47.5% (+-2.5%)	rave_prior
+
+1a1eb	ucb1		15% (+-2%)	selfatarirate=0:capturerate=0:lcapturerate=0
+
+6e22f	ucb1amaf	49.5% (+-2.5%)
+6e22f	ucb1amaf*0	48% (+-2.5%)	rave_equiv=6000
+6e22f	ucb1amaf*1	49% (+-2.5%)	rave_equiv=500
+6e22f	ucb1amaf#	43.2% (+-2.5%)	explore_p=0
+6e22f	ucb1amaf#*0	45.8% (+-2.5%)	explore_p=0,rave_equiv=6000
+6e22f	ucb1amaf#*1	48.8% (+-2.5%)	explore_p=0,rave_equiv=500
+6e22f	ucb1amaf#0	49.5% (+-2.5%)	explore_p=0.01
+6e22f	ucb1amaf#1	24.8% (+-2.5%)	explore_p=0.5
+6e22f	19x19 ucb1amaf	0%
+6e22f	19x19 ucb1amaf*	0%	explore_p=0.01,rave_equiv=100
+
+88fe2	ucb1amaf	50.8% (+-2.5%)
+88fe2	ucb1amaf*	49.5% (+-2.5%)	selfatarirate=0
+
+04b7b	ucb1amaf	60.5% (+-2.4%)
+04b7b	ucb1amaf*	60.2% (+-2.4%)	selfatarirate=0
+04b7b	ucb1amaf%1	58.5% (+-2.5%)	rate=75
+04b7b	ucb1amaf%2	60.8% (+-2.4%)	rate=100
+04b7b	ucb1amaf#	54.5% (+-2.5%)	explore_p=0
+04b7b	ucb1amaf^	63.5% (+-2.4%)	threads=2
+04b7b	ucb1amaf+	71.2% (+-2.3%)	games=10000
+04b7b	ucb1amaf!	79.5% (+-2%)	playout_amaf
+04b7b	ucb1amaf!&	46% (+-2.5%)	playout_amaf,patternrate=0
+
+82790	ucb1amaf	54.1% (+-2.9%)
+82790	ucb1amaf!	79% (+-2.9%)	playout_amaf
+
+129bb	ucb1amaf	64.5% (+-2.4%)
+129bb	ucb1amaf!	77.2% (+-2.1%)	playout_amaf
+
+<playout_amaf_nakade on by default>
+
+605dd	ucb1amaf	56.2% (+-2.5%)
+605dd	ucb1amaf!	63.5% (+-2.4%)	playout_amaf
+
+<unknown playout_amaf regression>
+
+c031a	ucb1amaf	52.5% (+-4.2%)
+c031a	ucb1amaf!	63.4% (+-4.2%)	playout_amaf
+
+87b9e	ucb1amaf	53.7% (+-2.1%)
+87b9e	ucb1amaf#1	59.5% (+-1.7%)	explore_p_rave=0
+87b9e	ucb1amaf#2	59.1% (+-1.7%)	explore_p=0.01,explore_p_rave=0.01
+87b9e	ucb1amaf%	56.6% (+-2%)	local_assess
+87b9e	ucb1amaf*	19% (+-1.3%)	patternrate=0
+87b9e	ucb1amaf!$	62.8% (+-2.4%)	playout_amaf,rave_equiv=500
+87b9e	ucb1amaf!#1	62.8% (+-1.7%)	playout_amaf,explore_p=0.01,explore_p_rave=0.01
+87b9e	ucb1amaf!#2	61.6% (+-1.7%)	playout_amaf,explore_p_rave=0.01
+87b9e	ucb1amaf!&	61.8% (+-2.4%)	playout_amaf,eqex=25
+87b9e	ucb1amaf!	61.4% (+-2.1%)	playout_amaf
+
+<playout_amaf is now default>
+
+093e7	ucb1amaf	60.5% (+-2.4%)
+093e7	ucb1amaf!	58.8% (+-2.5%)	plaout_amaf=0
+093e7	ucb1amaf%	60.8% (+-2.4%)	ladders=0
+
+<playout_amaf_nakade partially off>
+
+635a3	ucb1amaf	65% (+-2.4%)
+635a3	ucb1amaf	63% (+-2.4%)	explore_p_rave=0.01
+
+<playout_amaf_nakade off by default>
+
+eac23	ucb1amaf	77.4% (+-1.5%)
+eac23	ucb1amaf#	76.6% (+-1.5%)	explore_p_rave=0.01
+eac23	ucb1amaf!	74.3% (+-1.5%)	check_nakade=0
+eac23	ucb1amaf!#	75.5% (+-1.6%)	check_nakade=0,explore_p_rave=0.01
+eac23	ucb1amaf!#*	75% (+-1.5%)	check_nakade=0,explore_p_rave=0.01,explore_p=0.01
+
+<explore_p_rave=0.01>
+
+229b9	ucb1amaf 2k	65.5% (+-2.4%)
+229b9	ucb1amaf 5k	77.5% (+-2.1%)
+229b9	ucb1amaf 20k	83.8% (+-1.7%)
+229b9	ucb1amaf 50k	90% (+-1.5%)
+229b9	ucb1amaf! 2k	37.8% (+-2.4%)	playout_amaf=0
+229b9	ucb1amaf! 5k	59% (+-2.5%)	playout_amaf=0
+229b9	ucb1amaf! 20k	79% (+-2%)	playout_amaf=0
+229b9	ucb1amaf! 50k	83.5% (+-1.9%)	playout_amaf=0
+229b9	ucb1amaf% 5k	77.2% (+-2.1%)	ladders=0
+229b9	ucb1amaf*# 5k	74.9% (+-2.2%)	explore_p=0.005,explore_p_rave=0.005
+
+self-play:
+229b9	ucb1amaf km5.5	B+57.5% (+-2.5%)
+229b9	ucb1amaf km7.5	B+48.8% (+-2.5%)
+
+2d54a	ucb1amaf	72.2% (+-2.2%)
+
+8ac8a	ucb1amaf	77% (+-2.1%)
+8ac8a	ucb1amaf@	77% (+-2.1%)	ladder catcher atari check disabled
+8ac8a	ucb1amaf 50k	93.5% (+-1.2%)
+
+
+fccfe	ucb1amaf	78% (+-2.1%)
+fccfe	ucb1amaf#	78.5% (+-2.1%)	rave_prior=0
+fccfe	ucb1amaf*0	76% (+-2.1%)	playout_amaf_cutoff=50
+fccfe	ucb1amaf*0!	78.5% (+-2.1%)	playout_amaf_cutoff=50,playout_amaf_nakade=1
+fccfe	ucb1amaf*1	79.8% (+-2%)	playout_amaf_cutoff=75
+fccfe	ucb1amaf*1!	74% (+-2.2%)	playout_amaf_cutoff=75,playout_amaf_nakade=1
+fccfe	ucb1amaf*2	76.7% (+-2.1%)	playout_amaf_cutoff=85
+fccfe	ucb1amaf*2!	77% (+-2.1%)	playout_amaf_cutoff=85,playout_amaf_nakade=1
+fccfe	ucb1amaf*3	72% (+-2.2%)	playout_amaf_cutoff=90
+fccfe	ucb1amaf*3!	73% (+-2.2%)	playout_amaf_cutoff=90,playout_amaf_nakade=1
+fccfe	ucb1amaf*3	72% (+-2.2%)	playout_amaf_cutoff=90
+fccfe	ucb1amaf*3!	73% (+-2.2%)	playout_amaf_cutoff=90,playout_amaf_nakade=1
+
+Threading test:
+fccfe	ucb1amaf	78% (+-2.1%)
+fccfe	ucb1amaf 10k	79.8% (+-2%)
+fccfe	ucb1amaf t=2	75.5% (+-2.2%)
+569d7	ucb1amaf t=2	82.9% (+-1.9%)
+
+
+<Multiple board sizes from now on>
+
+Fillboard investigations (only 4-lib fillboard yet):
+
+569d7	9ucb1amaf!	81.2% (+-2%)	fillboardtries=10
+569d7	9ucb1amaf 50k	90% (+-1.5%)
+569d7	9ucb1amaf! 50k	90.8% (+-1.4%)	fillboardtries=10
+
+ce382	13ucb1amaf	51.8% (+-2.5%)
+ce382	13ucb1amaf 50k	79.6% (+-2.6%)
+569d7	13ucb1amaf!	47% (+-2.5%)	fillboardtries=10
+569d7	13ucb1amaf! 50k	82.8% (+-2.4%)	fillboardtries=10
+
+
+<many optimizations>
+
+4181b	9ucb1amaf	76% (+-2.4%)
+4181b	13ucb1amaf	47.8% (+-2.5%)
+4181b	19ucb1amaf	1.6% (+-0.9%)
+4181b	19ucb1amaf!	1% (+-0.7%)	fillboardtries=10
+
+
+0965e	9ucb1amaf	77.5% (+-2.1%)
+0965e	9ucb1amaf#	9.5% (+-1.5%)	sylvain_rave=0
+0965e	9ucb1amaf&	79% (+-2.1%)	self-atari protection turned off for single-stone groups
+
+0965e	13ucb1amaf	45.2% (+-2.5%)
+0965e	13ucb1amaf&	52.2% (+-2.5%)	self-atari protection turned off for single-stone groups
+
+<permit snapbacks>
+
+234b3	9ucb1amaf	77.2% (+-2.1%)
+234b3	13ucb1amaf	47% (+-2.5%)
+
+
+<add pattern2>
+
+035fc	9ucb1amaf	70.5% (+-2.3%)
+035fc	9ucb1amaf#	79.8% (+-2%)	pattern2=0
+
+<add 2-liberty>
+
+74b71	9ucb1amaf	74.2% (+-2.2%)
+74b71	9ucb1amaf#	77% (+-2.1%)	pattern2=0
+74b71	13ucb1amaf	46.8% (+-2.5%)
+74b71	13ucb1amaf#	50.2% (+-2.5%)	pattern2=0
+
+e34f9	9ucb1amaf	74.2% (+-2.2%)
+e34f9	9ucb1amaf#	74% (+-2.2%)	pattern2=0
+e34f9	9ucb1amaf*	76% (+-2.1%)	atarirate=0
+e34f9	9ucb1amaf#*	79% (+-2%)	pattern2=0,atarirate=0
+e34f9	13ucb1amaf	47.2% (+-2.5%)
+e34f9	13ucb1amaf#	49.7% (+-2.8%)	pattern2=0
+e34f9	13ucb1amaf#*	52.2% (+-2.5%)	pattern2=0,atarirate=0
+
+ba2e1	9ucb1amaf	78.2% (+-2.1%)
+ba2e1	9ucb1amaf#	81.8% (+-1.9%)	pattern2=0
+ba2e1	9ucb1amaf*	74.5% (+-2.2%)	atarirate=0
+ba2e1	9ucb1amaf#*	75.5% (+-2.2%)	pattern2=0,atarirate=0
+ba2e1	9ucb1amaf#*+	78.5% (+-2.1%)	pattern2=0,atarirate=0,prior_cfgd=6
+ba2e1	9ucb1amaf+%	81.2% (+-2%)	prior_cfgd=6,prior_b19=6
+ba2e1	9ucb1amaf#+%	83% (+-1.9%)	pattern2=0,prior_cfgd=6,prior_b19=6
+
+ba2e1	13ucb1amaf+	57% (+-2.5%)	prior_cfgd=6
+ba2e1	13ucb1amaf+%	51.2% (+-2.5%)	prior_cfgd=6,prior_b19=6
+ba2e1	13ucb1amaf#*+	54.8% (+-2.5%)	pattern2=0,atarirate=0,prior_cfgd=6
+
+ba2e1	19ucb1amaf+!	13.8% (+-1.7%)	prior_cfgd=6,fillboard
+ba2e1	19ucb1amaf+%2	21.2% (+-2%)	prior_cfgd=prior_b19=prior=20
+ba2e1	19ucb1amaf+%2!	20.5% (+-2%)	prior_cfgd=prior_b19=prior=20,fillboard
+ba2e1	19ucb1amaf+%3	20.8% (+-2%)	prior_cfgd=prior_b19=prior=30
+ba2e1	19ucb1amaf+%4	25.8% (+-2.2%)	prior_cfgd=prior_b19=prior=40
+ba2e1	19ucb1amaf+%5	23.2% (+-2.1%)	prior_cfgd=prior_b19=prior=50
+ba2e1	19ucb1amaf+%4	24.5% (+-2.2%)	prior_cfgd=prior_b19=prior=40,amaf_prior=0
+ba2e1	19ucb1amaf#*+%!	9.8% (+-1.5%)	pattern2=0,atarirate=0,prior_cfgd=prior_b19=6,fillboard
+ba2e1	19ucb1amaf#*+%2	25% (+-2.2%)	pattern2=0,atarirate=0,prior_cfgd=prior_b19=prior=20
+ba2e1	19ucb1amaf#+%2	26.5% (+-2.2%)	pattern2=0,prior_cfgd=prior_b19=prior=20
+ba2e1	19ucb1amaf#+%3	24% (+-2.2%)	pattern2=0,prior_cfgd=prior_b19=prior=30
+ba2e1	19ucb1amaf#+%4	27% (+-2.2%)	pattern2=0,prior_cfgd=prior_b19=prior=40
+ba2e1	19ucb1amaf#+%2!	22.5% (+-2.1%)	pattern2=0,prior_cfgd=prior_b19=prior=20,fillboard
+ba2e1	19ucb1amaf#+%2_	23.5% (+-2.1%)	pattern2=0,prior_cfgd=prior_b19=prior=20,prior_policy=10
+ba2e1	19ucb1amaf#+%2a	1% (+-0.7%)	pattern2=0,prior_cfgd=prior_b19=prior=20,playouts=1000
+ba2e1	19ucb1amaf#+%2b	7.2% (+-1.4%)	pattern2=0,prior_cfgd=prior_b19=prior=20,playouts=2000
+ba2e1	19ucb1amaf#+%2	28.2% (+-2.3%)	pattern2=0,prior_cfgd=prior_b19=prior=20,amaf_prior=0
+
+<pattern2=0, prior_cfgd=prior_b19=-1, etc.>
+<From now on, 19x19 always has % = prior=20>
+
+49208	9ucb1amaf	80% (+-2%)
+49208	9ucb1amaf&	76.8% (+-2.1%)	selfatarirate=0
+49208	9ucb1amaf_	76.8% (+-2.1%)	can_capture_group() always true (really same rate)
+49208	19ucb1amaf%	25.4% (+-2.3%)
+49208	19ucb1amaf%&	18.8% (+-2%)	selfatarirate=0
+49208	19ucb1amaf%_	19.5% (+-2%)	can_capture_group() always true (really same rate)
+
+aef5c	19ucb1amaf%	24.5% (+-2.4%)
+
+67561	19ucb1amaf%	29% (+-2.3%)
+67561	19ucb1amaf%*2	26.7% (+-2.7%)	explore_p=0.02
+
+d11b1	9ucb1amaf	81.8% (+-1.9%)	
+d11b1	9ucb1amaf_	81.5% (+-1.9%)	investigate all nakade neis only in case of snapback (945e5)
+d11b1	9ucb1amaf*	81.2% (+-2%)	atarirate=0
+d11b1	9ucb1amaf&	78.8% (+-2.1%)	explore_p_rave=0
+d11b1	19ucb1amaf%	24% (+-2%)
+
+f1c52	19ucb1amaf%	26.2% (+-2.4%)
+08c0a	19ucb1amaf%	25.5% (+-2.4%)	<d11b1_&>
+
+<explore coefficient outside of RAVE>
+a0f85	9ucb1amaf	80.2% (+-2%)
+a0f85	9ucb1amaf*1	80.8% (+-2%)	explore_p=0
+a0f85	9ucb1amaf*2	81.2% (+-2%)	explore_p=0.01
+a0f85	9ucb1amaf*3	40.2% (+-2.5%)	explore_p=0.6
+a0f85	19ucb1amaf%	18.8% (+-2%)
+
+<UCT value tracking>
+
+5524c	9ucb1amaf	84.2% (+-1.8%)
+5524c	9ucb1amaf^1	70.2% (+-3%)	fuego cfgd
+5524c	9ucb1amaf^2	77% (+-2.1%)	fuego cfgd, 0.1 for pass
+5524c	9ucb1amaf^2*	76.5% (+-2.1%)	fuego cfgd, 0.1 for pass, prior_cfgd=4
+5524c	9ucb1amaf!	81.2% (+-2%)	prior_even is 0.1 for pass
+
+5524c	19ucb1amaf%	19.8% (+-2%)
+5524c	19ucb1amaf%^1	13.2% (+-1.7%)	fuego cfgd
+5524c	19ucb1amaf%^2	12.5% (+-1.7%)	fuego cfgd, 0.1 for pass
+5524c	19ucb1amaf%^2*	16.2% (+-1.8%)	fuego cfgd, 0.1 for pass, prior_cfgd=5
+5524c	19ucb1amaf!	19.6% (+-2%)	prior_even is 0.3 for pass
+
+2151a	9ucb1amaf	81.5% (+-1.9%)
+443e1	9ucb1amaf_1	72.5% (+-2.2%)	Priors just like in Fuego
+6c6cb	9ucb1amaf_2	70.5% (+-2.3%)	Priors just like in Fuego, including equivalent-best-move
+
+2151a	19ucb1amaf	17.8% (+-1.9%)
+443e1	19ucb1amaf_1	12.2% (+-1.6%)	Priors just like in Fuego
+6c6cb	19ucb1amaf_2	19.5% (+-2%)	Priors just like in Fuego, including equivalent-best-move
+
+03c36	19ucb1amaf%$	17.2% (+-1.9%)	ko=-1, without ko aging yet
+
+09368	9ucb1amaf	80.2% (+-2%)
+09368	9ucb1amaf$	80% (+-2%)	ko=-1
+09368	9ucb1amaf^	79% (+-2%)	eye=0
+09368	9ucb1amaf$^	77.2% (+-2.1%)	ko=-1,eye=0
+
+a1353	19u1a%*		61.8% (+-3.2%)	10k
+a1353	19u1a%^1 k-14.5	29.2% (+-2.3%)	dynkomi=150
+a1353	19u1a% k-14.5	29% (+-2.3%)
+a1353	19u1a%^1 k-7.5	30% (+-2.3%)	dynkomi=150
+a1353	19u1a% k-7.5	26.5% (+-2.2%)
+a1353	19u1a%*^1 k0.5	41.6% (+-3%)	10k, dynkomi=150
+a1353	19u1a%* k0.5	45.1% (+-3%)	10k
+a1353	19u1a% k0.5	24% (+-2.1%)
+a1353	19u1a%^0 k0.5	25.8% (+-2.2%)	dynkomi=100
+a1353	19u1a%^1 k0.5	24.2% (+-2.1%)	dynkomi=150
+a1353	19u1a%^2 k0.5	25% (+-2.2%)	dynkomi=200
+
+a1267	9ucb1amaf	80.1% (+-2%)
+a1267	9ucb1amaf~20	20.3% (+-2%)	val_scale=0.15,val_points=10
+a1267	9ucb1amaf~21	6% (+-1.2%)	val_scale=0.15,val_points=20
+a1267	9ucb1amaf~22	2.5% (+-0.8%)	val_scale=0.15,val_points=30
+a1267	9ucb1amaf~00	20.2% (+-1.2%)	val_scale=0.05,val_points=10
+a1267	9ucb1amaf~11	5.8% (+-1.2%)	val_scale=0.10,val_points=20
+a1267	9ucb1amaf~31	6.5% (+-2%)	val_scale=0.20,val_points=20
+a1267	9ucb1amaf~a0	18% (+-1.9%)	val_scale=0.01,val_points=10
+a1267	9ucb1amaf~a1	3.5% (+-0.9%)	val_scale=0.01,val_points=20
+a1267	9ucb1amaf~b1	6.8% (+-1.3%)	val_scale=0.02,val_points=20
+a1267	9ucb1amaf~bx	2.3% (+-0.7$)	val_scale=0.02,val_points=80
+a1267	19ucb1amaf%	21.8% (+-2.1%)
+
+2b830	9ucb1amaf	73% (+-2.2%)
+2b830	9ucb1amaf_	79% (+-2%)	global atari check picks moves across all atari groups
+2b830	9ucb1amaf~b1	3.8% (+-1%)	val_scale=0.02,val_points=20
+2b830	19ucb1amaf%	20.7% (+-3%)
+2b830	19ucb1amaf%_	20.1% (+-2.4%)	global group atari check picks move across all groups
+
+<Bugfixing ensues>
+
+cc80e	9ucb1amaf	76.8% (+-2.1%)
+cc80e	19ucb1amaf%_	18.8% (+-2.7%)	8 neighbors are examined instead of 4 in local atari/2lib check
+
+e2a49	9ucb1amaf	81.2% (+-2%)
+e2a49	9ucb1amaf_	75.8% (+-2.1%)	liberal 2-liberty check (take even liberty where opponent can't play)
+e2a49	9ucb1amaf 2k	71.2% (+-2.3%)
+e2a49	9ucb1amaf 3k	65.5% (+-2.4%)
+e2a49	19ucb1amaf%	25.3% (+-2.1%)	??? suspicious bump in percentage
+e2a49	19ucb1amaf%*3	25.4% (+-3.7%)	explore_p=0
+
+f3603	9ucb1amaf	75.8% (+-2.1%)
+f3603	9ucb1amaf~b1	7% (+-1.3%)	val_scale=0.02,val_points=20
+f3603	19ucb1amaf%	19.4% (+-2.1%)
+
+<fixed non-integer results in AMAF>
+
+fba31	9ucb1amaf 40k	94.2% (+-1.2%)
+fba31	9ucb1amaf~b1	78% (+-2.1%)	val_scale=0.02,val_points=20
+fba31	9ucb1amaf~ax	80.8% (+-2%)	val_scale=0.01,val_points=80
+fba31	19ucb1amaf%	20.7% (+-2.2%)
+fba31	19ucb1amaf%~a0	20.9% (+-2.2%)	val_scale=0.01,val_points=10
+fba31	19ucb1amaf%~ax	23.2% (+-2.1%)	val_scale=0.01,val_points=80
+fba31	19ucb1amaf%~b1	22.3% (+-2.2%)	val_scale=0.02,val_points=20
+
+3d0d9	19k-14.5 a%	29.5% (+-2.3%)
+3d0d9	19k-14.5 a%^0	29.9% (+-2.5%)	dynkomi=100
+3d0d9	19k-14.5 a%^1	37% (+-2.4%)	dynkomi=150
+3d0d9	19k-14.5 a%^2	38.6% (+-2.6%)	dynkomi=200
+3d0d9	19k-14.5 a%^3	34.7% (+-2.5%)	dynkomi=250
+
+c40e2	19h2 u1a%	36.2% (+-2.4%)
+c40e2	19h3 u1a%	43% (+-2.5%)
+c40e2	19h4 u1a%	50.7% (+-2.9%)
+
+c035e	9ucb1amaf	77.5% (+-2.1%)
+1d4f8	9ucb1amaf	77% (+-2.1%)
+1d4f8	9ucb1amaf*1	84% (+-1.8%)	explore_p=0.02
+1d4f8	9ucb1amaf*3	84.5% (+-1.8%)	explore_p=0.002
+1d4f8	9ucb1amaf%*1	81.8% (+-1.9%)	prior=eqex=20,explore_p=0.02
+1d4f8	9ucb1amaf%*2	81.8% (+-1.9%)	prior=eqex=20,explore_p=0.002
+1d4f8	9ucb1amaf%*3	85.2% (+-1.9%)	prior=eqex=20,explore_p=0
+1d4f8	9km0 u1a	60.2% (+-2.5%)
+1d4f8	9km0 u1a*1	61.2% (+-2.4%)	explore_p=0.02
+1d4f8	9km0 u1a*3	61% (+-2.4%)	explore_p=0
+1d4f8	9km0 u1a%*1	65% (+-2.4%)	prior=eqex=20,explore_p=0.02
+1d4f8	9km0 u1a%*3	65.2% (+-2.4%)	prior=eqex=20,explore_p=0
+
+1d4f8	19u1a%		17.4% (+-2.3%)
+1d4f8	19u1a%2		21.4% (+-3.7%)	prior=eqex=40
+1d4f8	19u1a%*x	0% (+-0%)	explore_p=0.6
+1d4f8	19u1a%*0	13% (+-1.7%)	explore_p=0.2
+1d4f8	19u1a%*1	23.4% (+-2.4%)	explore_p=0.02
+1d4f8	19u1a%*2	25% (+-2.4%)	explore_p=0.002
+1d4f8	19u1a%*3	22.4% (+-2.9%)	explore_p=0
+1d4f8	19u1a%2*3	29.4% (+-3.2%)	explore_p=0,prior=eqex=40
+1d4f8-67561 19u1a%	10.6% (+-2.3%)	1d4f8 perspective - something deeply rotten, eh? ;)
+c035e-67561 19u1a%*1	44.1% (+-2.6%)	explore_p=0.02, c035e perspective
+1d4f8-67561 19u1a%*1	41.7% (+-2.9%)	explore_p=0.02, 1d4f8 perspective - better than old exp., but still regression
+
+7b125	19u1a%		15.7% (+-2.4%)	<exploration bias moves back into the beta-term>
+16ac5	19u1a%		15.3% (+-4.7%)	<restored explore_p_rave bias term on top of 7b125>
+
+More dynkomi experiments:
+1d4f8	19h2ua%*1~ax	31.8% (+-2.5%)	explore_p=0.02,val_scale=0.01,val_points=80
+1d4f8	19h2ua%*1~ax^2	38.4% (+-2.6%)	explore_p=0.02,val_scale=0.01,val_points=80,dynkomi=200
+1d4f8	19h4ua%*1	49.2% (+-2.5%)	explore_p=0.02
+1d4f8	19h4ua%*1^1	59.5% (+-2.5%)	explore_p=0.02,dynkomi=150
+1d4f8	19h4ua%*1^2	63.8% (+-2.4%)	explore_p=0.02,dynkomi=200
+1d4f8	19h4ua%*1~a1	52.2% (+-2.5%)	explore_p=0.02,val_scale=0.01,val_points=20
+1d4f8	19h4ua%*1~a1^1	58.5% (+-2.5%)	explore_p=0.02,val_scale=0.01,val_points=20,dynkomi=150
+1d4f8	19h4ua%*1~ax	51.5% (+-2.5%)	explore_p=0.02,val_scale=0.01,val_points=80
+1d4f8	19h4ua%*1~ax^1	58.7% (+-2.6%)	explore_p=0.02,val_scale=0.01,val_points=80,dynkomi=150
+1d4f8	19h4ua%*1~ax^2	63.5% (+-2.4%)	explore_p=0.02,val_scale=0.01,val_points=80,dynkomi=200
+1d4f8	19h4ua%2*3~ax^2	66.8% (+-2.4%)	explore_p=0,prior=eqex=40,val_scale=0.01,val_points=80,dynkomi=200
+
+2e4fa	19u1a%*1	30.1% (+-2.3%)	explore_p=0.02
+
+<New defaults - explore_p=0,prior=eqex=40>
+
+d032a	9u1a		82.2% (+-1.9%)
+d032a	9u1a%1		85.2% (+-1.8%)	prior=eqex=20
+d032a	9k0u1a		66% (+-2.4%)
+d032a	9k0u1a@		62.2% (+-2.4%)	prior=ko=-1
+d032a	9k0u1a%1	64.8% (+-2.4%)	prior=eqex=20
+d032a	9k0u1a~a1	59.5% (+-2.5%)	val_scale=0.01,val_points=20
+d032a	9k0u1a~ax	67.8% (+-2.3%)	val_scale=0.01,val_points=80
+d032a	9k0u1a~b1	65.8% (+-2.4%)	val_scale=0.02,val_points=20
+d032a	9k0u1a~bx	65.5% (+-2.4%)	val_scale=0.02,val_points=80
+d032a	9k0u1a*1	64.2% (+-2.4%)	explore_p=0.02
+d032a	9k0u1a*1%1	67% (+-2.4%)	explore_p=0.02,prior=eqex=20
+d032a	9k0u1a^10	62.8% (+-2.4%)	dynkomi=10
+d032a	9k0u1a^20	64% (+-2.4%)	dynkomi=20
+d032a	9k0u1a^40	50.5% (+-2.5%)	dynkomi=40
+d032a	9k0u1a^60	25.3% (+-2.5%)	dynkomi=60
+d032a	19u1a		33% (+-3.2%)
+d032a	19u1a@		33.5% (+-3.3%)	prior=ko=-1
+d032a	19u1a*1%1	30% (+-3.1%)	explore_p=0.02,prior=eqex=20
+d032a	19u1a~a20	33% (+-2.8%)	val_scale=0.01,val_points=20
+d032a	19u1a~a80	31.2% (+-3.2%)	val_scale=0.01,val_points=80
+d032a	19u1a~a150	34.5% (+-2.8%)	val_scale=0.01,val_points=150
+d032a	19u1a~a360	33.2% (+-2.8%)	val_scale=0.01,val_points=360
+
+<Fix the counter-atari check to actuall work at all>
+
+8ce82	9u1a		85.2% (+-1.8%)
+8ce82	9k0u1a		69.8% (+-2.3%)
+8ce82	9u1a$		89% (+-1.6%)	games=6666
+8ce82	9k0u1a$		72.8% (+-2.2%)	games=6666
+8ce82	19u1a		36.8% (+-2.4%)
+8ce82	19u1a@		34.5% (+-2.4%)	prior=ko=-1
+8ce82	19u1a~a361	36.8% (+-2.4%)	val_scale=0.01,val_points=361
+8ce82	19u1a~b361	36.5% (+-2.4%)	val_scale=0.02,val_points=361
+
+<#define NO_DOOMED_GROUPS; this also pertains a speedup,
+ so we test with original 5k and 6.6k playouts (appropriate
+ for measured speedup on 19x19)>
+
+f4cb0	9u1a		83.2% (+-1.9%)
+f4cb0	9u1a$		87.5% (+-1.7%)	games=6666
+f4cb0	9k0u1a		64% (+-2.4%)
+f4cb0	9k0u1a$		66.2% (+-2.4%)	games=6666
+f4cb0	19u1a		32.5% (+-2.3%)
+f4cb0	19u1a~b361	31.8% (+-2.3%)	val_scale=0.02,val_points=361
+f4cb0	19u1a$		42% (+-2.5%)	games=6666
+f4cb0	19u1a$~b361	42.5% (+-2.5%)	games=6666,val_scale=0.02,val_points=361
+
+<Set default to val_scale=0.02,val_points=-1>
+
+7d1c7	9k0u1a		63.5% (+-2.4%)
+7d1c7	9k0u1a$		68.2% (+-2.3%)	games=6666
+7d1c7	9k0u1a~x	61.8% (+-2.4%)	val_extra
+7d1c7	9k0u1a~10	68.2% (+-2.3%)	val_points=10
+7d1c7	9k0u1a~20	71.5% (+-2.3%)	val_points=20
+7d1c7	9k0u1a^		63.8% (+-1.7%)	ladders=0
+7d1c7	9k0u1a+		61.6% (+-1.7%)	pattern2=1
+
+7d1c7	19u1a		30.5% (+-2.3%)
+7d1c7	19u1a$		40.2% (+-2.2%)	games=6666
+7d1c7	19u1a~x		31.2% (+-2.3%)	val_extra
+7d1c7	19u1a~10	30.2% (+-2.3%)	val_points=10
+7d1c7	19u1a~20	30.8% (+-2.3%)	val_points=20
+7d1c7	19u1a@		31.2% (+-2.3%)	prior=ko=-1
+
+Playout randomization experiments:
+7d1c7	9k0u1a%95	64% (+-1.8%)	rate=95
+7d1c7	9k0u1a%80	65.8% (+-1.8%)	rate=80
+7d1c7	9k0u1a%70	67.1% (+-1.7%)	rate=70
+7d1c7	9k0u1a%65	68.5% (+-1.4%)	rate=65
+7d1c7	9k0u1a%60	66.4% (+-1.7%)	rate=60
+7d1c7	9k0u1a%55	65.8% (+-1.7%)	rate=55
+7d1c7	9k0u1a%50	63% (+-1.7%)	rate=50
+7d1c7	9k0u1a%45	57.6% (+-1.7%)	rate=45
+7d1c7	9k0u1a%65#80	64.7% (+-1.7%)	rate=65,patternrate=80
+7d1c7	9k0u1a%65&80	68.1% (+-1.6%)	rate=65,selfatarirate=80
+7d1c7	9k0u1a%65&95	64% (+-1.7%)	rate=65,selfatarirate=95
+7d1c7	9k0u1a%90!50	66.4% (+-1.7%)	rate=90,atarirate=50
+7d1c7	9k0u1a%90=50	64.2% (+-1.7%)	rate=90,capturerate=50
+7d1c7	19u1a%99	32.2% (+-2.4%)	rate=99
+7d1c7	19u1a%95	32.5% (+-2.3%)	rate=95
+7d1c7	19u1a%85	33% (+-2.4%)	rate=85
+7d1c7	19u1a%80	25.8% (+-2.1%)	rate=80
+7d1c7	19u1a%65	22.2% (+-2.2%)	rate=65
+
+Even game heuristics experiments:
+</ == even prior is added to both normal and AMAF values>
+7d1c7	9k0u1a!		68.2% (+-1.6%)	amaf_prior=0
+7d1c7	9k0u1a!~10	65.8% (+-1.7%)	amaf_prior=0,prior=even=10
+7d1c7	9k0u1a/		55.7% (+-1.8%)
+7d1c7	9k0u1a/!	57% (+-1.8%)	amaf_prior=0
+7d1c7	9k0u1a/!~0	8.2% (+-1.4%)	amaf_prior=0,prior=even=0
+7d1c7	9k0u1a/!~2	66% (+-1.7%)	amaf_prior=0,prior=even=2
+7d1c7	9k0u1a/!~4	63.6% (+-1.7%)	amaf_prior=0,prior=even=4
+7d1c7	9k0u1a/!~6	61.8% (+-1.7%)	amaf_prior=0,prior=even=6
+7d1c7	9k0u1a/!~10	65.4% (+-1.7%)	amaf_prior=0,prior=even=10
+
+7d1c7	19u1a!~10	28.8% (+-2.3%)	amaf_prior=0,prior=even=10
+7d1c7	19u1a/		13.5% (+-1.7%)
+7d1c7	19u1a/!		17.2% (+-1.9%)	amaf_prior=0
+7d1c7	19u1a/!~0	0%		amaf_prior=0,prior=even=0
+7d1c7	19u1a/!~2	31% (+-2.3%)	amaf_prior=0,prior=even=2
+7d1c7	19u1a/!~4	32.8% (+-2.3%)	amaf_prior=0,prior=even=4
+7d1c7	19u1a/!~6	32.8% (+-2.3%)	amaf_prior=0,prior=even=6
+7d1c7	19u1a/!~10	33.8% (+-2.4%)	amaf_prior=0,prior=even=10
+7d1c7	19u1a/!~16	23.5% (+-2.1%)	amaf_prior=0,prior=even=16
+
+More dynkomi experiments:
+7d1c7	19k0u1a		36.2% (+-2.4%)
+7d1c7	19k0u1a^	40.8% (+-2.5%)	dynkomi=200	extra komi is 7.5
+7d1c7	19k0u1a^_1	40.2% (+-2.5%)	dynkomi=200	extra komi is 5.5
+7d1c7	19k0u1a^_2	40% (+-2.4%)	dynkomi=200	extra komi is 8
+
+7d1c7	19h2u1a		46.2% (+-2.5%)
+7d1c7	19h2u1a^	50.8% (+-2.5%)	dynkomi=200	extra komi is 15
+7d1c7	19h2u1a^_1	47.5% (+-2.5%)	dynkomi=200	extra komi is 11.5
+7d1c7	19h2u1a^_2	50.5% (+-2.5%)	dynkomi=200	extra komi is 16
+
+7d1c7	19h3u1a		54% (+-2.5%)
+7d1c7	19h3u1a^	59.2% (+-2.5%)	dynkomi=200	extra komi is 22.5
+7d1c7	19h3u1a^_1	61.5% (+-2.4%)	dynkomi=200	extra komi is 18.5
+7d1c7	19h3u1a^_2	58.2% (+-2.5%)	dynkomi=200	extra komi is 22
+
+7d1c7	19h4u1a		63% (+-2.4%)
+7d1c7	19h4u1a^_20	62.5% (+-2.4%)	dynkomi=200	extra komi is 80
+7d1c7	19h4u1a^_16	67.5% (+-2.3%)	dynkomi=200	extra komi is 64
+7d1c7	19h4u1a^_12	74.5% (+-2.2%)	dynkomi=200	extra komi is 48
+7d1c7	19h4u1a^	71.8% (+-2.4%)	dynkomi=200	extra komi is 30
+7d1c7	19h4u1a^_1	67.5% (+-2.3%)	dynkomi=200	extra komi is 27.5
+7d1c7	19h4u1a^_2	71.5% (+-2.3%)	dynkomi=200	extra komi is 28
+
+7d1c7	19h5u1a		69.3% (+-2.4%)
+7d1c7	19h5u1a^_20	48.3% (+-2.5%)	dynkomi=200	extra komi is 100
+7d1c7	19h5u1a^_16	77.5% (+-2.1%)	dynkomi=200	extra komi is 80
+7d1c7	19h5u1a^_12	76.5% (+-2.1%)	dynkomi=200	extra komi is 60
+7d1c7	19h5u1a^	80.4% (+-2.1%)	dynkomi=200	extra komi is 37.5
+7d1c7	19h5u1a^_1	81.5% (+-1.9%)	dynkomi=200	extra komi is 35.5
+7d1c7	19h5u1a^_2	79.5% (+-2%)	dynkomi=200	extra komi is 34
+
+a9249	9k0u1a		65.5% (+-2.4%)	[prior=cfgd=3%40%20%20]
+a9249	9k0u1a*1	64.5% (+-2.4%)	prior=cfgd=1%40
+a9249	9k0u1a*2	64.2% (+-2.4%)	prior=cfgd=2%40%20
+a9249	9k0u1a*3	63.5% (+-2.4%)	prior=cfgd=4%40%30%20%10
+a9249	19u1a		30.5% (+-2.3%)	[prior=cfgd=3%40%20%20]
+a9249	19u1a*1		23.5% (+-2.1%)	prior=cfgd=1%40
+a9249	19u1a*2		25.8% (+-2.2%)	prior=cfgd=2%40%20
+a9249	19u1a*3		26.5% (+-2.2%)	prior=cfgd=3%40%10%10
+a9249	19u1a*4		23.2% (+-2.1%)	prior=cfgd=4%40%30%20%10
+a9249	19u1a*5		23% (+-2.1%)	prior=cfgd=4%40%30%30%5
+a9249	19u1a*6		25% (+-2.2%)	prior=cfgd=4%40%30%30%20
+
+44216	19u1a		30% (+-2.3%)
+44216	19u1a+		24% (+-2.1%)	pattern2=1
+44216	19u1a%60	26% (+-2.2%)	prior=eqex=60
+44216	19u1a!%10	29.8% (+-2.3%)	amaf_prior=0,prior=eqex=10
+44216	19u1a!%20	25% (+-2.4%)	amaf_prior=0,prior=eqex=20
+44216	19u1a!%30	32.5% (+-2.3%)	amaf_prior=0,prior=eqex=30
+44216	19u1a!		36.8% (+-2.4%)	amaf_prior=0,[prior=eqex=40]
+44216	19u1a!%50	27.8% (+-2.2%)	amaf_prior=0,prior=eqex=50
+44216	19u1a!%60	25.2% (+-2.2%)	amaf_prior=0,prior=eqex=60
+
+938a4	9k0u1a		65.5% (+-1.7%)
+938a4	9k0u1a~0	68.8% (+-2.3%)	val_points=0
+938a4	9k0u1a!%30	71.2% (+-2.3%)	amaf_prior=0,prior=eqex=30
+938a4	9k0u1a!		71% (+-2.3%)	amaf_prior=0,[prior=eqex=40]
+938a4	9k0u1a!%50	65% (+-2.4%)	amaf_prior=0,prior=eqex=50
+938a4	9k0u1a!%65	64% (+-2.4%)	amaf_prior=0,prior=eqex=65
+938a4	9k0u1a#1	20.5% (+-2%)	root_heuristic,root_rave=1
+938a4	9k0u1a#0.6	57.2% (+-2.5%)	root_heuristic,root_rave=0.6
+938a4	9k0u1a#0.2	63.2% (+-2.4%)	root_heuristic,root_rave=0.2
+938a4	9k0u1a#0.02	65.6% (+-2.4%)	root_heuristic,root_rave=0.02
+a3010	19u1a		30.2% (+-2.3%)
+938a4	19u1a		31.2% (+-2.3%)
+938a4	19u1a~10	31.2% (+-2.3%)	prior=even=10
+a3010	19u1a#1.6	23.5% (+-2.1%)	root_heuristic,root_rave=1.6
+a3010	19u1a#1		26% (+-2.2%)	root_heuristic,root_rave=1
+a3010	19u1a#0.6	28% (+-2.2%)	root_heuristic,root_rave=0.6
+a3010	19u1a#0.2	29% (+-2.3%)	root_heuristic,root_rave=0.2
+938a4	19u1a#0.05	29.2% (+-2.3%)	root_heuristic,root_rave=0.05
+938a4	19u1a#0.02	27.2% (+-2.2%)	root_heuristic,root_rave=0.02
+938a4	19u1a#0.005	33.8% (+-2.4%)	root_heuristic,root_rave=0.005
+
+4e89f	19u1		0%
+4e89f	19u1a		30.5% (+-2.3%)
+4e89f	19u1a#95	28.5% (+-2.3%)	rate=95
+4e89f	19u1a#100/95	32.5% (+-2.3%)	rate=100,selfatarirate=95
+4e89f	19u1a%02	1% (+-0.5%)	explore_p=0.2
+4e89f	19u1a%002	30.5% (+-2.3%)	explore_p=0.02
+
+4e89f	19u1a*10	22% (+-2.1%)	prior=cfgd=3%20%10%5
+4e89f	19u1a*11	25.5% (+-2.1%)	prior=cfgd=3%30%10%10
+4e89f	19u1a*12	26.5% (+-2.2%)	prior=cfgd=3%30%20%10
+4e89f	19u1a*13	25.5% (+-2.1%)	prior=cfgd=3%30%20%20
+4e89f	19u1a		28% (+-2.2%)	[prior=cfgd=3%40%20%20]
+4e89f	19u1a*15	19.8% (+-2%)	prior=cfgd=3%50%20%20
+4e89f	19u1a*16	21.5% (+-2.1%)	prior=cfgd=3%50%30%20
+4e89f	19u1a*17	25.5% (+-2.2%)	prior=cfgd=3%50%30%30
+4e89f	19u1a*18	25.2% (+-2.2%)	prior=cfgd=3%50%40%30
+4e89f	19u1a*19	24.5% (+-2.2%)	prior=cfgd=3%50%40%40
+4e89f	19u1a*1a	23% (+-2.1%)	prior=cfgd=3%60%30%10
+4e89f	19u1a*1b	25.8% (+-2.2%)	prior=cfgd=3%60%40%30
+4e89f	19u1a*1c	26.8% (+-2.2%)	prior=cfgd=3%60%50%40

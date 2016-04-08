@@ -1,0 +1,29 @@
+Pachi stands on research shoulders of giants, specifically:
+
+Modification of UCT with Patterns in Monte-Carlo Go
+	Sylvain Gelly, Yizao Wang, Remi Munos & Olivier Teytaud
+
+Combining Online and Offline Knowledge in UCT
+	Sylvain Gelly, David Silver
+
+
+Pachi contains unpublished methods we claim we have invented
+independently and are preparing for publication:
+
+* The dynamic komi feature.
+* The local tree feature.
+
+
+These people have made significant contributions to the code:
+
+Petr Baudis
+	Pachi the Bot ;-)
+
+Jean-loup Gaily
+	Distributed engine
+	Time allocation algorithm
+	Efficient UCT memory allocator
+
+
+Pachi uses data extracted from the Kogo joseki dictionary as its
+joseki database: http://waterfire.us/joseki.htm

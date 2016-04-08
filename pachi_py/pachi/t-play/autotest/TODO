@@ -1,0 +1,13 @@
+* Support for handicap settings
+
+* Support for automatic checking against loss-by-points
+  (desirable for UCT players)
+
+* Caching unchanged results - faster ./autotest-show
+
+* Nicer support for disconnected usage
+
+* Support for multi-core systems and multi-threaded players
+
+* Support for using different(ly optimized) binaries based
+  on host architecture / processor type
