@@ -3,7 +3,7 @@
 #include "random.h"
 
 
-/* Simple Park-Miller */
+/* Simple Park-Miller for floating point; LCG as used in glibc and other places */
 
 #ifndef NO_THREAD_LOCAL
 
@@ -24,12 +24,7 @@ fast_getseed(void)
 uint16_t
 fast_random(unsigned int max)
 {
-	unsigned long hi, lo;
-	lo = 16807 * (pmseed & 0xffff);
-	hi = 16807 * (pmseed >> 16);
-	lo += (hi & 0x7fff) << 16;
-	lo += hi >> 15;
-	pmseed = (lo & 0x7fffffff) + (lo >> 31);
+	pmseed = ((pmseed * 1103515245) + 12345) & 0x7fffffff;
 	return ((pmseed & 0xffff) * max) >> 16;
 }
 
@@ -75,12 +70,7 @@ uint16_t
 fast_random(unsigned int max)
 {
 	unsigned long pmseed = (unsigned long)pthread_getspecific(seed_key);
-	unsigned long hi, lo;
-	lo = 16807 * (pmseed & 0xffff);
-	hi = 16807 * (pmseed >> 16);
-	lo += (hi & 0x7fff) << 16;
-	lo += hi >> 15;
-	pmseed = (lo & 0x7fffffff) + (lo >> 31);
+	pmseed = ((pmseed * 1103515245) + 12345) & 0x7fffffff;
 	pthread_setspecific(seed_key, (void *)pmseed);
 	return ((pmseed & 0xffff) * max) >> 16;
 }

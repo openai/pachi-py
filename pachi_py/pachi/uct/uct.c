@@ -13,6 +13,7 @@
 #include "chat.h"
 #include "move.h"
 #include "mq.h"
+#include "dcnn.h"
 #include "joseki/base.h"
 #include "playout.h"
 #include "playout/moggy.h"
@@ -157,6 +158,13 @@ uct_printhook_ownermap(struct board *board, coord_t c, char *s, char *end)
 	return s;
 }
 
+static float
+uct_owner_map(struct engine *e, struct board *b, coord_t c)
+{
+	struct uct *u = b->es;
+	return board_ownermap_estimate_point(&u->ownermap, c);
+}
+
 static char *
 uct_notify_play(struct engine *e, struct board *b, struct move *m, char *enginearg)
 {
@@ -242,7 +250,7 @@ uct_chat(struct engine *e, struct board *b, bool opponent, char *from, char *cmd
 
 	struct tree_node *n = u->t->root;
 	double winrate = tree_node_get_value(u->t, -1, n->u.value);
-	double extra_komi = u->t->use_extra_komi && abs(u->t->extra_komi) >= 0.5 ? u->t->extra_komi : 0;
+	double extra_komi = u->t->use_extra_komi && fabs(u->t->extra_komi) >= 0.5 ? u->t->extra_komi : 0;
 
 	return generic_chat(b, opponent, from, cmd, u->t->root_color, node_coord(n), n->u.playouts, 1,
 			    u->threads, winrate, extra_komi);
@@ -309,13 +317,16 @@ uct_done(struct engine *e)
 {
 	/* This is called on engine reset, especially when clear_board
 	 * is received and new game should begin. */
+	free(e->comment);
+
 	struct uct *u = e->data;
 	uct_pondering_stop(u);
 	if (u->t) reset_state(u);
+	if (u->dynkomi) u->dynkomi->done(u->dynkomi);
 	free(u->ownermap.map);
 
-	free(u->policy);
-	free(u->random_policy);
+	if (u->policy) u->policy->done(u->policy);
+	if (u->random_policy) u->random_policy->done(u->random_policy);
 	playout_policy_done(u->playout);
 	uct_prior_done(u->prior);
 	joseki_done(u->jdict);
@@ -480,6 +491,43 @@ uct_genmove_setup(struct uct *u, struct board *b, enum stone color)
 	}
 }
 
+static void
+uct_live_gfx_hook(struct engine *e)
+{
+	struct uct *u = e->data;
+	/* Hack: Override reportfreq to get decent update rates in GoGui */
+	u->reportfreq = 1000;
+}
+
+/* Kindof like uct_genmove() but just find the best candidates */
+static void
+uct_best_moves(struct engine *e, struct board *b, enum stone color)
+{
+	struct time_info ti = { .period = TT_NULL };
+	double start_time = time_now();
+	struct uct *u = e->data;
+	uct_pondering_stop(u);
+	if (u->t)
+		reset_state(u);
+	uct_genmove_setup(u, b, color);
+
+        /* Start the Monte Carlo Tree Search! */
+	int base_playouts = u->t->root->u.playouts;
+	int played_games = uct_search(u, b, &ti, color, u->t, false);
+
+	coord_t best_coord;
+	uct_search_result(u, b, color, u->pass_all_alive, played_games, base_playouts, &best_coord);
+
+	if (UDEBUGL(2)) {
+		double time = time_now() - start_time + 0.000001; /* avoid divide by zero */
+		fprintf(stderr, "genmove in %0.2fs (%d games/s, %d games/s/thread)\n",
+			time, (int)(played_games/time), (int)(played_games/time/u->threads));
+	}
+
+	uct_progress_status(u, u->t, color, played_games, &best_coord);
+	reset_state(u);
+}
+
 static coord_t *
 uct_genmove(struct engine *e, struct board *b, struct time_info *ti, enum stone color, bool pass_all_alive)
 {
@@ -487,6 +535,16 @@ uct_genmove(struct engine *e, struct board *b, struct time_info *ti, enum stone 
 	struct uct *u = e->data;
 	u->pass_all_alive |= pass_all_alive;
 	uct_pondering_stop(u);
+
+	if (using_dcnn(b)) {
+		// dcnn hack: reset state to make dcnn priors kick in.
+		// FIXME this makes pondering useless when using dcnn ...
+		if (u->t) {
+			u->initial_extra_komi = u->t->extra_komi;
+			reset_state(u);
+		}
+	}
+
 	uct_genmove_setup(u, b, color);
 
         /* Start the Monte Carlo Tree Search! */
@@ -1230,6 +1288,7 @@ uct_state_init(char *arg, struct board *b)
 
 	if (u->want_pat && !pat_setup)
 		patterns_init(&u->pat, NULL, false, true);
+	dcnn_init();
 
 	u->ownermap.map = malloc2(board_size2(b) * sizeof(u->ownermap.map[0]));
 
@@ -1269,6 +1328,9 @@ engine_uct_init(char *arg, struct board *b)
 	e->dead_group_list = uct_dead_group_list;
 	e->stop = uct_stop;
 	e->done = uct_done;
+	e->owner_map = uct_owner_map;
+	e->best_moves = uct_best_moves;
+	e->live_gfx_hook = uct_live_gfx_hook;
 	e->data = u;
 	if (u->slave)
 		e->notify = uct_notify;

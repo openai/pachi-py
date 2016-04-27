@@ -371,7 +371,7 @@ board_print_row(struct board *board, int y, char *s, char *end, board_cprint cpr
 	return s;
 }
 
-void
+char *
 board_print_custom(struct board *board, FILE *f, board_cprint cprint)
 {
 	char buf[10240];
@@ -384,7 +384,11 @@ board_print_custom(struct board *board, FILE *f, board_cprint cprint)
 	for (int y = board_size(board) - 2; y >= 1; y--)
 		s = board_print_row(board, y, s, end, cprint);
 	board_print_bottom(board, s, end, 1 + !!cprint);
-	fprintf(f, "%s\n", buf);
+	if (f != NULL) {
+        fprintf(f, "%s\n", buf);
+    } else {
+        return strdup(buf);
+    }
 }
 
 static char *
@@ -394,10 +398,10 @@ cprint_group(struct board *board, coord_t c, char *s, char *end)
 	return s;
 }
 
-void
+char *
 board_print(struct board *board, FILE *f)
 {
-	board_print_custom(board, f, DEBUGL(6) ? cprint_group : NULL);
+	return board_print_custom(board, f, DEBUGL(6) ? cprint_group : NULL);
 }
 
 
@@ -1218,6 +1222,8 @@ board_play_outside(struct board *board, struct move *m, int f)
 	if (unlikely(!group))
 		group = new_group(board, coord);
 
+	board->last_move4 = board->last_move3;
+	board->last_move3 = board->last_move2;
 	board->last_move2 = board->last_move;
 	board->last_move = *m;
 	board->moves++;
@@ -1317,6 +1323,8 @@ board_play_in_eye(struct board *board, struct move *m, int f)
 	board_at(board, coord) = color;
 	group_t group = new_group(board, coord);
 
+	board->last_move4 = board->last_move3;
+	board->last_move3 = board->last_move2;
 	board->last_move2 = board->last_move;
 	board->last_move = *m;
 	board->moves++;

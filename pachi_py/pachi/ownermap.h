@@ -29,17 +29,19 @@ enum point_judgement {
 	PJ_UNKNOWN = 3,
 };
 enum point_judgement board_ownermap_judge_point(struct board_ownermap *ownermap, coord_t c, floating_t thres);
+float board_ownermap_estimate_point(struct board_ownermap *ownermap, coord_t c);
 
 
 /* Estimate status of stones on board based on ownermap stats. */
+enum gj_state {
+    GS_NONE,
+    GS_DEAD,
+    GS_ALIVE,
+    GS_UNKNOWN,
+};
 struct group_judgement {
 	floating_t thres;
-	enum gj_state {
-		GS_NONE,
-		GS_DEAD,
-		GS_ALIVE,
-		GS_UNKNOWN,
-	} *gs; // [bsize2]
+    enum gj_state *gs; // [bsize2]
 };
 void board_ownermap_judge_groups(struct board *b, struct board_ownermap *ownermap, struct group_judgement *judge);
 

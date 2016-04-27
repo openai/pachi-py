@@ -176,7 +176,7 @@ uct_notify(struct engine *e, struct board *b, int id, char *cmd, char *args, cha
 {
 	struct uct *u = e->data;
 
-	static bool board_resized = false;
+	static bool board_resized = true;
 	if (is_gamestart(cmd)) {
 		board_resized = true;
 		uct_pondering_stop(u);
@@ -194,7 +194,7 @@ uct_notify(struct engine *e, struct board *b, int id, char *cmd, char *args, cha
 
 		*reply = buf;
 		/* Let gtp_parse() complain about invalid commands. */
-		if (!gtp_is_valid(cmd) && !is_repeated(cmd)) return P_OK;
+		if (!gtp_is_valid(e, cmd) && !is_repeated(cmd)) return P_OK;
 		return P_DONE_ERROR;
 	}
 	return reply_disabled(id) ? P_NOREPLY : P_OK;

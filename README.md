@@ -1,3 +1,3 @@
-# pachi_py 
+# pachi_py
 
-Python wrappers for a slightly modified version of [http://pachi.or.cz/](Pachi 11.00).
+Python wrappers for a slightly modified version of [Pachi 11.00](http://pachi.or.cz/).

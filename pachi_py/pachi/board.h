@@ -40,6 +40,15 @@ struct fbook;
 #define BOARD_MAX_MOVES (BOARD_MAX_SIZE * BOARD_MAX_SIZE)
 #define BOARD_MAX_GROUPS (BOARD_MAX_SIZE * BOARD_MAX_SIZE / 2)
 
+enum e_sym {
+		SYM_FULL,
+		SYM_DIAG_UP,
+		SYM_DIAG_DOWN,
+		SYM_HORIZ,
+		SYM_VERT,
+		SYM_NONE
+};
+
 
 /* Some engines might normalize their reading and skip symmetrical
  * moves. We will tell them how can they do it. */
@@ -52,14 +61,7 @@ struct board_symmetry {
 	/* General symmetry type. */
 	/* Note that the above is redundant to this, but just provided
 	 * for easier usage. */
-	enum {
-		SYM_FULL,
-		SYM_DIAG_UP,
-		SYM_DIAG_DOWN,
-		SYM_HORIZ,
-		SYM_VERT,
-		SYM_NONE
-	} type;
+	enum e_sym type;
 };
 
 
@@ -267,9 +269,11 @@ struct board {
 /* Avoid unused variable warnings */
 #define board_size(b_) (((b_) == (b_)) ? BOARD_SIZE + 2 : 0)
 #define board_size2(b_) (board_size(b_) * board_size(b_))
+#define real_board_size(b_)  (((b_) == (b_)) ? BOARD_SIZE : 0)
 #else
 #define board_size(b_) ((b_)->size)
 #define board_size2(b_) ((b_)->size2)
+#define real_board_size(b_) ((b_)->size - 2)
 #endif
 
 /* This is a shortcut for taking different action on smaller
@@ -326,10 +330,9 @@ void board_done(struct board *board);
 void board_resize(struct board *board, int size);
 void board_clear(struct board *board);
 
-struct FILE;
 typedef char *(*board_cprint)(struct board *b, coord_t c, char *s, char *end);
-void board_print(struct board *board, FILE *f);
-void board_print_custom(struct board *board, FILE *f, board_cprint cprint);
+char *board_print(struct board *board, FILE *f);
+char *board_print_custom(struct board *board, FILE *f, board_cprint cprint);
 
 /* Place given handicap on the board; coordinates are printed to f. */
 void board_handicap(struct board *board, int stones, FILE *f);
@@ -465,6 +468,7 @@ board_is_eyelike(struct board *board, coord_t coord, enum stone eye_color)
 	        + neighbor_count_at(board, coord, S_OFFBOARD)) == 4;
 }
 
+/* Group suicides allowed */
 static inline bool
 board_is_valid_play(struct board *board, enum stone color, coord_t coord)
 {
@@ -487,6 +491,42 @@ board_is_valid_play(struct board *board, enum stone color, coord_t coord)
 	return !!groups_in_atari;
 #endif
 }
+
+/* Check group suicides, slower than board_is_valid_play() */
+static inline bool
+board_is_valid_play_no_suicide(struct board *board, enum stone color, coord_t coord)
+{
+	if (board_at(board, coord) != S_NONE)
+		return false;
+	if (immediate_liberty_count(board, coord) >= 1)
+		return true;
+	if (board_is_eyelike(board, coord, stone_other(color)) &&
+	    board->ko.coord == coord && board->ko.color == color)
+			return false;
+
+	// Capturing something ?
+#ifdef BOARD_TRAITS
+	/* XXX: Disallows suicide. */
+	if (trait_at(board, coord, color).cap > 0)
+		return true;
+#else
+	foreach_neighbor(board, coord, {
+		if (board_at(board, c) == stone_other(color) &&
+		    board_group_info(board, group_at(board, c)).libs == 1)
+			return true;
+	});
+#endif
+
+	// Neighbour with 2 libs ?
+	foreach_neighbor(board, coord, {
+		if (board_at(board, c) == color &&
+		    board_group_info(board, group_at(board, c)).libs > 1)
+			return true;
+	});
+
+	return false;  // Suicide
+}
+
 
 static inline bool
 board_is_valid_move(struct board *board, struct move *m)

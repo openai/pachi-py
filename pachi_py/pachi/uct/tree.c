@@ -77,7 +77,10 @@ tree_init(struct board *board, enum stone color, unsigned long max_tree_size,
 	  unsigned long max_pruned_size, unsigned long pruning_threshold, floating_t ltree_aging, int hbits)
 {
 	struct tree *t = calloc2(1, sizeof(*t));
-	t->board = board;
+
+	t->board = malloc2(sizeof(struct board));
+	board_copy(t->board, board);
+
 	t->max_tree_size = max_tree_size;
 	t->max_pruned_size = max_pruned_size;
 	t->pruning_threshold = pruning_threshold;
@@ -170,6 +173,8 @@ tree_done(struct tree *t)
 	tree_done_node(t, t->ltree_black);
 	tree_done_node(t, t->ltree_white);
 
+	board_done(t->board);
+
 	if (t->htable) free(t->htable);
 	if (t->nodes) {
 		free(t->nodes);
@@ -258,8 +263,8 @@ tree_node_save(FILE *f, struct tree_node *node, int thres)
 		node->is_expanded = 0;
 
 	fputc(1, f);
-	fwrite(((void *) node) + offsetof(struct tree_node, depth),
-	       sizeof(struct tree_node) - offsetof(struct tree_node, depth),
+	fwrite(((void *) node) + offsetof(struct tree_node, u),
+	       sizeof(struct tree_node) - offsetof(struct tree_node, u),
 	       1, f);
 
 	if (save_children) {
@@ -293,9 +298,9 @@ tree_node_load(FILE *f, struct tree_node *node, int *num)
 {
 	(*num)++;
 
-	fread(((void *) node) + offsetof(struct tree_node, depth),
-	       sizeof(struct tree_node) - offsetof(struct tree_node, depth),
-	       1, f);
+	fread(((void *) node) + offsetof(struct tree_node, u),
+	      sizeof(struct tree_node) - offsetof(struct tree_node, u),
+	      1, f);
 
 	/* Keep values in sane scale, otherwise we start overflowing. */
 #define MAX_PLAYOUTS	10000000
@@ -591,7 +596,7 @@ tree_expand_node(struct tree *t, struct tree_node *node, struct board *b, enum s
 	int child_count = 1; // for pass
 	foreach_free_point(b) {
 		assert(board_at(b, c) == S_NONE);
-		if (!board_is_valid_play(b, color, c))
+		if (!board_is_valid_play_no_suicide(b, color, c))
 			continue;
 		map.consider[c] = true;
 		child_count++;

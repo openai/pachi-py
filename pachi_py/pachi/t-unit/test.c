@@ -51,7 +51,7 @@ board_load(struct board *b, FILE *f, unsigned int size)
 		board_print(b, stderr);
 }
 
-void
+bool
 test_sar(struct board *b, char *arg)
 {
 	enum stone color = str2stone(arg);
@@ -78,7 +78,7 @@ test_sar(struct board *b, char *arg)
 		}
 		printf("FAILED (%d)\n", rres);
 	}
-
+	return rres == eres;
 }
 
 void
@@ -90,18 +90,22 @@ unittest(char *filename)
 		exit(EXIT_FAILURE);
 	}
 
+	int skipped = 0;
+	bool passed = true;
+
 	struct board *b = board_init(NULL);
 	char line[256];
 	while (fgets(line, sizeof(line), f)) {
 		line[strlen(line) - 1] = 0; // chomp
 		switch (line[0]) {
 			case '%': printf("\n%s\n", line); continue;
+			case '!': printf("%s...\tSKIPPED\n", line); skipped++; continue;
 			case 0: continue;
 		}
 		if (!strncmp(line, "boardsize ", 10)) {
 			board_load(b, f, atoi(line + 10));
 		} else if (!strncmp(line, "sar ", 4)) {
-			test_sar(b, line + 4);
+			passed = test_sar(b, line + 4) && passed; 
 		} else {
 			fprintf(stderr, "Syntax error: %s\n", line);
 			exit(EXIT_FAILURE);
@@ -109,4 +113,14 @@ unittest(char *filename)
 	}
 
 	fclose(f);
+ 	if (passed) {
+		printf("\nAll tests PASSED");
+	} else {
+		printf("\nSome tests FAILED");
+		exit(EXIT_FAILURE);
+	}
+	if (skipped > 0) {
+		printf(", %d test(s) SKIPPED", skipped);
+	}
+	printf("\n");
 }
