@@ -2,17 +2,16 @@ dist: trusty
 sudo: required
 cache:
   apt: true
-  pip: false
 language: python
 addons:
-    apt:
-      packages:
-        - python-numpy
-        - python-dev
-before_install:
-  - pip install nose2
-install: pip install .
-script: cd tests && nose2
+  apt:
+    packages:
+      - python-dev
+python:
+  - "2.7"
+  - "3.5"
+install: pip install tox-travis
+script: tox
 
 notifications:
   slack:

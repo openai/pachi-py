@@ -4,7 +4,7 @@ import numpy as np
 def make_random_board(size):
     b = pachi_py.CreateBoard(size)
     c = pachi_py.BLACK
-    for _ in xrange(50):
+    for _ in range(0, 50):
         b = b.play(np.random.choice(b.get_legal_coords(c)), c)
         c = pachi_py.stone_other(c)
     return b
