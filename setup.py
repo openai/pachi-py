@@ -1,22 +1,24 @@
 from distutils.command.build import build as DistutilsBuild
 from setuptools import setup, Extension
 import subprocess
-import sys
+
+class FakeNumpy(object):
+  def get_include(self):
+    raise Exception('Tried to compile pachi-py, but numpy is not installed. HINT: Please install numpy separately before attempting this -- `pip install numpy` should do it.')
 
 try:
-    import numpy
-except ImportError as e:
-    raise ImportError("""{}
+  import numpy
+except Exception as e:
+  print('Failed to load numpy: {}. Numpy must be already installed to normally set up pachi-py. Trying to actually build pachi-py will result in an error.'.format(e))
+  numpy = FakeNumpy()
 
-pachi-py requires numpy before the install begins. Please install numpy (either via 'pip install numpy' or something like 'apt-get install python-numpy' and try again).""".format(e))
 
 # For building Pachi as a library
-PACHI_BUILD_TYPE = 'Release'
 class BuildLibPachi(DistutilsBuild):
     def run(self):
         try:
-            subprocess.check_call("cd pachi_py; mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE={} ../pachi && make -j4".format(PACHI_BUILD_TYPE), shell=True)
-        except subprocess.CalledProcessError, e:
+            subprocess.check_call("cd pachi_py; mkdir -p build && cd build && cmake ../pachi && make -j4", shell=True)
+        except subprocess.CalledProcessError as e:
             print("Could not build pachi-py: %s" % e)
             raise
         DistutilsBuild.run(self)
