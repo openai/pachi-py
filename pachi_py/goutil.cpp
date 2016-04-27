@@ -131,9 +131,7 @@ PachiBoardPtr PlayRandom(PachiBoardPtr b, stone color, coord_t *coord) {
 }
 
 
-PachiEngine::PachiEngine(PachiBoardPtr bptr, const std::string& engine_type, std::string arg) : m_engine_type(engine_type) {
-    board* b = bptr->pachiboard();
-
+PachiEngine::PachiEngine(PachiBoardPtr bptr, const std::string& engine_type, std::string arg) : m_engine_type(engine_type), m_board(bptr) {
     auto engine_init_fn = engine_random_init;
     if (engine_type == "random") {
         engine_init_fn = engine_random_init;
@@ -150,11 +148,11 @@ PachiEngine::PachiEngine(PachiBoardPtr bptr, const std::string& engine_type, std
 
     printf("Initializing Pachi engine %s with args %s\n", engine_type.c_str(), arg.c_str());
     char* tmp_arg = arg == "" ? nullptr : strdup(arg.c_str());
-    m_engine = engine_init_fn(tmp_arg, b);
+    m_engine = engine_init_fn(tmp_arg, m_board->pachiboard());
     if (tmp_arg != nullptr) { free(tmp_arg); }
 }
 
-coord_t PachiEngine::genmove(PachiBoardPtr curr_board, stone curr_color, const std::string& timestr) {
+coord_t PachiEngine::genmove(stone curr_color, const std::string& timestr) {
     // Set pachi timing options (max sims, etc.)
     time_info ti;
     ti.period = time_info::TT_NULL;
@@ -169,16 +167,16 @@ coord_t PachiEngine::genmove(PachiBoardPtr curr_board, stone curr_color, const s
     }
 
     // Play
-    coord_t* c = m_engine->genmove(m_engine, curr_board->pachiboard(), &ti, curr_color, false);
+    coord_t* c = m_engine->genmove(m_engine, m_board->pachiboard(), &ti, curr_color, false);
     coord_t out = *c;
     coord_done(c);
     return out;
 }
 
-void PachiEngine::notify(PachiBoardPtr curr_board, coord_t move_coord, stone move_color) {
+void PachiEngine::notify(coord_t move_coord, stone move_color) {
     if (!m_engine->notify_play) { return; }
     move m = { move_coord, move_color };
-    m_engine->notify_play(m_engine, curr_board->pachiboard(), &m, NULL);
+    m_engine->notify_play(m_engine, m_board->pachiboard(), &m, NULL);
 }
 
 PachiEngine::~PachiEngine() {

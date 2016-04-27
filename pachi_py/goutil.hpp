@@ -92,10 +92,13 @@ inline int j_from_coord(board* b, coord_t c) { return j_from_xy(b, coord_x(c, b)
 class PachiEngine {
     engine* m_engine;
     const std::string m_engine_type;
+    PachiBoardPtr m_board; // Stores the current board for the game. Must stay alive during the lifetime of the engine.
+
 public:
     PachiEngine(PachiBoardPtr b, const std::string& engine_type, std::string arg);
     ~PachiEngine();
 
-    coord_t genmove(PachiBoardPtr curr_board, stone curr_color, const std::string& timestr);
-    void notify(PachiBoardPtr curr_board, coord_t move_coord, stone move_color);
+    PachiBoardPtr get_curr_board() { return m_board; }
+    coord_t genmove(stone curr_color, const std::string& timestr);
+    void notify(coord_t move_coord, stone move_color);
 };

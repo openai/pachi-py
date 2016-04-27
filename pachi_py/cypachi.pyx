@@ -68,8 +68,9 @@ cdef extern from "goutil.hpp":
 
     cppclass PachiEngine:
         PachiEngine(PachiBoardPtr b, const string& engine_type, string arg) except +raise_py_error
-        coord_t genmove(PachiBoardPtr curr_board, stone curr_color, const string& timestr) except +raise_py_error
-        void notify(PachiBoardPtr curr_board, coord_t move_coord, stone move_color)
+        PachiBoardPtr get_curr_board()
+        coord_t genmove(stone curr_color, const string& timestr) except +raise_py_error
+        void notify(coord_t move_coord, stone move_color)
 
 
 ##### Pachi API declarations #####
@@ -312,11 +313,15 @@ cdef class PyPachiEngine:
     def __dealloc__(self):
         del self._engine
 
-    def genmove(self, PyPachiBoard curr_board, stone curr_color, const string& timestr):
-        return self._engine.genmove(curr_board._bptr, curr_color, timestr)
+    @property
+    def curr_board(self):
+        return wrap_board(self._engine.get_curr_board())
 
-    def notify(self, PyPachiBoard curr_board, coord_t move_coord, stone move_color):
-        self._engine.notify(curr_board._bptr, move_coord, move_color)
+    def genmove(self, stone curr_color, const string& timestr):
+        return self._engine.genmove(curr_color, timestr)
+
+    def notify(self, coord_t move_coord, stone move_color):
+        self._engine.notify(move_coord, move_color)
 
 
 ##### Exposed constants #####

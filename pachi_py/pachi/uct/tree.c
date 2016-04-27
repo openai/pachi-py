@@ -77,10 +77,7 @@ tree_init(struct board *board, enum stone color, unsigned long max_tree_size,
 	  unsigned long max_pruned_size, unsigned long pruning_threshold, floating_t ltree_aging, int hbits)
 {
 	struct tree *t = calloc2(1, sizeof(*t));
-
-	t->board = malloc2(sizeof(struct board));
-	board_copy(t->board, board);
-
+	t->board = board;
 	t->max_tree_size = max_tree_size;
 	t->max_pruned_size = max_pruned_size;
 	t->pruning_threshold = pruning_threshold;
@@ -172,8 +169,6 @@ tree_done(struct tree *t)
 {
 	tree_done_node(t, t->ltree_black);
 	tree_done_node(t, t->ltree_white);
-
-	board_done(t->board);
 
 	if (t->htable) free(t->htable);
 	if (t->nodes) {

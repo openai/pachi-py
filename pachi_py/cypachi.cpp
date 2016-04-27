@@ -817,7 +817,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
-/* "pachi_py/cypachi.pyx":129
+/* "pachi_py/cypachi.pyx":130
  * 
  * 
  * cdef enum Channel:             # <<<<<<<<<<<<<<
@@ -830,7 +830,7 @@ enum __pyx_t_8pachi_py_7cypachi_Channel {
   __pyx_e_8pachi_py_7cypachi_CHAN_CELL_EMPTY
 };
 
-/* "pachi_py/cypachi.pyx":158
+/* "pachi_py/cypachi.pyx":159
  *     return PyPachiBoard()._set(b)
  * 
  * cdef class PyPachiBoard:             # <<<<<<<<<<<<<<
@@ -846,7 +846,7 @@ struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard {
 };
 
 
-/* "pachi_py/cypachi.pyx":306
+/* "pachi_py/cypachi.pyx":307
  * 
  * 
  * cdef class PyPachiEngine:             # <<<<<<<<<<<<<<
@@ -860,7 +860,7 @@ struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine {
 
 
 
-/* "pachi_py/cypachi.pyx":158
+/* "pachi_py/cypachi.pyx":159
  *     return PyPachiBoard()._set(b)
  * 
  * cdef class PyPachiBoard:             # <<<<<<<<<<<<<<
@@ -1443,7 +1443,6 @@ static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_IndexError[] = "IndexError";
 static const char __pyx_k_PASS_COORD[] = "PASS_COORD";
 static const char __pyx_k_ValueError[] = "ValueError";
-static const char __pyx_k_curr_board[] = "curr_board";
 static const char __pyx_k_curr_color[] = "curr_color";
 static const char __pyx_k_get_stones[] = "get_stones";
 static const char __pyx_k_move_color[] = "move_color";
@@ -1499,7 +1498,6 @@ static PyObject *__pyx_n_s_black;
 static PyObject *__pyx_n_s_color;
 static PyObject *__pyx_n_s_color_to_str;
 static PyObject *__pyx_n_s_coord;
-static PyObject *__pyx_n_s_curr_board;
 static PyObject *__pyx_n_s_curr_color;
 static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_s_dtype;
@@ -1562,8 +1560,9 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_26coord_to_ij(struct
 static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_28ij_to_coord(struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_v_self, int __pyx_v_i, int __pyx_v_j); /* proto */
 static int __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine___cinit__(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self, struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_v_b, std::string __pyx_v_engine_type, std::string __pyx_v_arg); /* proto */
 static void __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_2__dealloc__(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_4genmove(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self, struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_v_curr_board, enum stone __pyx_v_curr_color, std::string __pyx_v_timestr); /* proto */
-static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_6notify(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self, struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_v_curr_board, coord_t __pyx_v_move_coord, enum stone __pyx_v_move_color); /* proto */
+static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_10curr_board___get__(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_4genmove(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self, enum stone __pyx_v_curr_color, std::string __pyx_v_timestr); /* proto */
+static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_6notify(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self, coord_t __pyx_v_move_coord, enum stone __pyx_v_move_color); /* proto */
 static PyObject *__pyx_pf_8pachi_py_7cypachi_CreateBoard(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_size); /* proto */
 static PyObject *__pyx_pf_8pachi_py_7cypachi_2pachi_srand(CYTHON_UNUSED PyObject *__pyx_self, unsigned long __pyx_v_seed); /* proto */
 static PyObject *__pyx_pf_8pachi_py_7cypachi_4stone_other(CYTHON_UNUSED PyObject *__pyx_self, enum stone __pyx_v_s); /* proto */
@@ -1591,7 +1590,7 @@ static PyObject *__pyx_codeobj__14;
 PyObject *_PyIllegalMove;
 PyObject *_PyPachiEngineError;
 
-/* "pachi_py/cypachi.pyx":134
+/* "pachi_py/cypachi.pyx":135
  *     CHAN_CELL_EMPTY
  * cdef int _NUM_FEATURE_CHANNELS = 3
  * cdef void encode_board(board* b, np.ndarray[np.int_t, ndim=3] out_x):             # <<<<<<<<<<<<<<
@@ -1631,11 +1630,11 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
   __pyx_pybuffernd_out_x.rcbuffer = &__pyx_pybuffer_out_x;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_out_x.rcbuffer->pybuffer, (PyObject*)__pyx_v_out_x, &__Pyx_TypeInfo_nn___pyx_t_5numpy_int_t, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 134, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_out_x.rcbuffer->pybuffer, (PyObject*)__pyx_v_out_x, &__Pyx_TypeInfo_nn___pyx_t_5numpy_int_t, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 135, __pyx_L1_error)
   }
   __pyx_pybuffernd_out_x.diminfo[0].strides = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_out_x.diminfo[0].shape = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_out_x.diminfo[1].strides = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_out_x.diminfo[1].shape = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_out_x.diminfo[2].strides = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_out_x.diminfo[2].shape = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.shape[2];
 
-  /* "pachi_py/cypachi.pyx":135
+  /* "pachi_py/cypachi.pyx":136
  * cdef int _NUM_FEATURE_CHANNELS = 3
  * cdef void encode_board(board* b, np.ndarray[np.int_t, ndim=3] out_x):
  *     cdef int s = board_size(b) - 2             # <<<<<<<<<<<<<<
@@ -1644,7 +1643,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
  */
   __pyx_v_s = (board_size(__pyx_v_b) - 2);
 
-  /* "pachi_py/cypachi.pyx":136
+  /* "pachi_py/cypachi.pyx":137
  * cdef void encode_board(board* b, np.ndarray[np.int_t, ndim=3] out_x):
  *     cdef int s = board_size(b) - 2
  *     assert out_x.shape[0] == _NUM_FEATURE_CHANNELS and out_x.shape[1] == out_x.shape[2] == s             # <<<<<<<<<<<<<<
@@ -1668,21 +1667,21 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
     __pyx_L3_bool_binop_done:;
     if (unlikely(!__pyx_t_1)) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 136, __pyx_L1_error)
+      __PYX_ERR(0, 137, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "pachi_py/cypachi.pyx":137
+  /* "pachi_py/cypachi.pyx":138
  *     cdef int s = board_size(b) - 2
  *     assert out_x.shape[0] == _NUM_FEATURE_CHANNELS and out_x.shape[1] == out_x.shape[2] == s
  *     out_x[...] = 0             # <<<<<<<<<<<<<<
  * 
  *     cdef unsigned int i, j
  */
-  if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_out_x), Py_Ellipsis, __pyx_int_0) < 0)) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_out_x), Py_Ellipsis, __pyx_int_0) < 0)) __PYX_ERR(0, 138, __pyx_L1_error)
 
-  /* "pachi_py/cypachi.pyx":141
+  /* "pachi_py/cypachi.pyx":142
  *     cdef unsigned int i, j
  *     cdef stone curr_stone
  *     for i in range(s):             # <<<<<<<<<<<<<<
@@ -1693,7 +1692,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "pachi_py/cypachi.pyx":142
+    /* "pachi_py/cypachi.pyx":143
  *     cdef stone curr_stone
  *     for i in range(s):
  *         for j in range(s):             # <<<<<<<<<<<<<<
@@ -1704,7 +1703,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
     for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_j = __pyx_t_7;
 
-      /* "pachi_py/cypachi.pyx":143
+      /* "pachi_py/cypachi.pyx":144
  *     for i in range(s):
  *         for j in range(s):
  *             curr_stone = board_atij(b, i, j)             # <<<<<<<<<<<<<<
@@ -1713,7 +1712,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
  */
       __pyx_v_curr_stone = board_atij(__pyx_v_b, __pyx_v_i, __pyx_v_j);
 
-      /* "pachi_py/cypachi.pyx":145
+      /* "pachi_py/cypachi.pyx":146
  *             curr_stone = board_atij(b, i, j)
  *             # Cell color
  *             if curr_stone == S_BLACK:             # <<<<<<<<<<<<<<
@@ -1723,7 +1722,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
       switch (__pyx_v_curr_stone) {
         case S_BLACK:
 
-        /* "pachi_py/cypachi.pyx":146
+        /* "pachi_py/cypachi.pyx":147
  *             # Cell color
  *             if curr_stone == S_BLACK:
  *                 out_x[<unsigned int>CHAN_CELL_BLACK,i,j] = 1             # <<<<<<<<<<<<<<
@@ -1739,11 +1738,11 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
         if (unlikely(__pyx_t_10 >= (size_t)__pyx_pybuffernd_out_x.diminfo[2].shape)) __pyx_t_11 = 2;
         if (unlikely(__pyx_t_11 != -1)) {
           __Pyx_RaiseBufferIndexError(__pyx_t_11);
-          __PYX_ERR(0, 146, __pyx_L1_error)
+          __PYX_ERR(0, 147, __pyx_L1_error)
         }
         *__Pyx_BufPtrStrided3d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_out_x.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_out_x.diminfo[0].strides, __pyx_t_9, __pyx_pybuffernd_out_x.diminfo[1].strides, __pyx_t_10, __pyx_pybuffernd_out_x.diminfo[2].strides) = 1;
 
-        /* "pachi_py/cypachi.pyx":145
+        /* "pachi_py/cypachi.pyx":146
  *             curr_stone = board_atij(b, i, j)
  *             # Cell color
  *             if curr_stone == S_BLACK:             # <<<<<<<<<<<<<<
@@ -1752,7 +1751,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
  */
         break;
 
-        /* "pachi_py/cypachi.pyx":147
+        /* "pachi_py/cypachi.pyx":148
  *             if curr_stone == S_BLACK:
  *                 out_x[<unsigned int>CHAN_CELL_BLACK,i,j] = 1
  *             elif curr_stone == S_WHITE:             # <<<<<<<<<<<<<<
@@ -1761,7 +1760,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
  */
         case S_WHITE:
 
-        /* "pachi_py/cypachi.pyx":148
+        /* "pachi_py/cypachi.pyx":149
  *                 out_x[<unsigned int>CHAN_CELL_BLACK,i,j] = 1
  *             elif curr_stone == S_WHITE:
  *                 out_x[<unsigned int>CHAN_CELL_WHITE,i,j] = 1             # <<<<<<<<<<<<<<
@@ -1777,11 +1776,11 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
         if (unlikely(__pyx_t_14 >= (size_t)__pyx_pybuffernd_out_x.diminfo[2].shape)) __pyx_t_11 = 2;
         if (unlikely(__pyx_t_11 != -1)) {
           __Pyx_RaiseBufferIndexError(__pyx_t_11);
-          __PYX_ERR(0, 148, __pyx_L1_error)
+          __PYX_ERR(0, 149, __pyx_L1_error)
         }
         *__Pyx_BufPtrStrided3d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_out_x.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_out_x.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_out_x.diminfo[1].strides, __pyx_t_14, __pyx_pybuffernd_out_x.diminfo[2].strides) = 1;
 
-        /* "pachi_py/cypachi.pyx":147
+        /* "pachi_py/cypachi.pyx":148
  *             if curr_stone == S_BLACK:
  *                 out_x[<unsigned int>CHAN_CELL_BLACK,i,j] = 1
  *             elif curr_stone == S_WHITE:             # <<<<<<<<<<<<<<
@@ -1790,7 +1789,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
  */
         break;
 
-        /* "pachi_py/cypachi.pyx":149
+        /* "pachi_py/cypachi.pyx":150
  *             elif curr_stone == S_WHITE:
  *                 out_x[<unsigned int>CHAN_CELL_WHITE,i,j] = 1
  *             elif curr_stone == S_NONE:             # <<<<<<<<<<<<<<
@@ -1799,7 +1798,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
  */
         case S_NONE:
 
-        /* "pachi_py/cypachi.pyx":150
+        /* "pachi_py/cypachi.pyx":151
  *                 out_x[<unsigned int>CHAN_CELL_WHITE,i,j] = 1
  *             elif curr_stone == S_NONE:
  *                 out_x[<unsigned int>CHAN_CELL_EMPTY,i,j] = 1             # <<<<<<<<<<<<<<
@@ -1815,11 +1814,11 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
         if (unlikely(__pyx_t_17 >= (size_t)__pyx_pybuffernd_out_x.diminfo[2].shape)) __pyx_t_11 = 2;
         if (unlikely(__pyx_t_11 != -1)) {
           __Pyx_RaiseBufferIndexError(__pyx_t_11);
-          __PYX_ERR(0, 150, __pyx_L1_error)
+          __PYX_ERR(0, 151, __pyx_L1_error)
         }
         *__Pyx_BufPtrStrided3d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_out_x.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_out_x.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_out_x.diminfo[1].strides, __pyx_t_17, __pyx_pybuffernd_out_x.diminfo[2].strides) = 1;
 
-        /* "pachi_py/cypachi.pyx":149
+        /* "pachi_py/cypachi.pyx":150
  *             elif curr_stone == S_WHITE:
  *                 out_x[<unsigned int>CHAN_CELL_WHITE,i,j] = 1
  *             elif curr_stone == S_NONE:             # <<<<<<<<<<<<<<
@@ -1829,7 +1828,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
         break;
         default:
 
-        /* "pachi_py/cypachi.pyx":152
+        /* "pachi_py/cypachi.pyx":153
  *                 out_x[<unsigned int>CHAN_CELL_EMPTY,i,j] = 1
  *             else:
  *                 assert False             # <<<<<<<<<<<<<<
@@ -1840,7 +1839,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
         if (unlikely(!Py_OptimizeFlag)) {
           if (unlikely(!0)) {
             PyErr_SetNone(PyExc_AssertionError);
-            __PYX_ERR(0, 152, __pyx_L1_error)
+            __PYX_ERR(0, 153, __pyx_L1_error)
           }
         }
         #endif
@@ -1849,7 +1848,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
     }
   }
 
-  /* "pachi_py/cypachi.pyx":134
+  /* "pachi_py/cypachi.pyx":135
  *     CHAN_CELL_EMPTY
  * cdef int _NUM_FEATURE_CHANNELS = 3
  * cdef void encode_board(board* b, np.ndarray[np.int_t, ndim=3] out_x):             # <<<<<<<<<<<<<<
@@ -1874,7 +1873,7 @@ static void __pyx_f_8pachi_py_7cypachi_encode_board(struct board *__pyx_v_b, PyA
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pachi_py/cypachi.pyx":155
+/* "pachi_py/cypachi.pyx":156
  * 
  * # Python board wrapper
  * cdef PyPachiBoard wrap_board(PachiBoardPtr b):             # <<<<<<<<<<<<<<
@@ -1889,7 +1888,7 @@ static struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_f_8pachi_py_7cypa
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("wrap_board", 0);
 
-  /* "pachi_py/cypachi.pyx":156
+  /* "pachi_py/cypachi.pyx":157
  * # Python board wrapper
  * cdef PyPachiBoard wrap_board(PachiBoardPtr b):
  *     return PyPachiBoard()._set(b)             # <<<<<<<<<<<<<<
@@ -1897,17 +1896,17 @@ static struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_f_8pachi_py_7cypa
  * cdef class PyPachiBoard:
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8pachi_py_7cypachi_PyPachiBoard), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8pachi_py_7cypachi_PyPachiBoard), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = ((struct __pyx_vtabstruct_8pachi_py_7cypachi_PyPachiBoard *)((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_t_1)->__pyx_vtab)->_set(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_t_1), __pyx_v_b); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_2 = ((struct __pyx_vtabstruct_8pachi_py_7cypachi_PyPachiBoard *)((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_t_1)->__pyx_vtab)->_set(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_t_1), __pyx_v_b); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard))))) __PYX_ERR(0, 156, __pyx_L1_error)
+  if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard))))) __PYX_ERR(0, 157, __pyx_L1_error)
   __pyx_r = ((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_t_2);
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":155
+  /* "pachi_py/cypachi.pyx":156
  * 
  * # Python board wrapper
  * cdef PyPachiBoard wrap_board(PachiBoardPtr b):             # <<<<<<<<<<<<<<
@@ -1927,7 +1926,7 @@ static struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_f_8pachi_py_7cypa
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":163
+/* "pachi_py/cypachi.pyx":164
  *     cdef int _size
  * 
  *     cdef _set(self, PachiBoardPtr b):             # <<<<<<<<<<<<<<
@@ -1940,7 +1939,7 @@ static PyObject *__pyx_f_8pachi_py_7cypachi_12PyPachiBoard__set(struct __pyx_obj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("_set", 0);
 
-  /* "pachi_py/cypachi.pyx":164
+  /* "pachi_py/cypachi.pyx":165
  * 
  *     cdef _set(self, PachiBoardPtr b):
  *         self._bptr.assign(b)             # <<<<<<<<<<<<<<
@@ -1949,7 +1948,7 @@ static PyObject *__pyx_f_8pachi_py_7cypachi_12PyPachiBoard__set(struct __pyx_obj
  */
   __pyx_v_self->_bptr.assign(__pyx_v_b);
 
-  /* "pachi_py/cypachi.pyx":165
+  /* "pachi_py/cypachi.pyx":166
  *     cdef _set(self, PachiBoardPtr b):
  *         self._bptr.assign(b)
  *         self._b = self._bptr.get()             # <<<<<<<<<<<<<<
@@ -1958,7 +1957,7 @@ static PyObject *__pyx_f_8pachi_py_7cypachi_12PyPachiBoard__set(struct __pyx_obj
  */
   __pyx_v_self->_b = __pyx_v_self->_bptr.get();
 
-  /* "pachi_py/cypachi.pyx":166
+  /* "pachi_py/cypachi.pyx":167
  *         self._bptr.assign(b)
  *         self._b = self._bptr.get()
  *         self._size = self._b.size()             # <<<<<<<<<<<<<<
@@ -1967,7 +1966,7 @@ static PyObject *__pyx_f_8pachi_py_7cypachi_12PyPachiBoard__set(struct __pyx_obj
  */
   __pyx_v_self->_size = __pyx_v_self->_b->size();
 
-  /* "pachi_py/cypachi.pyx":167
+  /* "pachi_py/cypachi.pyx":168
  *         self._b = self._bptr.get()
  *         self._size = self._b.size()
  *         return self             # <<<<<<<<<<<<<<
@@ -1979,7 +1978,7 @@ static PyObject *__pyx_f_8pachi_py_7cypachi_12PyPachiBoard__set(struct __pyx_obj
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":163
+  /* "pachi_py/cypachi.pyx":164
  *     cdef int _size
  * 
  *     cdef _set(self, PachiBoardPtr b):             # <<<<<<<<<<<<<<
@@ -1994,7 +1993,7 @@ static PyObject *__pyx_f_8pachi_py_7cypachi_12PyPachiBoard__set(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":169
+/* "pachi_py/cypachi.pyx":170
  *         return self
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2021,7 +2020,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard___repr__(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "pachi_py/cypachi.pyx":170
+  /* "pachi_py/cypachi.pyx":171
  * 
  *     def __repr__(self):
  *         return ToString(self._bptr)             # <<<<<<<<<<<<<<
@@ -2029,13 +2028,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard___repr__(struct __py
  *     def clone(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__in_string(ToString(__pyx_v_self->_bptr)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__in_string(ToString(__pyx_v_self->_bptr)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":169
+  /* "pachi_py/cypachi.pyx":170
  *         return self
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2054,7 +2053,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard___repr__(struct __py
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":172
+/* "pachi_py/cypachi.pyx":173
  *         return ToString(self._bptr)
  * 
  *     def clone(self):             # <<<<<<<<<<<<<<
@@ -2081,7 +2080,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_2clone(struct __pyx_
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("clone", 0);
 
-  /* "pachi_py/cypachi.pyx":173
+  /* "pachi_py/cypachi.pyx":174
  * 
  *     def clone(self):
  *         return wrap_board(self._bptr.get().clone())             # <<<<<<<<<<<<<<
@@ -2089,13 +2088,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_2clone(struct __pyx_
  *     def get_stones(self, stone color):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_wrap_board(__pyx_v_self->_bptr.get()->clone())); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_wrap_board(__pyx_v_self->_bptr.get()->clone())); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":172
+  /* "pachi_py/cypachi.pyx":173
  *         return ToString(self._bptr)
  * 
  *     def clone(self):             # <<<<<<<<<<<<<<
@@ -2114,7 +2113,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_2clone(struct __pyx_
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":175
+/* "pachi_py/cypachi.pyx":176
  *         return wrap_board(self._bptr.get().clone())
  * 
  *     def get_stones(self, stone color):             # <<<<<<<<<<<<<<
@@ -2130,7 +2129,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_5get_stones(PyObject
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_stones (wrapper)", 0);
   assert(__pyx_arg_color); {
-    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(__pyx_arg_color)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 175, __pyx_L3_error)
+    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(__pyx_arg_color)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2176,21 +2175,21 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
   __pyx_pybuffernd_stones.data = NULL;
   __pyx_pybuffernd_stones.rcbuffer = &__pyx_pybuffer_stones;
 
-  /* "pachi_py/cypachi.pyx":176
+  /* "pachi_py/cypachi.pyx":177
  * 
  *     def get_stones(self, stone color):
  *         cdef np.ndarray[np.int_t, ndim=2] stones = np.empty((self._size*self._size, 2), dtype=np.int)             # <<<<<<<<<<<<<<
  *         cdef int i, j
  *         cdef unsigned int num_stones = 0
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int((__pyx_v_self->_size * __pyx_v_self->_size)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int((__pyx_v_self->_size * __pyx_v_self->_size)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -2198,32 +2197,32 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
   __Pyx_GIVEREF(__pyx_int_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_int_2);
   __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 177, __pyx_L1_error)
   __pyx_t_6 = ((PyArrayObject *)__pyx_t_5);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_stones.rcbuffer->pybuffer, (PyObject*)__pyx_t_6, &__Pyx_TypeInfo_nn___pyx_t_5numpy_int_t, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_stones = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_stones.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 176, __pyx_L1_error)
+      __PYX_ERR(0, 177, __pyx_L1_error)
     } else {__pyx_pybuffernd_stones.diminfo[0].strides = __pyx_pybuffernd_stones.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_stones.diminfo[0].shape = __pyx_pybuffernd_stones.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_stones.diminfo[1].strides = __pyx_pybuffernd_stones.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_stones.diminfo[1].shape = __pyx_pybuffernd_stones.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -2231,7 +2230,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
   __pyx_v_stones = ((PyArrayObject *)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "pachi_py/cypachi.pyx":178
+  /* "pachi_py/cypachi.pyx":179
  *         cdef np.ndarray[np.int_t, ndim=2] stones = np.empty((self._size*self._size, 2), dtype=np.int)
  *         cdef int i, j
  *         cdef unsigned int num_stones = 0             # <<<<<<<<<<<<<<
@@ -2240,7 +2239,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
  */
   __pyx_v_num_stones = 0;
 
-  /* "pachi_py/cypachi.pyx":179
+  /* "pachi_py/cypachi.pyx":180
  *         cdef int i, j
  *         cdef unsigned int num_stones = 0
  *         for i in range(self._size):             # <<<<<<<<<<<<<<
@@ -2251,7 +2250,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "pachi_py/cypachi.pyx":180
+    /* "pachi_py/cypachi.pyx":181
  *         cdef unsigned int num_stones = 0
  *         for i in range(self._size):
  *             for j in range(self._size):             # <<<<<<<<<<<<<<
@@ -2262,7 +2261,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
     for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
       __pyx_v_j = __pyx_t_10;
 
-      /* "pachi_py/cypachi.pyx":181
+      /* "pachi_py/cypachi.pyx":182
  *         for i in range(self._size):
  *             for j in range(self._size):
  *                 if board_atij(self._b.pachiboard(), i, j) == color:             # <<<<<<<<<<<<<<
@@ -2272,7 +2271,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
       __pyx_t_11 = ((board_atij(__pyx_v_self->_b->pachiboard(), __pyx_v_i, __pyx_v_j) == __pyx_v_color) != 0);
       if (__pyx_t_11) {
 
-        /* "pachi_py/cypachi.pyx":182
+        /* "pachi_py/cypachi.pyx":183
  *             for j in range(self._size):
  *                 if board_atij(self._b.pachiboard(), i, j) == color:
  *                     stones[num_stones,0] = i             # <<<<<<<<<<<<<<
@@ -2289,11 +2288,11 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
         } else if (unlikely(__pyx_t_13 >= __pyx_pybuffernd_stones.diminfo[1].shape)) __pyx_t_14 = 1;
         if (unlikely(__pyx_t_14 != -1)) {
           __Pyx_RaiseBufferIndexError(__pyx_t_14);
-          __PYX_ERR(0, 182, __pyx_L1_error)
+          __PYX_ERR(0, 183, __pyx_L1_error)
         }
         *__Pyx_BufPtrStrided2d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_stones.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_stones.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_stones.diminfo[1].strides) = __pyx_v_i;
 
-        /* "pachi_py/cypachi.pyx":183
+        /* "pachi_py/cypachi.pyx":184
  *                 if board_atij(self._b.pachiboard(), i, j) == color:
  *                     stones[num_stones,0] = i
  *                     stones[num_stones,1] = j             # <<<<<<<<<<<<<<
@@ -2310,11 +2309,11 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
         } else if (unlikely(__pyx_t_16 >= __pyx_pybuffernd_stones.diminfo[1].shape)) __pyx_t_14 = 1;
         if (unlikely(__pyx_t_14 != -1)) {
           __Pyx_RaiseBufferIndexError(__pyx_t_14);
-          __PYX_ERR(0, 183, __pyx_L1_error)
+          __PYX_ERR(0, 184, __pyx_L1_error)
         }
         *__Pyx_BufPtrStrided2d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_stones.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_stones.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_stones.diminfo[1].strides) = __pyx_v_j;
 
-        /* "pachi_py/cypachi.pyx":184
+        /* "pachi_py/cypachi.pyx":185
  *                     stones[num_stones,0] = i
  *                     stones[num_stones,1] = j
  *                     num_stones += 1             # <<<<<<<<<<<<<<
@@ -2323,7 +2322,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
  */
         __pyx_v_num_stones = (__pyx_v_num_stones + 1);
 
-        /* "pachi_py/cypachi.pyx":181
+        /* "pachi_py/cypachi.pyx":182
  *         for i in range(self._size):
  *             for j in range(self._size):
  *                 if board_atij(self._b.pachiboard(), i, j) == color:             # <<<<<<<<<<<<<<
@@ -2334,7 +2333,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
     }
   }
 
-  /* "pachi_py/cypachi.pyx":185
+  /* "pachi_py/cypachi.pyx":186
  *                     stones[num_stones,1] = j
  *                     num_stones += 1
  *         return stones[:num_stones,:]             # <<<<<<<<<<<<<<
@@ -2342,12 +2341,12 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
  *     def get_legal_coords(self, stone color, bint filter_suicides=False):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_5 = __Pyx_PyInt_From_unsigned_int(__pyx_v_num_stones); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_unsigned_int(__pyx_v_num_stones); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = PySlice_New(Py_None, __pyx_t_5, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_3 = PySlice_New(Py_None, __pyx_t_5, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
@@ -2355,14 +2354,14 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
   __Pyx_GIVEREF(__pyx_slice_);
   PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_slice_);
   __pyx_t_3 = 0;
-  __pyx_t_3 = PyObject_GetItem(((PyObject *)__pyx_v_stones), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_3 = PyObject_GetItem(((PyObject *)__pyx_v_stones), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":175
+  /* "pachi_py/cypachi.pyx":176
  *         return wrap_board(self._bptr.get().clone())
  * 
  *     def get_stones(self, stone color):             # <<<<<<<<<<<<<<
@@ -2395,7 +2394,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4get_stones(struct _
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":187
+/* "pachi_py/cypachi.pyx":188
  *         return stones[:num_stones,:]
  * 
  *     def get_legal_coords(self, stone color, bint filter_suicides=False):             # <<<<<<<<<<<<<<
@@ -2435,7 +2434,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_7get_legal_coords(Py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_legal_coords") < 0)) __PYX_ERR(0, 187, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_legal_coords") < 0)) __PYX_ERR(0, 188, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2445,16 +2444,16 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_7get_legal_coords(Py
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[0])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 187, __pyx_L3_error)
+    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[0])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 188, __pyx_L3_error)
     if (values[1]) {
-      __pyx_v_filter_suicides = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_filter_suicides == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 187, __pyx_L3_error)
+      __pyx_v_filter_suicides = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_filter_suicides == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 188, __pyx_L3_error)
     } else {
       __pyx_v_filter_suicides = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_legal_coords", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 187, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_legal_coords", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 188, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pachi_py.cypachi.PyPachiBoard.get_legal_coords", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2474,7 +2473,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_6get_legal_coords(st
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("get_legal_coords", 0);
 
-  /* "pachi_py/cypachi.pyx":189
+  /* "pachi_py/cypachi.pyx":190
  *     def get_legal_coords(self, stone color, bint filter_suicides=False):
  *         cdef vector[coord_t] legal_coords
  *         GetLegalMoves(self._bptr, color, filter_suicides, &legal_coords)             # <<<<<<<<<<<<<<
@@ -2483,7 +2482,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_6get_legal_coords(st
  */
   GetLegalMoves(__pyx_v_self->_bptr, __pyx_v_color, __pyx_v_filter_suicides, ((std::vector<coord_t>  *)(&__pyx_v_legal_coords)));
 
-  /* "pachi_py/cypachi.pyx":190
+  /* "pachi_py/cypachi.pyx":191
  *         cdef vector[coord_t] legal_coords
  *         GetLegalMoves(self._bptr, color, filter_suicides, &legal_coords)
  *         return legal_coords             # <<<<<<<<<<<<<<
@@ -2491,13 +2490,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_6get_legal_coords(st
  *     def encode(self, np.ndarray[np.int_t, ndim=3] out_x=None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_vector_to_py_coord_t(__pyx_v_legal_coords); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_vector_to_py_coord_t(__pyx_v_legal_coords); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":187
+  /* "pachi_py/cypachi.pyx":188
  *         return stones[:num_stones,:]
  * 
  *     def get_legal_coords(self, stone color, bint filter_suicides=False):             # <<<<<<<<<<<<<<
@@ -2516,7 +2515,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_6get_legal_coords(st
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":192
+/* "pachi_py/cypachi.pyx":193
  *         return legal_coords
  * 
  *     def encode(self, np.ndarray[np.int_t, ndim=3] out_x=None):             # <<<<<<<<<<<<<<
@@ -2552,7 +2551,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_9encode(PyObject *__
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "encode") < 0)) __PYX_ERR(0, 192, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "encode") < 0)) __PYX_ERR(0, 193, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2565,13 +2564,13 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_9encode(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("encode", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 192, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("encode", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 193, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pachi_py.cypachi.PyPachiBoard.encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_out_x), __pyx_ptype_5numpy_ndarray, 1, "out_x", 0))) __PYX_ERR(0, 192, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_out_x), __pyx_ptype_5numpy_ndarray, 1, "out_x", 0))) __PYX_ERR(0, 193, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_8encode(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_v_self), __pyx_v_out_x);
 
   /* function exit code */
@@ -2608,11 +2607,11 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_8encode(struct __pyx
   __pyx_pybuffernd_out_x.rcbuffer = &__pyx_pybuffer_out_x;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_out_x.rcbuffer->pybuffer, (PyObject*)__pyx_v_out_x, &__Pyx_TypeInfo_nn___pyx_t_5numpy_int_t, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 192, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_out_x.rcbuffer->pybuffer, (PyObject*)__pyx_v_out_x, &__Pyx_TypeInfo_nn___pyx_t_5numpy_int_t, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 193, __pyx_L1_error)
   }
   __pyx_pybuffernd_out_x.diminfo[0].strides = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_out_x.diminfo[0].shape = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_out_x.diminfo[1].strides = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_out_x.diminfo[1].shape = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_out_x.diminfo[2].strides = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_out_x.diminfo[2].shape = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.shape[2];
 
-  /* "pachi_py/cypachi.pyx":193
+  /* "pachi_py/cypachi.pyx":194
  * 
  *     def encode(self, np.ndarray[np.int_t, ndim=3] out_x=None):
  *         if out_x is None:             # <<<<<<<<<<<<<<
@@ -2623,25 +2622,25 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_8encode(struct __pyx
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "pachi_py/cypachi.pyx":194
+    /* "pachi_py/cypachi.pyx":195
  *     def encode(self, np.ndarray[np.int_t, ndim=3] out_x=None):
  *         if out_x is None:
  *             out_x = np.zeros((NUM_FEATURE_CHANNELS, self._size, self._size), dtype=int)             # <<<<<<<<<<<<<<
  *         encode_board(self._b.pachiboard(), out_x)
  *         return out_x
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_NUM_FEATURE_CHANNELS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_NUM_FEATURE_CHANNELS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_self->_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_self->_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_self->_size); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_self->_size); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_3);
@@ -2652,20 +2651,20 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_8encode(struct __pyx
     __pyx_t_3 = 0;
     __pyx_t_5 = 0;
     __pyx_t_6 = 0;
-    __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_GIVEREF(__pyx_t_7);
     PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_7);
     __pyx_t_7 = 0;
-    __pyx_t_7 = PyDict_New(); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_7 = PyDict_New(); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_dtype, ((PyObject *)(&PyInt_Type))) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_dtype, ((PyObject *)(&PyInt_Type))) < 0) __PYX_ERR(0, 195, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 194, __pyx_L1_error)
+    if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 195, __pyx_L1_error)
     __pyx_t_8 = ((PyArrayObject *)__pyx_t_5);
     {
       __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -2681,13 +2680,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_8encode(struct __pyx
         }
       }
       __pyx_pybuffernd_out_x.diminfo[0].strides = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_out_x.diminfo[0].shape = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_out_x.diminfo[1].strides = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_out_x.diminfo[1].shape = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_out_x.diminfo[2].strides = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_out_x.diminfo[2].shape = __pyx_pybuffernd_out_x.rcbuffer->pybuffer.shape[2];
-      if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 194, __pyx_L1_error)
+      if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 195, __pyx_L1_error)
     }
     __pyx_t_8 = 0;
     __Pyx_DECREF_SET(__pyx_v_out_x, ((PyArrayObject *)__pyx_t_5));
     __pyx_t_5 = 0;
 
-    /* "pachi_py/cypachi.pyx":193
+    /* "pachi_py/cypachi.pyx":194
  * 
  *     def encode(self, np.ndarray[np.int_t, ndim=3] out_x=None):
  *         if out_x is None:             # <<<<<<<<<<<<<<
@@ -2696,7 +2695,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_8encode(struct __pyx
  */
   }
 
-  /* "pachi_py/cypachi.pyx":195
+  /* "pachi_py/cypachi.pyx":196
  *         if out_x is None:
  *             out_x = np.zeros((NUM_FEATURE_CHANNELS, self._size, self._size), dtype=int)
  *         encode_board(self._b.pachiboard(), out_x)             # <<<<<<<<<<<<<<
@@ -2705,7 +2704,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_8encode(struct __pyx
  */
   __pyx_f_8pachi_py_7cypachi_encode_board(__pyx_v_self->_b->pachiboard(), ((PyArrayObject *)__pyx_v_out_x));
 
-  /* "pachi_py/cypachi.pyx":196
+  /* "pachi_py/cypachi.pyx":197
  *             out_x = np.zeros((NUM_FEATURE_CHANNELS, self._size, self._size), dtype=int)
  *         encode_board(self._b.pachiboard(), out_x)
  *         return out_x             # <<<<<<<<<<<<<<
@@ -2717,7 +2716,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_8encode(struct __pyx
   __pyx_r = ((PyObject *)__pyx_v_out_x);
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":192
+  /* "pachi_py/cypachi.pyx":193
  *         return legal_coords
  * 
  *     def encode(self, np.ndarray[np.int_t, ndim=3] out_x=None):             # <<<<<<<<<<<<<<
@@ -2750,7 +2749,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_8encode(struct __pyx
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":198
+/* "pachi_py/cypachi.pyx":199
  *         return out_x
  * 
  *     def play(self, int coord, stone color):             # <<<<<<<<<<<<<<
@@ -2786,11 +2785,11 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_11play(PyObject *__p
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_color)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("play", 1, 2, 2, 1); __PYX_ERR(0, 198, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("play", 1, 2, 2, 1); __PYX_ERR(0, 199, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "play") < 0)) __PYX_ERR(0, 198, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "play") < 0)) __PYX_ERR(0, 199, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2798,12 +2797,12 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_11play(PyObject *__p
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_coord = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_coord == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L3_error)
-    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[1])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L3_error)
+    __pyx_v_coord = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_coord == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L3_error)
+    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[1])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("play", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 198, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("play", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 199, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pachi_py.cypachi.PyPachiBoard.play", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2825,7 +2824,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10play(struct __pyx_
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("play", 0);
 
-  /* "pachi_py/cypachi.pyx":199
+  /* "pachi_py/cypachi.pyx":200
  * 
  *     def play(self, int coord, stone color):
  *         assert color == S_BLACK or color == S_WHITE             # <<<<<<<<<<<<<<
@@ -2845,12 +2844,12 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10play(struct __pyx_
     }
     if (unlikely(!__pyx_t_1)) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 199, __pyx_L1_error)
+      __PYX_ERR(0, 200, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "pachi_py/cypachi.pyx":201
+  /* "pachi_py/cypachi.pyx":202
  *         assert color == S_BLACK or color == S_WHITE
  *         cdef move m
  *         m.color = color             # <<<<<<<<<<<<<<
@@ -2859,7 +2858,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10play(struct __pyx_
  */
   __pyx_v_m.color = __pyx_v_color;
 
-  /* "pachi_py/cypachi.pyx":202
+  /* "pachi_py/cypachi.pyx":203
  *         cdef move m
  *         m.color = color
  *         m.coord = coord             # <<<<<<<<<<<<<<
@@ -2868,7 +2867,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10play(struct __pyx_
  */
   __pyx_v_m.coord = __pyx_v_coord;
 
-  /* "pachi_py/cypachi.pyx":203
+  /* "pachi_py/cypachi.pyx":204
  *         m.color = color
  *         m.coord = coord
  *         return wrap_board(Play(self._bptr, m))             # <<<<<<<<<<<<<<
@@ -2880,15 +2879,15 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10play(struct __pyx_
     __pyx_t_2 = Play(__pyx_v_self->_bptr, __pyx_v_m);
   } catch(...) {
     raise_py_error(); if (!PyErr_Occurred()) PyErr_SetString(PyExc_RuntimeError , "Error converting c++ exception.");
-    __PYX_ERR(0, 203, __pyx_L1_error)
+    __PYX_ERR(0, 204, __pyx_L1_error)
   }
-  __pyx_t_3 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_wrap_board(__pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_wrap_board(__pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":198
+  /* "pachi_py/cypachi.pyx":199
  *         return out_x
  * 
  *     def play(self, int coord, stone color):             # <<<<<<<<<<<<<<
@@ -2907,7 +2906,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10play(struct __pyx_
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":205
+/* "pachi_py/cypachi.pyx":206
  *         return wrap_board(Play(self._bptr, m))
  * 
  *     def play_random(self, stone color, bint return_action=False):             # <<<<<<<<<<<<<<
@@ -2947,7 +2946,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_13play_random(PyObje
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "play_random") < 0)) __PYX_ERR(0, 205, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "play_random") < 0)) __PYX_ERR(0, 206, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2957,16 +2956,16 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_13play_random(PyObje
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[0])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 205, __pyx_L3_error)
+    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[0])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 206, __pyx_L3_error)
     if (values[1]) {
-      __pyx_v_return_action = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_return_action == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 205, __pyx_L3_error)
+      __pyx_v_return_action = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_return_action == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 206, __pyx_L3_error)
     } else {
       __pyx_v_return_action = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("play_random", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 205, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("play_random", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 206, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pachi_py.cypachi.PyPachiBoard.play_random", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2989,19 +2988,19 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12play_random(struct
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("play_random", 0);
 
-  /* "pachi_py/cypachi.pyx":207
+  /* "pachi_py/cypachi.pyx":208
  *     def play_random(self, stone color, bint return_action=False):
  *         cdef coord_t c
  *         cdef PyPachiBoard out = wrap_board(PlayRandom(self._bptr, color, &c))             # <<<<<<<<<<<<<<
  *         if not return_action: return out
  *         return out, c
  */
-  __pyx_t_1 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_wrap_board(PlayRandom(__pyx_v_self->_bptr, __pyx_v_color, (&__pyx_v_c)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_wrap_board(PlayRandom(__pyx_v_self->_bptr, __pyx_v_color, (&__pyx_v_c)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_out = ((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":208
+  /* "pachi_py/cypachi.pyx":209
  *         cdef coord_t c
  *         cdef PyPachiBoard out = wrap_board(PlayRandom(self._bptr, color, &c))
  *         if not return_action: return out             # <<<<<<<<<<<<<<
@@ -3016,7 +3015,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12play_random(struct
     goto __pyx_L0;
   }
 
-  /* "pachi_py/cypachi.pyx":209
+  /* "pachi_py/cypachi.pyx":210
  *         cdef PyPachiBoard out = wrap_board(PlayRandom(self._bptr, color, &c))
  *         if not return_action: return out
  *         return out, c             # <<<<<<<<<<<<<<
@@ -3024,9 +3023,9 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12play_random(struct
  *     def play_inplace(self, int coord, stone color):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_coord_t(__pyx_v_c); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_coord_t(__pyx_v_c); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(((PyObject *)__pyx_v_out));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_out));
@@ -3038,7 +3037,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12play_random(struct
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":205
+  /* "pachi_py/cypachi.pyx":206
  *         return wrap_board(Play(self._bptr, m))
  * 
  *     def play_random(self, stone color, bint return_action=False):             # <<<<<<<<<<<<<<
@@ -3059,7 +3058,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12play_random(struct
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":211
+/* "pachi_py/cypachi.pyx":212
  *         return out, c
  * 
  *     def play_inplace(self, int coord, stone color):             # <<<<<<<<<<<<<<
@@ -3095,11 +3094,11 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_15play_inplace(PyObj
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_color)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("play_inplace", 1, 2, 2, 1); __PYX_ERR(0, 211, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("play_inplace", 1, 2, 2, 1); __PYX_ERR(0, 212, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "play_inplace") < 0)) __PYX_ERR(0, 211, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "play_inplace") < 0)) __PYX_ERR(0, 212, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3107,12 +3106,12 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_15play_inplace(PyObj
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_coord = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_coord == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 211, __pyx_L3_error)
-    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[1])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 211, __pyx_L3_error)
+    __pyx_v_coord = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_coord == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 212, __pyx_L3_error)
+    __pyx_v_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[1])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 212, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("play_inplace", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 211, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("play_inplace", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 212, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pachi_py.cypachi.PyPachiBoard.play_inplace", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3132,7 +3131,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_14play_inplace(struc
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("play_inplace", 0);
 
-  /* "pachi_py/cypachi.pyx":212
+  /* "pachi_py/cypachi.pyx":213
  * 
  *     def play_inplace(self, int coord, stone color):
  *         assert color == S_BLACK or color == S_WHITE             # <<<<<<<<<<<<<<
@@ -3152,12 +3151,12 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_14play_inplace(struc
     }
     if (unlikely(!__pyx_t_1)) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 212, __pyx_L1_error)
+      __PYX_ERR(0, 213, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "pachi_py/cypachi.pyx":214
+  /* "pachi_py/cypachi.pyx":215
  *         assert color == S_BLACK or color == S_WHITE
  *         cdef move m
  *         m.color = color             # <<<<<<<<<<<<<<
@@ -3166,7 +3165,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_14play_inplace(struc
  */
   __pyx_v_m.color = __pyx_v_color;
 
-  /* "pachi_py/cypachi.pyx":215
+  /* "pachi_py/cypachi.pyx":216
  *         cdef move m
  *         m.color = color
  *         m.coord = coord             # <<<<<<<<<<<<<<
@@ -3175,7 +3174,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_14play_inplace(struc
  */
   __pyx_v_m.coord = __pyx_v_coord;
 
-  /* "pachi_py/cypachi.pyx":216
+  /* "pachi_py/cypachi.pyx":217
  *         m.color = color
  *         m.coord = coord
  *         PlayInPlace(self._bptr, m)             # <<<<<<<<<<<<<<
@@ -3186,10 +3185,10 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_14play_inplace(struc
     PlayInPlace(__pyx_v_self->_bptr, __pyx_v_m);
   } catch(...) {
     raise_py_error(); if (!PyErr_Occurred()) PyErr_SetString(PyExc_RuntimeError , "Error converting c++ exception.");
-    __PYX_ERR(0, 216, __pyx_L1_error)
+    __PYX_ERR(0, 217, __pyx_L1_error)
   }
 
-  /* "pachi_py/cypachi.pyx":211
+  /* "pachi_py/cypachi.pyx":212
  *         return out, c
  * 
  *     def play_inplace(self, int coord, stone color):             # <<<<<<<<<<<<<<
@@ -3209,7 +3208,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_14play_inplace(struc
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":219
+/* "pachi_py/cypachi.pyx":220
  * 
  *     property size:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3236,7 +3235,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4size___get__(struct
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "pachi_py/cypachi.pyx":220
+  /* "pachi_py/cypachi.pyx":221
  *     property size:
  *         def __get__(self):
  *             return self._size             # <<<<<<<<<<<<<<
@@ -3244,13 +3243,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4size___get__(struct
  *         def __get__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":219
+  /* "pachi_py/cypachi.pyx":220
  * 
  *     property size:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3269,7 +3268,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_4size___get__(struct
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":222
+/* "pachi_py/cypachi.pyx":223
  *             return self._size
  *     property num_stones:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3304,7 +3303,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10num_stones___get__
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "pachi_py/cypachi.pyx":223
+  /* "pachi_py/cypachi.pyx":224
  *     property num_stones:
  *         def __get__(self):
  *             cdef int i, j, n = 0             # <<<<<<<<<<<<<<
@@ -3313,7 +3312,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10num_stones___get__
  */
   __pyx_v_n = 0;
 
-  /* "pachi_py/cypachi.pyx":224
+  /* "pachi_py/cypachi.pyx":225
  *         def __get__(self):
  *             cdef int i, j, n = 0
  *             for i in range(self._size):             # <<<<<<<<<<<<<<
@@ -3324,7 +3323,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10num_stones___get__
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "pachi_py/cypachi.pyx":225
+    /* "pachi_py/cypachi.pyx":226
  *             cdef int i, j, n = 0
  *             for i in range(self._size):
  *                 for j in range(self._size):             # <<<<<<<<<<<<<<
@@ -3335,7 +3334,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10num_stones___get__
     for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_j = __pyx_t_4;
 
-      /* "pachi_py/cypachi.pyx":226
+      /* "pachi_py/cypachi.pyx":227
  *             for i in range(self._size):
  *                 for j in range(self._size):
  *                     if board_atij(self._b.pachiboard(), i, j) != S_NONE:             # <<<<<<<<<<<<<<
@@ -3345,7 +3344,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10num_stones___get__
       __pyx_t_5 = ((board_atij(__pyx_v_self->_b->pachiboard(), __pyx_v_i, __pyx_v_j) != S_NONE) != 0);
       if (__pyx_t_5) {
 
-        /* "pachi_py/cypachi.pyx":227
+        /* "pachi_py/cypachi.pyx":228
  *                 for j in range(self._size):
  *                     if board_atij(self._b.pachiboard(), i, j) != S_NONE:
  *                         n += 1             # <<<<<<<<<<<<<<
@@ -3354,7 +3353,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10num_stones___get__
  */
         __pyx_v_n = (__pyx_v_n + 1);
 
-        /* "pachi_py/cypachi.pyx":226
+        /* "pachi_py/cypachi.pyx":227
  *             for i in range(self._size):
  *                 for j in range(self._size):
  *                     if board_atij(self._b.pachiboard(), i, j) != S_NONE:             # <<<<<<<<<<<<<<
@@ -3365,7 +3364,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10num_stones___get__
     }
   }
 
-  /* "pachi_py/cypachi.pyx":228
+  /* "pachi_py/cypachi.pyx":229
  *                     if board_atij(self._b.pachiboard(), i, j) != S_NONE:
  *                         n += 1
  *             return n             # <<<<<<<<<<<<<<
@@ -3373,13 +3372,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10num_stones___get__
  *         def __get__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_n); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_n); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_r = __pyx_t_6;
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":222
+  /* "pachi_py/cypachi.pyx":223
  *             return self._size
  *     property num_stones:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3398,7 +3397,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10num_stones___get__
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":230
+/* "pachi_py/cypachi.pyx":231
  *             return n
  *     property empty:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3426,7 +3425,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_5empty___get__(struc
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "pachi_py/cypachi.pyx":231
+  /* "pachi_py/cypachi.pyx":232
  *     property empty:
  *         def __get__(self):
  *             return self.num_stones == 0             # <<<<<<<<<<<<<<
@@ -3434,16 +3433,16 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_5empty___get__(struc
  *         def __get__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_stones); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_stones); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 232, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_1, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_1, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":230
+  /* "pachi_py/cypachi.pyx":231
  *             return n
  *     property empty:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3463,7 +3462,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_5empty___get__(struc
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":233
+/* "pachi_py/cypachi.pyx":234
  *             return self.num_stones == 0
  *     property black_stones:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3494,7 +3493,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12black_stones___get
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "pachi_py/cypachi.pyx":234
+  /* "pachi_py/cypachi.pyx":235
  *     property black_stones:
  *         def __get__(self):
  *             return self.get_stones(S_BLACK)             # <<<<<<<<<<<<<<
@@ -3502,9 +3501,9 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12black_stones___get
  *         def __get__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_stones); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 234, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_stones); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_enum__stone(S_BLACK); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 234, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_enum__stone(S_BLACK); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3517,17 +3516,17 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12black_stones___get
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __pyx_t_4 = NULL;
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -3536,7 +3535,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12black_stones___get
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":233
+  /* "pachi_py/cypachi.pyx":234
  *             return self.num_stones == 0
  *     property black_stones:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3559,7 +3558,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12black_stones___get
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":236
+/* "pachi_py/cypachi.pyx":237
  *             return self.get_stones(S_BLACK)
  *     property white_stones:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3590,7 +3589,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12white_stones___get
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "pachi_py/cypachi.pyx":237
+  /* "pachi_py/cypachi.pyx":238
  *     property white_stones:
  *         def __get__(self):
  *             return self.get_stones(S_WHITE)             # <<<<<<<<<<<<<<
@@ -3598,9 +3597,9 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12white_stones___get
  *         def __get__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_stones); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_stones); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_enum__stone(S_WHITE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_enum__stone(S_WHITE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3613,17 +3612,17 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12white_stones___get
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 237, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 238, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 237, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 238, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __pyx_t_4 = NULL;
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 237, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 238, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -3632,7 +3631,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12white_stones___get
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":236
+  /* "pachi_py/cypachi.pyx":237
  *             return self.get_stones(S_BLACK)
  *     property white_stones:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3655,7 +3654,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_12white_stones___get
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":239
+/* "pachi_py/cypachi.pyx":240
  *             return self.get_stones(S_WHITE)
  *     property is_terminal:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3682,7 +3681,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_11is_terminal___get_
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "pachi_py/cypachi.pyx":240
+  /* "pachi_py/cypachi.pyx":241
  *     property is_terminal:
  *         def __get__(self):
  *             return IsTerminal(self._bptr)             # <<<<<<<<<<<<<<
@@ -3690,13 +3689,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_11is_terminal___get_
  *         def __get__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(IsTerminal(__pyx_v_self->_bptr)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(IsTerminal(__pyx_v_self->_bptr)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":239
+  /* "pachi_py/cypachi.pyx":240
  *             return self.get_stones(S_WHITE)
  *     property is_terminal:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3715,7 +3714,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_11is_terminal___get_
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":242
+/* "pachi_py/cypachi.pyx":243
  *             return IsTerminal(self._bptr)
  *     property fast_score:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3742,7 +3741,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10fast_score___get__
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "pachi_py/cypachi.pyx":243
+  /* "pachi_py/cypachi.pyx":244
  *     property fast_score:
  *         def __get__(self):
  *             return FastScore(self._bptr)             # <<<<<<<<<<<<<<
@@ -3750,13 +3749,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10fast_score___get__
  *         def __get__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(FastScore(__pyx_v_self->_bptr)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(FastScore(__pyx_v_self->_bptr)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":242
+  /* "pachi_py/cypachi.pyx":243
  *             return IsTerminal(self._bptr)
  *     property fast_score:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3775,7 +3774,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_10fast_score___get__
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":245
+/* "pachi_py/cypachi.pyx":246
  *             return FastScore(self._bptr)
  *     property official_score:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3802,7 +3801,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_14official_score___g
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "pachi_py/cypachi.pyx":246
+  /* "pachi_py/cypachi.pyx":247
  *     property official_score:
  *         def __get__(self):
  *             return OfficialScore(self._bptr)             # <<<<<<<<<<<<<<
@@ -3810,13 +3809,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_14official_score___g
  *     def __richcmp__(PyPachiBoard self, PyPachiBoard other, int op):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(OfficialScore(__pyx_v_self->_bptr)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(OfficialScore(__pyx_v_self->_bptr)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":245
+  /* "pachi_py/cypachi.pyx":246
  *             return FastScore(self._bptr)
  *     property official_score:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3835,7 +3834,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_14official_score___g
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":248
+/* "pachi_py/cypachi.pyx":249
  *             return OfficialScore(self._bptr)
  * 
  *     def __richcmp__(PyPachiBoard self, PyPachiBoard other, int op):             # <<<<<<<<<<<<<<
@@ -3849,8 +3848,8 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_17__richcmp__(PyObje
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__richcmp__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_self), __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard, 1, "self", 0))) __PYX_ERR(0, 248, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard, 1, "other", 0))) __PYX_ERR(0, 248, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_self), __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard, 1, "self", 0))) __PYX_ERR(0, 249, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard, 1, "other", 0))) __PYX_ERR(0, 249, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_v_self), ((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_v_other), ((int)__pyx_v_op));
 
   /* function exit code */
@@ -3875,7 +3874,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("__richcmp__", 0);
 
-  /* "pachi_py/cypachi.pyx":250
+  /* "pachi_py/cypachi.pyx":251
  *     def __richcmp__(PyPachiBoard self, PyPachiBoard other, int op):
  *         # TODO: use the C++ operator==
  *         if op != 2 and op != 3: return NotImplemented             # <<<<<<<<<<<<<<
@@ -3898,7 +3897,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
     goto __pyx_L0;
   }
 
-  /* "pachi_py/cypachi.pyx":251
+  /* "pachi_py/cypachi.pyx":252
  *         # TODO: use the C++ operator==
  *         if op != 2 and op != 3: return NotImplemented
  *         if other._size != self._size: return False             # <<<<<<<<<<<<<<
@@ -3913,7 +3912,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
     goto __pyx_L0;
   }
 
-  /* "pachi_py/cypachi.pyx":253
+  /* "pachi_py/cypachi.pyx":254
  *         if other._size != self._size: return False
  *         cdef int i, j
  *         for i in range(self._size):             # <<<<<<<<<<<<<<
@@ -3924,7 +3923,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "pachi_py/cypachi.pyx":254
+    /* "pachi_py/cypachi.pyx":255
  *         cdef int i, j
  *         for i in range(self._size):
  *             for j in range(self._size):             # <<<<<<<<<<<<<<
@@ -3935,7 +3934,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
     for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
       __pyx_v_j = __pyx_t_5;
 
-      /* "pachi_py/cypachi.pyx":255
+      /* "pachi_py/cypachi.pyx":256
  *         for i in range(self._size):
  *             for j in range(self._size):
  *                 if board_atij(self._b.pachiboard(), i, j) != board_atij(other._b.pachiboard(), i, j):             # <<<<<<<<<<<<<<
@@ -3945,7 +3944,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
       __pyx_t_1 = ((board_atij(__pyx_v_self->_b->pachiboard(), __pyx_v_i, __pyx_v_j) != board_atij(__pyx_v_other->_b->pachiboard(), __pyx_v_i, __pyx_v_j)) != 0);
       if (__pyx_t_1) {
 
-        /* "pachi_py/cypachi.pyx":256
+        /* "pachi_py/cypachi.pyx":257
  *             for j in range(self._size):
  *                 if board_atij(self._b.pachiboard(), i, j) != board_atij(other._b.pachiboard(), i, j):
  *                     return op == 3             # <<<<<<<<<<<<<<
@@ -3953,13 +3952,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
  * 
  */
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_6 = __Pyx_PyBool_FromLong((__pyx_v_op == 3)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 256, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyBool_FromLong((__pyx_v_op == 3)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 257, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __pyx_r = __pyx_t_6;
         __pyx_t_6 = 0;
         goto __pyx_L0;
 
-        /* "pachi_py/cypachi.pyx":255
+        /* "pachi_py/cypachi.pyx":256
  *         for i in range(self._size):
  *             for j in range(self._size):
  *                 if board_atij(self._b.pachiboard(), i, j) != board_atij(other._b.pachiboard(), i, j):             # <<<<<<<<<<<<<<
@@ -3970,7 +3969,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
     }
   }
 
-  /* "pachi_py/cypachi.pyx":257
+  /* "pachi_py/cypachi.pyx":258
  *                 if board_atij(self._b.pachiboard(), i, j) != board_atij(other._b.pachiboard(), i, j):
  *                     return op == 3
  *         return op == 2             # <<<<<<<<<<<<<<
@@ -3978,13 +3977,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
  *     def __hash__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = __Pyx_PyBool_FromLong((__pyx_v_op == 2)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyBool_FromLong((__pyx_v_op == 2)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_r = __pyx_t_6;
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":248
+  /* "pachi_py/cypachi.pyx":249
  *             return OfficialScore(self._bptr)
  * 
  *     def __richcmp__(PyPachiBoard self, PyPachiBoard other, int op):             # <<<<<<<<<<<<<<
@@ -4003,7 +4002,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_16__richcmp__(struct
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":259
+/* "pachi_py/cypachi.pyx":260
  *         return op == 2
  * 
  *     def __hash__(self):             # <<<<<<<<<<<<<<
@@ -4036,7 +4035,7 @@ static Py_hash_t __pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_18__hash__(struct __
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("__hash__", 0);
 
-  /* "pachi_py/cypachi.pyx":261
+  /* "pachi_py/cypachi.pyx":262
  *     def __hash__(self):
  *         # Not sure if this is the best hash implementation, but it seems to work
  *         cdef long h = 0             # <<<<<<<<<<<<<<
@@ -4045,7 +4044,7 @@ static Py_hash_t __pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_18__hash__(struct __
  */
   __pyx_v_h = 0;
 
-  /* "pachi_py/cypachi.pyx":263
+  /* "pachi_py/cypachi.pyx":264
  *         cdef long h = 0
  *         cdef int i, j
  *         for i in range(self._size):             # <<<<<<<<<<<<<<
@@ -4056,7 +4055,7 @@ static Py_hash_t __pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_18__hash__(struct __
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "pachi_py/cypachi.pyx":264
+    /* "pachi_py/cypachi.pyx":265
  *         cdef int i, j
  *         for i in range(self._size):
  *             for j in range(self._size):             # <<<<<<<<<<<<<<
@@ -4067,7 +4066,7 @@ static Py_hash_t __pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_18__hash__(struct __
     for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_j = __pyx_t_4;
 
-      /* "pachi_py/cypachi.pyx":265
+      /* "pachi_py/cypachi.pyx":266
  *         for i in range(self._size):
  *             for j in range(self._size):
  *                 h = 101*h + board_atij(self._b.pachiboard(), i, j)             # <<<<<<<<<<<<<<
@@ -4078,7 +4077,7 @@ static Py_hash_t __pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_18__hash__(struct __
     }
   }
 
-  /* "pachi_py/cypachi.pyx":266
+  /* "pachi_py/cypachi.pyx":267
  *             for j in range(self._size):
  *                 h = 101*h + board_atij(self._b.pachiboard(), i, j)
  *         return h             # <<<<<<<<<<<<<<
@@ -4088,7 +4087,7 @@ static Py_hash_t __pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_18__hash__(struct __
   __pyx_r = __pyx_v_h;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":259
+  /* "pachi_py/cypachi.pyx":260
  *         return op == 2
  * 
  *     def __hash__(self):             # <<<<<<<<<<<<<<
@@ -4103,7 +4102,7 @@ static Py_hash_t __pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_18__hash__(struct __
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":268
+/* "pachi_py/cypachi.pyx":269
  *         return h
  * 
  *     def __getitem__(self, idx):             # <<<<<<<<<<<<<<
@@ -4140,31 +4139,31 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_20__getitem__(struct
   PyObject *__pyx_t_9 = NULL;
   __Pyx_RefNannySetupContext("__getitem__", 0);
 
-  /* "pachi_py/cypachi.pyx":269
+  /* "pachi_py/cypachi.pyx":270
  * 
  *     def __getitem__(self, idx):
  *         if len(idx) != 2:             # <<<<<<<<<<<<<<
  *             raise IndexError('Must provide 2 indices')
  *         cdef int i = idx[0]
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_idx); if (unlikely(__pyx_t_1 == -1)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_1 = PyObject_Length(__pyx_v_idx); if (unlikely(__pyx_t_1 == -1)) __PYX_ERR(0, 270, __pyx_L1_error)
   __pyx_t_2 = ((__pyx_t_1 != 2) != 0);
   if (__pyx_t_2) {
 
-    /* "pachi_py/cypachi.pyx":270
+    /* "pachi_py/cypachi.pyx":271
  *     def __getitem__(self, idx):
  *         if len(idx) != 2:
  *             raise IndexError('Must provide 2 indices')             # <<<<<<<<<<<<<<
  *         cdef int i = idx[0]
  *         cdef int j = idx[1]
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 270, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 270, __pyx_L1_error)
+    __PYX_ERR(0, 271, __pyx_L1_error)
 
-    /* "pachi_py/cypachi.pyx":269
+    /* "pachi_py/cypachi.pyx":270
  * 
  *     def __getitem__(self, idx):
  *         if len(idx) != 2:             # <<<<<<<<<<<<<<
@@ -4173,33 +4172,33 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_20__getitem__(struct
  */
   }
 
-  /* "pachi_py/cypachi.pyx":271
+  /* "pachi_py/cypachi.pyx":272
  *         if len(idx) != 2:
  *             raise IndexError('Must provide 2 indices')
  *         cdef int i = idx[0]             # <<<<<<<<<<<<<<
  *         cdef int j = idx[1]
  *         if not (0 <= i < self._size and 0 <= j < self._size):
  */
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_idx, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_idx, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 272, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 272, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_i = __pyx_t_4;
 
-  /* "pachi_py/cypachi.pyx":272
+  /* "pachi_py/cypachi.pyx":273
  *             raise IndexError('Must provide 2 indices')
  *         cdef int i = idx[0]
  *         cdef int j = idx[1]             # <<<<<<<<<<<<<<
  *         if not (0 <= i < self._size and 0 <= j < self._size):
  *             raise IndexError('Coordinates %d,%d out of range for board size %d' % (i, j, self._size))
  */
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_idx, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_idx, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_j = __pyx_t_4;
 
-  /* "pachi_py/cypachi.pyx":273
+  /* "pachi_py/cypachi.pyx":274
  *         cdef int i = idx[0]
  *         cdef int j = idx[1]
  *         if not (0 <= i < self._size and 0 <= j < self._size):             # <<<<<<<<<<<<<<
@@ -4226,20 +4225,20 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_20__getitem__(struct
   __pyx_t_5 = ((!__pyx_t_2) != 0);
   if (__pyx_t_5) {
 
-    /* "pachi_py/cypachi.pyx":274
+    /* "pachi_py/cypachi.pyx":275
  *         cdef int j = idx[1]
  *         if not (0 <= i < self._size and 0 <= j < self._size):
  *             raise IndexError('Coordinates %d,%d out of range for board size %d' % (i, j, self._size))             # <<<<<<<<<<<<<<
  *         return board_atij(self._b.pachiboard(), i, j)
  * 
  */
-    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_self->_size); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_self->_size); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_3);
@@ -4250,22 +4249,22 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_20__getitem__(struct
     __pyx_t_3 = 0;
     __pyx_t_7 = 0;
     __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_PyString_Format(__pyx_kp_s_Coordinates_d_d_out_of_range_for, __pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyString_Format(__pyx_kp_s_Coordinates_d_d_out_of_range_for, __pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_GIVEREF(__pyx_t_8);
     PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_8);
     __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_9, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_9, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_Raise(__pyx_t_8, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __PYX_ERR(0, 274, __pyx_L1_error)
+    __PYX_ERR(0, 275, __pyx_L1_error)
 
-    /* "pachi_py/cypachi.pyx":273
+    /* "pachi_py/cypachi.pyx":274
  *         cdef int i = idx[0]
  *         cdef int j = idx[1]
  *         if not (0 <= i < self._size and 0 <= j < self._size):             # <<<<<<<<<<<<<<
@@ -4274,7 +4273,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_20__getitem__(struct
  */
   }
 
-  /* "pachi_py/cypachi.pyx":275
+  /* "pachi_py/cypachi.pyx":276
  *         if not (0 <= i < self._size and 0 <= j < self._size):
  *             raise IndexError('Coordinates %d,%d out of range for board size %d' % (i, j, self._size))
  *         return board_atij(self._b.pachiboard(), i, j)             # <<<<<<<<<<<<<<
@@ -4282,13 +4281,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_20__getitem__(struct
  *     ### Utilities ###
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_8 = __Pyx_PyInt_From_enum__stone(board_atij(__pyx_v_self->_b->pachiboard(), __pyx_v_i, __pyx_v_j)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyInt_From_enum__stone(board_atij(__pyx_v_self->_b->pachiboard(), __pyx_v_i, __pyx_v_j)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_r = __pyx_t_8;
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":268
+  /* "pachi_py/cypachi.pyx":269
  *         return h
  * 
  *     def __getitem__(self, idx):             # <<<<<<<<<<<<<<
@@ -4310,7 +4309,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_20__getitem__(struct
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":279
+/* "pachi_py/cypachi.pyx":280
  *     ### Utilities ###
  * 
  *     def str_to_coord(self, char *s):             # <<<<<<<<<<<<<<
@@ -4326,7 +4325,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_23str_to_coord(PyObj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("str_to_coord (wrapper)", 0);
   assert(__pyx_arg_s); {
-    __pyx_v_s = __Pyx_PyObject_AsString(__pyx_arg_s); if (unlikely((!__pyx_v_s) && PyErr_Occurred())) __PYX_ERR(0, 279, __pyx_L3_error)
+    __pyx_v_s = __Pyx_PyObject_AsString(__pyx_arg_s); if (unlikely((!__pyx_v_s) && PyErr_Occurred())) __PYX_ERR(0, 280, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4354,7 +4353,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("str_to_coord", 0);
 
-  /* "pachi_py/cypachi.pyx":280
+  /* "pachi_py/cypachi.pyx":281
  * 
  *     def str_to_coord(self, char *s):
  *         cdef coord_t *cptr = str2coord(s, board_size(self._b.pachiboard()))             # <<<<<<<<<<<<<<
@@ -4363,7 +4362,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
  */
   __pyx_v_cptr = str2coord(__pyx_v_s, board_size(__pyx_v_self->_b->pachiboard()));
 
-  /* "pachi_py/cypachi.pyx":281
+  /* "pachi_py/cypachi.pyx":282
  *     def str_to_coord(self, char *s):
  *         cdef coord_t *cptr = str2coord(s, board_size(self._b.pachiboard()))
  *         cdef coord_t c = deref(cptr)             # <<<<<<<<<<<<<<
@@ -4372,7 +4371,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
  */
   __pyx_v_c = (*__pyx_v_cptr);
 
-  /* "pachi_py/cypachi.pyx":282
+  /* "pachi_py/cypachi.pyx":283
  *         cdef coord_t *cptr = str2coord(s, board_size(self._b.pachiboard()))
  *         cdef coord_t c = deref(cptr)
  *         free(cptr)             # <<<<<<<<<<<<<<
@@ -4381,7 +4380,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
  */
   free(__pyx_v_cptr);
 
-  /* "pachi_py/cypachi.pyx":284
+  /* "pachi_py/cypachi.pyx":285
  *         free(cptr)
  *         # Sanity checking
  *         if c == pass_coord or c == resign_coord: return c             # <<<<<<<<<<<<<<
@@ -4399,14 +4398,14 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_3 = __Pyx_PyInt_From_coord_t(__pyx_v_c); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 284, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_coord_t(__pyx_v_c); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_r = __pyx_t_3;
     __pyx_t_3 = 0;
     goto __pyx_L0;
   }
 
-  /* "pachi_py/cypachi.pyx":285
+  /* "pachi_py/cypachi.pyx":286
  *         # Sanity checking
  *         if c == pass_coord or c == resign_coord: return c
  *         if not (0 <= i_from_coord(self._b.pachiboard(), c) < self._size and             # <<<<<<<<<<<<<<
@@ -4425,7 +4424,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
     goto __pyx_L7_bool_binop_done;
   }
 
-  /* "pachi_py/cypachi.pyx":286
+  /* "pachi_py/cypachi.pyx":287
  *         if c == pass_coord or c == resign_coord: return c
  *         if not (0 <= i_from_coord(self._b.pachiboard(), c) < self._size and
  *                 0 <= j_from_coord(self._b.pachiboard(), c) < self._size):             # <<<<<<<<<<<<<<
@@ -4441,7 +4440,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
   __pyx_t_1 = __pyx_t_2;
   __pyx_L7_bool_binop_done:;
 
-  /* "pachi_py/cypachi.pyx":285
+  /* "pachi_py/cypachi.pyx":286
  *         # Sanity checking
  *         if c == pass_coord or c == resign_coord: return c
  *         if not (0 <= i_from_coord(self._b.pachiboard(), c) < self._size and             # <<<<<<<<<<<<<<
@@ -4451,31 +4450,31 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
   __pyx_t_2 = ((!__pyx_t_1) != 0);
   if (__pyx_t_2) {
 
-    /* "pachi_py/cypachi.pyx":287
+    /* "pachi_py/cypachi.pyx":288
  *         if not (0 <= i_from_coord(self._b.pachiboard(), c) < self._size and
  *                 0 <= j_from_coord(self._b.pachiboard(), c) < self._size):
  *             raise RuntimeError('Invalid coordinate %s' % s)             # <<<<<<<<<<<<<<
  *         return c
  * 
  */
-    __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_s); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_s); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 288, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_Invalid_coordinate_s, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_Invalid_coordinate_s, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 288, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 288, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_6);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6);
     __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 288, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_6, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __PYX_ERR(0, 287, __pyx_L1_error)
+    __PYX_ERR(0, 288, __pyx_L1_error)
 
-    /* "pachi_py/cypachi.pyx":285
+    /* "pachi_py/cypachi.pyx":286
  *         # Sanity checking
  *         if c == pass_coord or c == resign_coord: return c
  *         if not (0 <= i_from_coord(self._b.pachiboard(), c) < self._size and             # <<<<<<<<<<<<<<
@@ -4484,7 +4483,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
  */
   }
 
-  /* "pachi_py/cypachi.pyx":288
+  /* "pachi_py/cypachi.pyx":289
  *                 0 <= j_from_coord(self._b.pachiboard(), c) < self._size):
  *             raise RuntimeError('Invalid coordinate %s' % s)
  *         return c             # <<<<<<<<<<<<<<
@@ -4492,13 +4491,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
  *     def coord_to_str(self, coord_t c):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = __Pyx_PyInt_From_coord_t(__pyx_v_c); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 288, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_From_coord_t(__pyx_v_c); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 289, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_r = __pyx_t_6;
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":279
+  /* "pachi_py/cypachi.pyx":280
  *     ### Utilities ###
  * 
  *     def str_to_coord(self, char *s):             # <<<<<<<<<<<<<<
@@ -4518,7 +4517,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_22str_to_coord(struc
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":290
+/* "pachi_py/cypachi.pyx":291
  *         return c
  * 
  *     def coord_to_str(self, coord_t c):             # <<<<<<<<<<<<<<
@@ -4534,7 +4533,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_25coord_to_str(PyObj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("coord_to_str (wrapper)", 0);
   assert(__pyx_arg_c); {
-    __pyx_v_c = __Pyx_PyInt_As_coord_t(__pyx_arg_c); if (unlikely((__pyx_v_c == (coord_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 290, __pyx_L3_error)
+    __pyx_v_c = __Pyx_PyInt_As_coord_t(__pyx_arg_c); if (unlikely((__pyx_v_c == (coord_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 291, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4557,7 +4556,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_24coord_to_str(struc
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("coord_to_str", 0);
 
-  /* "pachi_py/cypachi.pyx":291
+  /* "pachi_py/cypachi.pyx":292
  * 
  *     def coord_to_str(self, coord_t c):
  *         cdef char* tmpstr = coord2str(c, self._b.pachiboard())             # <<<<<<<<<<<<<<
@@ -4566,7 +4565,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_24coord_to_str(struc
  */
   __pyx_v_tmpstr = coord2str(__pyx_v_c, __pyx_v_self->_b->pachiboard());
 
-  /* "pachi_py/cypachi.pyx":293
+  /* "pachi_py/cypachi.pyx":294
  *         cdef char* tmpstr = coord2str(c, self._b.pachiboard())
  *         cdef string s
  *         s += tmpstr             # <<<<<<<<<<<<<<
@@ -4575,7 +4574,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_24coord_to_str(struc
  */
   __pyx_v_s += __pyx_v_tmpstr;
 
-  /* "pachi_py/cypachi.pyx":294
+  /* "pachi_py/cypachi.pyx":295
  *         cdef string s
  *         s += tmpstr
  *         free(tmpstr)             # <<<<<<<<<<<<<<
@@ -4584,7 +4583,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_24coord_to_str(struc
  */
   free(__pyx_v_tmpstr);
 
-  /* "pachi_py/cypachi.pyx":295
+  /* "pachi_py/cypachi.pyx":296
  *         s += tmpstr
  *         free(tmpstr)
  *         return s             # <<<<<<<<<<<<<<
@@ -4592,13 +4591,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_24coord_to_str(struc
  *     def coord_to_ij(self, coord_t c):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__in_string(__pyx_v_s); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__in_string(__pyx_v_s); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":290
+  /* "pachi_py/cypachi.pyx":291
  *         return c
  * 
  *     def coord_to_str(self, coord_t c):             # <<<<<<<<<<<<<<
@@ -4617,7 +4616,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_24coord_to_str(struc
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":297
+/* "pachi_py/cypachi.pyx":298
  *         return s
  * 
  *     def coord_to_ij(self, coord_t c):             # <<<<<<<<<<<<<<
@@ -4633,7 +4632,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_27coord_to_ij(PyObje
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("coord_to_ij (wrapper)", 0);
   assert(__pyx_arg_c); {
-    __pyx_v_c = __Pyx_PyInt_As_coord_t(__pyx_arg_c); if (unlikely((__pyx_v_c == (coord_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 297, __pyx_L3_error)
+    __pyx_v_c = __Pyx_PyInt_As_coord_t(__pyx_arg_c); if (unlikely((__pyx_v_c == (coord_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 298, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4658,7 +4657,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_26coord_to_ij(struct
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("coord_to_ij", 0);
 
-  /* "pachi_py/cypachi.pyx":298
+  /* "pachi_py/cypachi.pyx":299
  * 
  *     def coord_to_ij(self, coord_t c):
  *         cdef int i = i_from_coord(self._b.pachiboard(), c)             # <<<<<<<<<<<<<<
@@ -4667,7 +4666,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_26coord_to_ij(struct
  */
   __pyx_v_i = i_from_coord(__pyx_v_self->_b->pachiboard(), __pyx_v_c);
 
-  /* "pachi_py/cypachi.pyx":299
+  /* "pachi_py/cypachi.pyx":300
  *     def coord_to_ij(self, coord_t c):
  *         cdef int i = i_from_coord(self._b.pachiboard(), c)
  *         cdef int j = j_from_coord(self._b.pachiboard(), c)             # <<<<<<<<<<<<<<
@@ -4676,7 +4675,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_26coord_to_ij(struct
  */
   __pyx_v_j = j_from_coord(__pyx_v_self->_b->pachiboard(), __pyx_v_c);
 
-  /* "pachi_py/cypachi.pyx":300
+  /* "pachi_py/cypachi.pyx":301
  *         cdef int i = i_from_coord(self._b.pachiboard(), c)
  *         cdef int j = j_from_coord(self._b.pachiboard(), c)
  *         return i, j             # <<<<<<<<<<<<<<
@@ -4684,11 +4683,11 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_26coord_to_ij(struct
  *     def ij_to_coord(self, int i, int j):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -4700,7 +4699,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_26coord_to_ij(struct
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":297
+  /* "pachi_py/cypachi.pyx":298
  *         return s
  * 
  *     def coord_to_ij(self, coord_t c):             # <<<<<<<<<<<<<<
@@ -4721,7 +4720,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_26coord_to_ij(struct
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":302
+/* "pachi_py/cypachi.pyx":303
  *         return i, j
  * 
  *     def ij_to_coord(self, int i, int j):             # <<<<<<<<<<<<<<
@@ -4757,11 +4756,11 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_29ij_to_coord(PyObje
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_j)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ij_to_coord", 1, 2, 2, 1); __PYX_ERR(0, 302, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ij_to_coord", 1, 2, 2, 1); __PYX_ERR(0, 303, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ij_to_coord") < 0)) __PYX_ERR(0, 302, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ij_to_coord") < 0)) __PYX_ERR(0, 303, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4769,12 +4768,12 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_12PyPachiBoard_29ij_to_coord(PyObje
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_i = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_i == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 302, __pyx_L3_error)
-    __pyx_v_j = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_j == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 302, __pyx_L3_error)
+    __pyx_v_i = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_i == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 303, __pyx_L3_error)
+    __pyx_v_j = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_j == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 303, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("ij_to_coord", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 302, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("ij_to_coord", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 303, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pachi_py.cypachi.PyPachiBoard.ij_to_coord", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4793,7 +4792,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_28ij_to_coord(struct
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("ij_to_coord", 0);
 
-  /* "pachi_py/cypachi.pyx":303
+  /* "pachi_py/cypachi.pyx":304
  * 
  *     def ij_to_coord(self, int i, int j):
  *         return coord_ij(self._b.pachiboard(), i, j)             # <<<<<<<<<<<<<<
@@ -4801,13 +4800,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_28ij_to_coord(struct
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(coord_ij(__pyx_v_self->_b->pachiboard(), __pyx_v_i, __pyx_v_j)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(coord_ij(__pyx_v_self->_b->pachiboard(), __pyx_v_i, __pyx_v_j)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":302
+  /* "pachi_py/cypachi.pyx":303
  *         return i, j
  * 
  *     def ij_to_coord(self, int i, int j):             # <<<<<<<<<<<<<<
@@ -4826,7 +4825,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_12PyPachiBoard_28ij_to_coord(struct
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":309
+/* "pachi_py/cypachi.pyx":310
  *     cdef PachiEngine* _engine
  * 
  *     def __cinit__(self, PyPachiBoard b, const string& engine_type, const string& arg):             # <<<<<<<<<<<<<<
@@ -4864,16 +4863,16 @@ static int __pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_1__cinit__(PyObject *__py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_engine_type)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 1); __PYX_ERR(0, 309, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 1); __PYX_ERR(0, 310, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_arg)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 2); __PYX_ERR(0, 309, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 2); __PYX_ERR(0, 310, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 309, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 310, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -4883,18 +4882,18 @@ static int __pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_1__cinit__(PyObject *__py
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
     __pyx_v_b = ((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)values[0]);
-    __pyx_v_engine_type = __pyx_convert_string_from_py_std__in_string(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 309, __pyx_L3_error)
-    __pyx_v_arg = __pyx_convert_string_from_py_std__in_string(values[2]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 309, __pyx_L3_error)
+    __pyx_v_engine_type = __pyx_convert_string_from_py_std__in_string(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 310, __pyx_L3_error)
+    __pyx_v_arg = __pyx_convert_string_from_py_std__in_string(values[2]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 310, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 309, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 310, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pachi_py.cypachi.PyPachiEngine.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard, 1, "b", 0))) __PYX_ERR(0, 309, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard, 1, "b", 0))) __PYX_ERR(0, 310, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine___cinit__(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *)__pyx_v_self), __pyx_v_b, __pyx_v_engine_type, __pyx_v_arg);
 
   /* function exit code */
@@ -4912,7 +4911,7 @@ static int __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine___cinit__(struct __pyx_ob
   PachiEngine *__pyx_t_1;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "pachi_py/cypachi.pyx":310
+  /* "pachi_py/cypachi.pyx":311
  * 
  *     def __cinit__(self, PyPachiBoard b, const string& engine_type, const string& arg):
  *         self._engine = new PachiEngine(b._bptr, engine_type, arg)             # <<<<<<<<<<<<<<
@@ -4923,11 +4922,11 @@ static int __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine___cinit__(struct __pyx_ob
     __pyx_t_1 = new PachiEngine(__pyx_v_b->_bptr, __pyx_v_engine_type, __pyx_v_arg);
   } catch(...) {
     raise_py_error(); if (!PyErr_Occurred()) PyErr_SetString(PyExc_RuntimeError , "Error converting c++ exception.");
-    __PYX_ERR(0, 310, __pyx_L1_error)
+    __PYX_ERR(0, 311, __pyx_L1_error)
   }
   __pyx_v_self->_engine = __pyx_t_1;
 
-  /* "pachi_py/cypachi.pyx":309
+  /* "pachi_py/cypachi.pyx":310
  *     cdef PachiEngine* _engine
  * 
  *     def __cinit__(self, PyPachiBoard b, const string& engine_type, const string& arg):             # <<<<<<<<<<<<<<
@@ -4946,7 +4945,7 @@ static int __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine___cinit__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":312
+/* "pachi_py/cypachi.pyx":313
  *         self._engine = new PachiEngine(b._bptr, engine_type, arg)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -4969,16 +4968,16 @@ static void __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_2__dealloc__(struct __py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "pachi_py/cypachi.pyx":313
+  /* "pachi_py/cypachi.pyx":314
  * 
  *     def __dealloc__(self):
  *         del self._engine             # <<<<<<<<<<<<<<
  * 
- *     def genmove(self, PyPachiBoard curr_board, stone curr_color, const string& timestr):
+ *     @property
  */
   delete __pyx_v_self->_engine;
 
-  /* "pachi_py/cypachi.pyx":312
+  /* "pachi_py/cypachi.pyx":313
  *         self._engine = new PachiEngine(b._bptr, engine_type, arg)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -4990,31 +4989,89 @@ static void __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_2__dealloc__(struct __py
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pachi_py/cypachi.pyx":315
- *         del self._engine
+/* "pachi_py/cypachi.pyx":317
  * 
- *     def genmove(self, PyPachiBoard curr_board, stone curr_color, const string& timestr):             # <<<<<<<<<<<<<<
- *         return self._engine.genmove(curr_board._bptr, curr_color, timestr)
+ *     @property
+ *     def curr_board(self):             # <<<<<<<<<<<<<<
+ *         return wrap_board(self._engine.get_curr_board())
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_10curr_board_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_10curr_board_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_10curr_board___get__(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_10curr_board___get__(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "pachi_py/cypachi.pyx":318
+ *     @property
+ *     def curr_board(self):
+ *         return wrap_board(self._engine.get_curr_board())             # <<<<<<<<<<<<<<
+ * 
+ *     def genmove(self, stone curr_color, const string& timestr):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_wrap_board(__pyx_v_self->_engine->get_curr_board())); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "pachi_py/cypachi.pyx":317
+ * 
+ *     @property
+ *     def curr_board(self):             # <<<<<<<<<<<<<<
+ *         return wrap_board(self._engine.get_curr_board())
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("pachi_py.cypachi.PyPachiEngine.curr_board.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "pachi_py/cypachi.pyx":320
+ *         return wrap_board(self._engine.get_curr_board())
+ * 
+ *     def genmove(self, stone curr_color, const string& timestr):             # <<<<<<<<<<<<<<
+ *         return self._engine.genmove(curr_color, timestr)
  * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_5genmove(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_5genmove(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_v_curr_board = 0;
   enum stone __pyx_v_curr_color;
   std::string __pyx_v_timestr;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("genmove (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_curr_board,&__pyx_n_s_curr_color,&__pyx_n_s_timestr,0};
-    PyObject* values[3] = {0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_curr_color,&__pyx_n_s_timestr,0};
+    PyObject* values[2] = {0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
-        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
         case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
         case  0: break;
@@ -5023,85 +5080,73 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_5genmove(PyObject *
       kw_args = PyDict_Size(__pyx_kwds);
       switch (pos_args) {
         case  0:
-        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_curr_board)) != 0)) kw_args--;
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_curr_color)) != 0)) kw_args--;
         else goto __pyx_L5_argtuple_error;
         case  1:
-        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_curr_color)) != 0)) kw_args--;
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_timestr)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("genmove", 1, 3, 3, 1); __PYX_ERR(0, 315, __pyx_L3_error)
-        }
-        case  2:
-        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_timestr)) != 0)) kw_args--;
-        else {
-          __Pyx_RaiseArgtupleInvalid("genmove", 1, 3, 3, 2); __PYX_ERR(0, 315, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("genmove", 1, 2, 2, 1); __PYX_ERR(0, 320, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "genmove") < 0)) __PYX_ERR(0, 315, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "genmove") < 0)) __PYX_ERR(0, 320, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_curr_board = ((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)values[0]);
-    __pyx_v_curr_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[1])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 315, __pyx_L3_error)
-    __pyx_v_timestr = __pyx_convert_string_from_py_std__in_string(values[2]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 315, __pyx_L3_error)
+    __pyx_v_curr_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[0])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 320, __pyx_L3_error)
+    __pyx_v_timestr = __pyx_convert_string_from_py_std__in_string(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 320, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("genmove", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 315, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("genmove", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 320, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pachi_py.cypachi.PyPachiEngine.genmove", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_curr_board), __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard, 1, "curr_board", 0))) __PYX_ERR(0, 315, __pyx_L1_error)
-  __pyx_r = __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_4genmove(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *)__pyx_v_self), __pyx_v_curr_board, __pyx_v_curr_color, __pyx_v_timestr);
+  __pyx_r = __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_4genmove(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *)__pyx_v_self), __pyx_v_curr_color, __pyx_v_timestr);
 
   /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __pyx_r = NULL;
-  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_4genmove(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self, struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_v_curr_board, enum stone __pyx_v_curr_color, std::string __pyx_v_timestr) {
+static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_4genmove(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self, enum stone __pyx_v_curr_color, std::string __pyx_v_timestr) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   coord_t __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("genmove", 0);
 
-  /* "pachi_py/cypachi.pyx":316
+  /* "pachi_py/cypachi.pyx":321
  * 
- *     def genmove(self, PyPachiBoard curr_board, stone curr_color, const string& timestr):
- *         return self._engine.genmove(curr_board._bptr, curr_color, timestr)             # <<<<<<<<<<<<<<
+ *     def genmove(self, stone curr_color, const string& timestr):
+ *         return self._engine.genmove(curr_color, timestr)             # <<<<<<<<<<<<<<
  * 
- *     def notify(self, PyPachiBoard curr_board, coord_t move_coord, stone move_color):
+ *     def notify(self, coord_t move_coord, stone move_color):
  */
   __Pyx_XDECREF(__pyx_r);
   try {
-    __pyx_t_1 = __pyx_v_self->_engine->genmove(__pyx_v_curr_board->_bptr, __pyx_v_curr_color, __pyx_v_timestr);
+    __pyx_t_1 = __pyx_v_self->_engine->genmove(__pyx_v_curr_color, __pyx_v_timestr);
   } catch(...) {
     raise_py_error(); if (!PyErr_Occurred()) PyErr_SetString(PyExc_RuntimeError , "Error converting c++ exception.");
-    __PYX_ERR(0, 316, __pyx_L1_error)
+    __PYX_ERR(0, 321, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyInt_From_coord_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 316, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_coord_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 321, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":315
- *         del self._engine
+  /* "pachi_py/cypachi.pyx":320
+ *         return wrap_board(self._engine.get_curr_board())
  * 
- *     def genmove(self, PyPachiBoard curr_board, stone curr_color, const string& timestr):             # <<<<<<<<<<<<<<
- *         return self._engine.genmove(curr_board._bptr, curr_color, timestr)
+ *     def genmove(self, stone curr_color, const string& timestr):             # <<<<<<<<<<<<<<
+ *         return self._engine.genmove(curr_color, timestr)
  * 
  */
 
@@ -5116,31 +5161,29 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_4genmove(struct __p
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":318
- *         return self._engine.genmove(curr_board._bptr, curr_color, timestr)
+/* "pachi_py/cypachi.pyx":323
+ *         return self._engine.genmove(curr_color, timestr)
  * 
- *     def notify(self, PyPachiBoard curr_board, coord_t move_coord, stone move_color):             # <<<<<<<<<<<<<<
- *         self._engine.notify(curr_board._bptr, move_coord, move_color)
+ *     def notify(self, coord_t move_coord, stone move_color):             # <<<<<<<<<<<<<<
+ *         self._engine.notify(move_coord, move_color)
  * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_7notify(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_7notify(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_v_curr_board = 0;
   coord_t __pyx_v_move_coord;
   enum stone __pyx_v_move_color;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("notify (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_curr_board,&__pyx_n_s_move_coord,&__pyx_n_s_move_color,0};
-    PyObject* values[3] = {0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_move_coord,&__pyx_n_s_move_color,0};
+    PyObject* values[2] = {0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
-        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
         case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
         case  0: break;
@@ -5149,72 +5192,60 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_7notify(PyObject *_
       kw_args = PyDict_Size(__pyx_kwds);
       switch (pos_args) {
         case  0:
-        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_curr_board)) != 0)) kw_args--;
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_move_coord)) != 0)) kw_args--;
         else goto __pyx_L5_argtuple_error;
         case  1:
-        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_move_coord)) != 0)) kw_args--;
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_move_color)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("notify", 1, 3, 3, 1); __PYX_ERR(0, 318, __pyx_L3_error)
-        }
-        case  2:
-        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_move_color)) != 0)) kw_args--;
-        else {
-          __Pyx_RaiseArgtupleInvalid("notify", 1, 3, 3, 2); __PYX_ERR(0, 318, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("notify", 1, 2, 2, 1); __PYX_ERR(0, 323, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "notify") < 0)) __PYX_ERR(0, 318, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "notify") < 0)) __PYX_ERR(0, 323, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_curr_board = ((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)values[0]);
-    __pyx_v_move_coord = __Pyx_PyInt_As_coord_t(values[1]); if (unlikely((__pyx_v_move_coord == (coord_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 318, __pyx_L3_error)
-    __pyx_v_move_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[2])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 318, __pyx_L3_error)
+    __pyx_v_move_coord = __Pyx_PyInt_As_coord_t(values[0]); if (unlikely((__pyx_v_move_coord == (coord_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 323, __pyx_L3_error)
+    __pyx_v_move_color = ((enum stone)__Pyx_PyInt_As_enum__stone(values[1])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 323, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("notify", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 318, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("notify", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 323, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pachi_py.cypachi.PyPachiEngine.notify", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_curr_board), __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard, 1, "curr_board", 0))) __PYX_ERR(0, 318, __pyx_L1_error)
-  __pyx_r = __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_6notify(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *)__pyx_v_self), __pyx_v_curr_board, __pyx_v_move_coord, __pyx_v_move_color);
+  __pyx_r = __pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_6notify(((struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *)__pyx_v_self), __pyx_v_move_coord, __pyx_v_move_color);
 
   /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __pyx_r = NULL;
-  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_6notify(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self, struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_v_curr_board, coord_t __pyx_v_move_coord, enum stone __pyx_v_move_color) {
+static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_6notify(struct __pyx_obj_8pachi_py_7cypachi_PyPachiEngine *__pyx_v_self, coord_t __pyx_v_move_coord, enum stone __pyx_v_move_color) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("notify", 0);
 
-  /* "pachi_py/cypachi.pyx":319
+  /* "pachi_py/cypachi.pyx":324
  * 
- *     def notify(self, PyPachiBoard curr_board, coord_t move_coord, stone move_color):
- *         self._engine.notify(curr_board._bptr, move_coord, move_color)             # <<<<<<<<<<<<<<
+ *     def notify(self, coord_t move_coord, stone move_color):
+ *         self._engine.notify(move_coord, move_color)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_v_self->_engine->notify(__pyx_v_curr_board->_bptr, __pyx_v_move_coord, __pyx_v_move_color);
+  __pyx_v_self->_engine->notify(__pyx_v_move_coord, __pyx_v_move_color);
 
-  /* "pachi_py/cypachi.pyx":318
- *         return self._engine.genmove(curr_board._bptr, curr_color, timestr)
+  /* "pachi_py/cypachi.pyx":323
+ *         return self._engine.genmove(curr_color, timestr)
  * 
- *     def notify(self, PyPachiBoard curr_board, coord_t move_coord, stone move_color):             # <<<<<<<<<<<<<<
- *         self._engine.notify(curr_board._bptr, move_coord, move_color)
+ *     def notify(self, coord_t move_coord, stone move_color):             # <<<<<<<<<<<<<<
+ *         self._engine.notify(move_coord, move_color)
  * 
  */
 
@@ -5225,7 +5256,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_13PyPachiEngine_6notify(struct __py
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":332
+/* "pachi_py/cypachi.pyx":337
  * 
  * ##### Exposed functions #####
  * cpdef PyPachiBoard CreateBoard(int size):             # <<<<<<<<<<<<<<
@@ -5240,7 +5271,7 @@ static struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_f_8pachi_py_7cypa
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("CreateBoard", 0);
 
-  /* "pachi_py/cypachi.pyx":333
+  /* "pachi_py/cypachi.pyx":338
  * ##### Exposed functions #####
  * cpdef PyPachiBoard CreateBoard(int size):
  *     return wrap_board(CreatePachiBoard(size))             # <<<<<<<<<<<<<<
@@ -5248,13 +5279,13 @@ static struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *__pyx_f_8pachi_py_7cypa
  * def pachi_srand(unsigned long seed):
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
-  __pyx_t_1 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_wrap_board(CreatePachiBoard(__pyx_v_size))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_wrap_board(CreatePachiBoard(__pyx_v_size))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = ((struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":332
+  /* "pachi_py/cypachi.pyx":337
  * 
  * ##### Exposed functions #####
  * cpdef PyPachiBoard CreateBoard(int size):             # <<<<<<<<<<<<<<
@@ -5281,7 +5312,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_1CreateBoard(PyObject *__pyx_self, 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("CreateBoard (wrapper)", 0);
   assert(__pyx_arg_size); {
-    __pyx_v_size = __Pyx_PyInt_As_int(__pyx_arg_size); if (unlikely((__pyx_v_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 332, __pyx_L3_error)
+    __pyx_v_size = __Pyx_PyInt_As_int(__pyx_arg_size); if (unlikely((__pyx_v_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 337, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5302,7 +5333,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_CreateBoard(CYTHON_UNUSED PyObject 
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("CreateBoard", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_CreateBoard(__pyx_v_size, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8pachi_py_7cypachi_CreateBoard(__pyx_v_size, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5319,7 +5350,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_CreateBoard(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":335
+/* "pachi_py/cypachi.pyx":340
  *     return wrap_board(CreatePachiBoard(size))
  * 
  * def pachi_srand(unsigned long seed):             # <<<<<<<<<<<<<<
@@ -5336,7 +5367,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_3pachi_srand(PyObject *__pyx_self, 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("pachi_srand (wrapper)", 0);
   assert(__pyx_arg_seed); {
-    __pyx_v_seed = __Pyx_PyInt_As_unsigned_long(__pyx_arg_seed); if (unlikely((__pyx_v_seed == (unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 335, __pyx_L3_error)
+    __pyx_v_seed = __Pyx_PyInt_As_unsigned_long(__pyx_arg_seed); if (unlikely((__pyx_v_seed == (unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 340, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5356,7 +5387,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_2pachi_srand(CYTHON_UNUSED PyObject
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("pachi_srand", 0);
 
-  /* "pachi_py/cypachi.pyx":336
+  /* "pachi_py/cypachi.pyx":341
  * 
  * def pachi_srand(unsigned long seed):
  *     fast_srandom(seed)             # <<<<<<<<<<<<<<
@@ -5365,7 +5396,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_2pachi_srand(CYTHON_UNUSED PyObject
  */
   fast_srandom(__pyx_v_seed);
 
-  /* "pachi_py/cypachi.pyx":335
+  /* "pachi_py/cypachi.pyx":340
  *     return wrap_board(CreatePachiBoard(size))
  * 
  * def pachi_srand(unsigned long seed):             # <<<<<<<<<<<<<<
@@ -5380,7 +5411,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_2pachi_srand(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":338
+/* "pachi_py/cypachi.pyx":343
  *     fast_srandom(seed)
  * 
  * def stone_other(stone s):             # <<<<<<<<<<<<<<
@@ -5397,7 +5428,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_5stone_other(PyObject *__pyx_self, 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stone_other (wrapper)", 0);
   assert(__pyx_arg_s); {
-    __pyx_v_s = ((enum stone)__Pyx_PyInt_As_enum__stone(__pyx_arg_s)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 338, __pyx_L3_error)
+    __pyx_v_s = ((enum stone)__Pyx_PyInt_As_enum__stone(__pyx_arg_s)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 343, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5418,7 +5449,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_4stone_other(CYTHON_UNUSED PyObject
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("stone_other", 0);
 
-  /* "pachi_py/cypachi.pyx":339
+  /* "pachi_py/cypachi.pyx":344
  * 
  * def stone_other(stone s):
  *     return pachi_stone_other(s)             # <<<<<<<<<<<<<<
@@ -5426,13 +5457,13 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_4stone_other(CYTHON_UNUSED PyObject
  * def color_to_str(stone s):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_enum__stone(stone_other(__pyx_v_s)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_enum__stone(stone_other(__pyx_v_s)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 344, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":338
+  /* "pachi_py/cypachi.pyx":343
  *     fast_srandom(seed)
  * 
  * def stone_other(stone s):             # <<<<<<<<<<<<<<
@@ -5451,7 +5482,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_4stone_other(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "pachi_py/cypachi.pyx":341
+/* "pachi_py/cypachi.pyx":346
  *     return pachi_stone_other(s)
  * 
  * def color_to_str(stone s):             # <<<<<<<<<<<<<<
@@ -5468,7 +5499,7 @@ static PyObject *__pyx_pw_8pachi_py_7cypachi_7color_to_str(PyObject *__pyx_self,
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("color_to_str (wrapper)", 0);
   assert(__pyx_arg_s); {
-    __pyx_v_s = ((enum stone)__Pyx_PyInt_As_enum__stone(__pyx_arg_s)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 341, __pyx_L3_error)
+    __pyx_v_s = ((enum stone)__Pyx_PyInt_As_enum__stone(__pyx_arg_s)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 346, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5488,7 +5519,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_6color_to_str(CYTHON_UNUSED PyObjec
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("color_to_str", 0);
 
-  /* "pachi_py/cypachi.pyx":342
+  /* "pachi_py/cypachi.pyx":347
  * 
  * def color_to_str(stone s):
  *     if s == S_BLACK: return "black"             # <<<<<<<<<<<<<<
@@ -5503,7 +5534,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_6color_to_str(CYTHON_UNUSED PyObjec
     goto __pyx_L0;
     break;
 
-    /* "pachi_py/cypachi.pyx":343
+    /* "pachi_py/cypachi.pyx":348
  * def color_to_str(stone s):
  *     if s == S_BLACK: return "black"
  *     elif s == S_WHITE: return "white"             # <<<<<<<<<<<<<<
@@ -5518,7 +5549,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_6color_to_str(CYTHON_UNUSED PyObjec
     default: break;
   }
 
-  /* "pachi_py/cypachi.pyx":344
+  /* "pachi_py/cypachi.pyx":349
  *     if s == S_BLACK: return "black"
  *     elif s == S_WHITE: return "white"
  *     return "INVALID"             # <<<<<<<<<<<<<<
@@ -5528,7 +5559,7 @@ static PyObject *__pyx_pf_8pachi_py_7cypachi_6color_to_str(CYTHON_UNUSED PyObjec
   __pyx_r = __pyx_n_s_INVALID;
   goto __pyx_L0;
 
-  /* "pachi_py/cypachi.pyx":341
+  /* "pachi_py/cypachi.pyx":346
  *     return pachi_stone_other(s)
  * 
  * def color_to_str(stone s):             # <<<<<<<<<<<<<<
@@ -8212,10 +8243,19 @@ static void __pyx_tp_dealloc_8pachi_py_7cypachi_PyPachiEngine(PyObject *o) {
   (*Py_TYPE(o)->tp_free)(o);
 }
 
+static PyObject *__pyx_getprop_8pachi_py_7cypachi_13PyPachiEngine_curr_board(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_10curr_board_1__get__(o);
+}
+
 static PyMethodDef __pyx_methods_8pachi_py_7cypachi_PyPachiEngine[] = {
   {"genmove", (PyCFunction)__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_5genmove, METH_VARARGS|METH_KEYWORDS, 0},
   {"notify", (PyCFunction)__pyx_pw_8pachi_py_7cypachi_13PyPachiEngine_7notify, METH_VARARGS|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
+};
+
+static struct PyGetSetDef __pyx_getsets_8pachi_py_7cypachi_PyPachiEngine[] = {
+  {(char *)"curr_board", __pyx_getprop_8pachi_py_7cypachi_13PyPachiEngine_curr_board, 0, (char *)0, 0},
+  {0, 0, 0, 0, 0}
 };
 
 static PyTypeObject __pyx_type_8pachi_py_7cypachi_PyPachiEngine = {
@@ -8253,7 +8293,7 @@ static PyTypeObject __pyx_type_8pachi_py_7cypachi_PyPachiEngine = {
   0, /*tp_iternext*/
   __pyx_methods_8pachi_py_7cypachi_PyPachiEngine, /*tp_methods*/
   0, /*tp_members*/
-  0, /*tp_getset*/
+  __pyx_getsets_8pachi_py_7cypachi_PyPachiEngine, /*tp_getset*/
   0, /*tp_base*/
   0, /*tp_dict*/
   0, /*tp_descr_get*/
@@ -8326,7 +8366,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_color, __pyx_k_color, sizeof(__pyx_k_color), 0, 0, 1, 1},
   {&__pyx_n_s_color_to_str, __pyx_k_color_to_str, sizeof(__pyx_k_color_to_str), 0, 0, 1, 1},
   {&__pyx_n_s_coord, __pyx_k_coord, sizeof(__pyx_k_coord), 0, 0, 1, 1},
-  {&__pyx_n_s_curr_board, __pyx_k_curr_board, sizeof(__pyx_k_curr_board), 0, 0, 1, 1},
   {&__pyx_n_s_curr_color, __pyx_k_curr_color, sizeof(__pyx_k_curr_color), 0, 0, 1, 1},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
   {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
@@ -8368,9 +8407,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(0, 23, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 141, __pyx_L1_error)
-  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) __PYX_ERR(0, 250, __pyx_L1_error)
-  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(0, 270, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(0, 271, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 218, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -8381,25 +8420,25 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pachi_py/cypachi.pyx":185
+  /* "pachi_py/cypachi.pyx":186
  *                     stones[num_stones,1] = j
  *                     num_stones += 1
  *         return stones[:num_stones,:]             # <<<<<<<<<<<<<<
  * 
  *     def get_legal_coords(self, stone color, bint filter_suicides=False):
  */
-  __pyx_slice_ = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice_)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_slice_ = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice_)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice_);
   __Pyx_GIVEREF(__pyx_slice_);
 
-  /* "pachi_py/cypachi.pyx":270
+  /* "pachi_py/cypachi.pyx":271
  *     def __getitem__(self, idx):
  *         if len(idx) != 2:
  *             raise IndexError('Must provide 2 indices')             # <<<<<<<<<<<<<<
  *         cdef int i = idx[0]
  *         cdef int j = idx[1]
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Must_provide_2_indices); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Must_provide_2_indices); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 271, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
@@ -8469,41 +8508,41 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "pachi_py/cypachi.pyx":335
+  /* "pachi_py/cypachi.pyx":340
  *     return wrap_board(CreatePachiBoard(size))
  * 
  * def pachi_srand(unsigned long seed):             # <<<<<<<<<<<<<<
  *     fast_srandom(seed)
  * 
  */
-  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_seed, __pyx_n_s_seed); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 335, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_seed, __pyx_n_s_seed); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_atlas_u_hoj_code_pachi_py_pachi, __pyx_n_s_pachi_srand, 335, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 335, __pyx_L1_error)
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_atlas_u_hoj_code_pachi_py_pachi, __pyx_n_s_pachi_srand, 340, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 340, __pyx_L1_error)
 
-  /* "pachi_py/cypachi.pyx":338
+  /* "pachi_py/cypachi.pyx":343
  *     fast_srandom(seed)
  * 
  * def stone_other(stone s):             # <<<<<<<<<<<<<<
  *     return pachi_stone_other(s)
  * 
  */
-  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_s, __pyx_n_s_s); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_s, __pyx_n_s_s); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 343, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_atlas_u_hoj_code_pachi_py_pachi, __pyx_n_s_stone_other, 338, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_atlas_u_hoj_code_pachi_py_pachi, __pyx_n_s_stone_other, 343, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 343, __pyx_L1_error)
 
-  /* "pachi_py/cypachi.pyx":341
+  /* "pachi_py/cypachi.pyx":346
  *     return pachi_stone_other(s)
  * 
  * def color_to_str(stone s):             # <<<<<<<<<<<<<<
  *     if s == S_BLACK: return "black"
  *     elif s == S_WHITE: return "white"
  */
-  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_s, __pyx_n_s_s); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_s, __pyx_n_s_s); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_atlas_u_hoj_code_pachi_py_pachi, __pyx_n_s_color_to_str, 341, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_atlas_u_hoj_code_pachi_py_pachi, __pyx_n_s_color_to_str, 346, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -8609,14 +8648,14 @@ PyMODINIT_FUNC PyInit_cypachi(void)
   /*--- Type init code ---*/
   __pyx_vtabptr_8pachi_py_7cypachi_PyPachiBoard = &__pyx_vtable_8pachi_py_7cypachi_PyPachiBoard;
   __pyx_vtable_8pachi_py_7cypachi_PyPachiBoard._set = (PyObject *(*)(struct __pyx_obj_8pachi_py_7cypachi_PyPachiBoard *, PachiBoardPtr))__pyx_f_8pachi_py_7cypachi_12PyPachiBoard__set;
-  if (PyType_Ready(&__pyx_type_8pachi_py_7cypachi_PyPachiBoard) < 0) __PYX_ERR(0, 158, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_8pachi_py_7cypachi_PyPachiBoard) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
   __pyx_type_8pachi_py_7cypachi_PyPachiBoard.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_8pachi_py_7cypachi_PyPachiBoard.tp_dict, __pyx_vtabptr_8pachi_py_7cypachi_PyPachiBoard) < 0) __PYX_ERR(0, 158, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "PyPachiBoard", (PyObject *)&__pyx_type_8pachi_py_7cypachi_PyPachiBoard) < 0) __PYX_ERR(0, 158, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_8pachi_py_7cypachi_PyPachiBoard.tp_dict, __pyx_vtabptr_8pachi_py_7cypachi_PyPachiBoard) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "PyPachiBoard", (PyObject *)&__pyx_type_8pachi_py_7cypachi_PyPachiBoard) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
   __pyx_ptype_8pachi_py_7cypachi_PyPachiBoard = &__pyx_type_8pachi_py_7cypachi_PyPachiBoard;
-  if (PyType_Ready(&__pyx_type_8pachi_py_7cypachi_PyPachiEngine) < 0) __PYX_ERR(0, 306, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_8pachi_py_7cypachi_PyPachiEngine) < 0) __PYX_ERR(0, 307, __pyx_L1_error)
   __pyx_type_8pachi_py_7cypachi_PyPachiEngine.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "PyPachiEngine", (PyObject *)&__pyx_type_8pachi_py_7cypachi_PyPachiEngine) < 0) __PYX_ERR(0, 306, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "PyPachiEngine", (PyObject *)&__pyx_type_8pachi_py_7cypachi_PyPachiEngine) < 0) __PYX_ERR(0, 307, __pyx_L1_error)
   __pyx_ptype_8pachi_py_7cypachi_PyPachiEngine = &__pyx_type_8pachi_py_7cypachi_PyPachiEngine;
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -8720,7 +8759,7 @@ PyMODINIT_FUNC PyInit_cypachi(void)
   _PyPachiEngineError = ((PyObject *)__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":133
+  /* "pachi_py/cypachi.pyx":134
  *     CHAN_CELL_WHITE
  *     CHAN_CELL_EMPTY
  * cdef int _NUM_FEATURE_CHANNELS = 3             # <<<<<<<<<<<<<<
@@ -8729,112 +8768,112 @@ PyMODINIT_FUNC PyInit_cypachi(void)
  */
   __pyx_v_8pachi_py_7cypachi__NUM_FEATURE_CHANNELS = 3;
 
-  /* "pachi_py/cypachi.pyx":323
+  /* "pachi_py/cypachi.pyx":328
  * 
  * ##### Exposed constants #####
  * NUM_FEATURE_CHANNELS = _NUM_FEATURE_CHANNELS             # <<<<<<<<<<<<<<
  * WHITE = S_WHITE
  * BLACK = S_BLACK
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_8pachi_py_7cypachi__NUM_FEATURE_CHANNELS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 323, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_8pachi_py_7cypachi__NUM_FEATURE_CHANNELS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 328, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_NUM_FEATURE_CHANNELS, __pyx_t_1) < 0) __PYX_ERR(0, 323, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_NUM_FEATURE_CHANNELS, __pyx_t_1) < 0) __PYX_ERR(0, 328, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":324
+  /* "pachi_py/cypachi.pyx":329
  * ##### Exposed constants #####
  * NUM_FEATURE_CHANNELS = _NUM_FEATURE_CHANNELS
  * WHITE = S_WHITE             # <<<<<<<<<<<<<<
  * BLACK = S_BLACK
  * EMPTY = S_NONE
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum__stone(S_WHITE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_enum__stone(S_WHITE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_WHITE, __pyx_t_1) < 0) __PYX_ERR(0, 324, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_WHITE, __pyx_t_1) < 0) __PYX_ERR(0, 329, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":325
+  /* "pachi_py/cypachi.pyx":330
  * NUM_FEATURE_CHANNELS = _NUM_FEATURE_CHANNELS
  * WHITE = S_WHITE
  * BLACK = S_BLACK             # <<<<<<<<<<<<<<
  * EMPTY = S_NONE
  * PASS_COORD = pass_coord
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum__stone(S_BLACK); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 325, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_enum__stone(S_BLACK); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BLACK, __pyx_t_1) < 0) __PYX_ERR(0, 325, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BLACK, __pyx_t_1) < 0) __PYX_ERR(0, 330, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":326
+  /* "pachi_py/cypachi.pyx":331
  * WHITE = S_WHITE
  * BLACK = S_BLACK
  * EMPTY = S_NONE             # <<<<<<<<<<<<<<
  * PASS_COORD = pass_coord
  * RESIGN_COORD = resign_coord
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum__stone(S_NONE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 326, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_enum__stone(S_NONE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 331, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_EMPTY, __pyx_t_1) < 0) __PYX_ERR(0, 326, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_EMPTY, __pyx_t_1) < 0) __PYX_ERR(0, 331, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":327
+  /* "pachi_py/cypachi.pyx":332
  * BLACK = S_BLACK
  * EMPTY = S_NONE
  * PASS_COORD = pass_coord             # <<<<<<<<<<<<<<
  * RESIGN_COORD = resign_coord
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_coord_t(pass); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_coord_t(pass); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PASS_COORD, __pyx_t_1) < 0) __PYX_ERR(0, 327, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PASS_COORD, __pyx_t_1) < 0) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":328
+  /* "pachi_py/cypachi.pyx":333
  * EMPTY = S_NONE
  * PASS_COORD = pass_coord
  * RESIGN_COORD = resign_coord             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_coord_t(resign); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_coord_t(resign); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RESIGN_COORD, __pyx_t_1) < 0) __PYX_ERR(0, 328, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RESIGN_COORD, __pyx_t_1) < 0) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":335
+  /* "pachi_py/cypachi.pyx":340
  *     return wrap_board(CreatePachiBoard(size))
  * 
  * def pachi_srand(unsigned long seed):             # <<<<<<<<<<<<<<
  *     fast_srandom(seed)
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_8pachi_py_7cypachi_3pachi_srand, NULL, __pyx_n_s_pachi_py_cypachi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_8pachi_py_7cypachi_3pachi_srand, NULL, __pyx_n_s_pachi_py_cypachi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pachi_srand, __pyx_t_1) < 0) __PYX_ERR(0, 335, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pachi_srand, __pyx_t_1) < 0) __PYX_ERR(0, 340, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":338
+  /* "pachi_py/cypachi.pyx":343
  *     fast_srandom(seed)
  * 
  * def stone_other(stone s):             # <<<<<<<<<<<<<<
  *     return pachi_stone_other(s)
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_8pachi_py_7cypachi_5stone_other, NULL, __pyx_n_s_pachi_py_cypachi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_8pachi_py_7cypachi_5stone_other, NULL, __pyx_n_s_pachi_py_cypachi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 343, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stone_other, __pyx_t_1) < 0) __PYX_ERR(0, 338, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stone_other, __pyx_t_1) < 0) __PYX_ERR(0, 343, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pachi_py/cypachi.pyx":341
+  /* "pachi_py/cypachi.pyx":346
  *     return pachi_stone_other(s)
  * 
  * def color_to_str(stone s):             # <<<<<<<<<<<<<<
  *     if s == S_BLACK: return "black"
  *     elif s == S_WHITE: return "white"
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_8pachi_py_7cypachi_7color_to_str, NULL, __pyx_n_s_pachi_py_cypachi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_8pachi_py_7cypachi_7color_to_str, NULL, __pyx_n_s_pachi_py_cypachi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_color_to_str, __pyx_t_1) < 0) __PYX_ERR(0, 341, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_color_to_str, __pyx_t_1) < 0) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "pachi_py/cypachi.pyx":1
