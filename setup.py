@@ -40,13 +40,14 @@ ext = Extension(
 )
 
 setup(name='pachi-py',
-      version='0.0.9',
+      version='0.0.16',
       description='Python bindings to Pachi',
-      url='https://github.com/rl-gym/pachi-py',
+      url='https://github.com/openai/pachi-py',
       author='OpenAI',
       author_email='info@openai.com',
       packages=['pachi_py'],
       cmdclass={'build': BuildLibPachi},
+      setup_requires=['numpy'],
       install_requires=['numpy'],
       tests_require=['nose2'],
       classifiers=['License :: OSI Approved :: GNU General Public License v2 (GPLv2)'],
