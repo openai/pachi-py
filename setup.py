@@ -33,7 +33,7 @@ ext = Extension(
 )
 
 setup(name='pachi-py',
-      version='0.0.19',
+      version='0.0.20',
       description='Python bindings to Pachi',
       url='https://github.com/openai/pachi-py',
       author='OpenAI',
