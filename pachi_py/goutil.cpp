@@ -104,7 +104,7 @@ static inline bool moves_equal(const move& m1, const move& m2) {
 void PlayInPlace(PachiBoardPtr b, const move& m) {
     board* pb = b->pachiboard();
 
-    if (board_play(pb, const_cast<move*>(&m)) < 0) { 
+    if (board_play(pb, const_cast<move*>(&m)) < 0) {
         char* tmp = coord2str(m.coord, pb);
         std::stringstream ss;
         ss << "Illegal move by " << (m.color == S_BLACK ? "black" : "white") << " at " << tmp << ". Current board:\n";
@@ -146,7 +146,6 @@ PachiEngine::PachiEngine(PachiBoardPtr bptr, const std::string& engine_type, std
         throw PachiEngineError("engine not supported: " + engine_type);
     }
 
-    printf("Initializing Pachi engine %s with args %s\n", engine_type.c_str(), arg.c_str());
     char* tmp_arg = arg == "" ? nullptr : strdup(arg.c_str());
     m_engine = engine_init_fn(tmp_arg, m_board->pachiboard());
     if (tmp_arg != nullptr) { free(tmp_arg); }
