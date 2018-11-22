@@ -1,3 +1,5 @@
+**Status:** Archive (code is provided as-is, no updates expected)
+
 # pachi_py
 
 [![Build Status](https://travis-ci.org/openai/pachi-py.svg?branch=master)](https://travis-ci.org/openai/pachi-py)
